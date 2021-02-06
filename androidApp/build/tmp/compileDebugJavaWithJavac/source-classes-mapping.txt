@@ -1,2 +1,0 @@
-com/keller/yourpet/androidApp/BuildConfig.java
- com.keller.yourpet.androidApp.BuildConfig
