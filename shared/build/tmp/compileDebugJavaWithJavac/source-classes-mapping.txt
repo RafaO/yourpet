@@ -1,0 +1,2 @@
+com/keller/yourpet/shared/BuildConfig.java
+ com.keller.yourpet.shared.BuildConfig
