@@ -1,7 +1,11 @@
 package com.keller.yourpet.shared.usecase
 
 import com.keller.yourpet.shared.model.Pet
+import kotlinx.coroutines.*
 
 class GetPetsUseCase {
-    fun execute() = listOf(Pet("charlie"), Pet("Willy"))
+    suspend fun execute(): List<Pet> = withContext(Dispatchers.Main) {
+        delay(2000)
+        return@withContext listOf(Pet("Charlie"), Pet("Willy"))
+    }
 }

@@ -1,14 +1,14 @@
 package com.keller.yourpet.androidApp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.keller.yourpet.shared.Greeting
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.keller.yourpet.shared.usecase.GetPetsUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-fun greet(): String {
-    return Greeting().greeting()
-}
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +16,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val tv: TextView = findViewById(R.id.text_view)
-        tv.text = GetPetsUseCase().execute().toString()
+
+        // TODO don't use global scope
+        GlobalScope.launch {
+            val name = GetPetsUseCase().execute().toString()
+            withContext(Dispatchers.Main) {
+                tv.text = name
+            }
+        }
     }
 }

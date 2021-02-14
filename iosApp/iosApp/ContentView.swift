@@ -1,13 +1,17 @@
 import SwiftUI
 import shared
 
-func greet() -> String {
-    return Greeting().greeting()
-}
-
 struct ContentView: View {
+    @State var textToDisplay = Text("loading...")
+    
     var body: some View {
-        Text(greet())
+        Group{
+            textToDisplay
+        }.onAppear {
+            GetPetsUseCase().execute(completionHandler: {(pets: [Pet]?, _: Error?) in
+                self.textToDisplay = Text(pets![0].name)
+            })
+        }
     }
 }
 
