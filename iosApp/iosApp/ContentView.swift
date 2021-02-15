@@ -8,9 +8,10 @@ struct ContentView: View {
         Group{
             textToDisplay
         }.onAppear {
-            GetPetsUseCase().execute(completionHandler: {(pets: [Pet]?, _: Error?) in
-                self.textToDisplay = Text(pets![0].name)
-            })
+            GetPetsUseCase(repository: PetsRepository(networkSource: PetsApiClient())).execute(
+                completionHandler: {(pets: [Pet]?, _: Error?) in
+                    self.textToDisplay = Text(pets![1].name)
+                })
         }
     }
 }

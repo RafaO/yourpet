@@ -1,11 +1,7 @@
 package com.keller.yourpet.shared.usecase
 
-import com.keller.yourpet.shared.model.Pet
-import kotlinx.coroutines.*
+import com.keller.yourpet.shared.repository.PetsRepository
 
-class GetPetsUseCase {
-    suspend fun execute(): List<Pet> = withContext(Dispatchers.Main) {
-        delay(2000)
-        return@withContext listOf(Pet("Charlie"), Pet("Willy"))
-    }
+class GetPetsUseCase(private val repository: PetsRepository) {
+    suspend fun execute() = repository.getPets()
 }
