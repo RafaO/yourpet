@@ -8,8 +8,11 @@ struct ContentView: View {
         Group{
             textToDisplay
         }.onAppear {
+            let databaseDriverFactory = DatabaseDriverFactory()
+            let database = DatabaseModule().createDataBase(driver: databaseDriverFactory.createDriver())
+            let databaseHelper = PetsDataBaseHelper(database: database)
             
-            GetPetsUseCase(repository: PetsRepository(cacheSource:PetsDataBase(),
+            GetPetsUseCase(repository: PetsRepository(cacheSource:databaseHelper,
                                                       networkSource: PetsApiClient())).execute { pets,_ in
                                                         pets?.watch { (pets) in
                                                             self.textToDisplay = Text((pets![0] as! Pet).name)

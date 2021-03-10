@@ -4,6 +4,7 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     kotlin("plugin.serialization")
+    id("com.squareup.sqldelight")
 }
 
 kotlin {
@@ -15,9 +16,18 @@ kotlin {
             }
         }
     }
+
+    val sdkName = System.getenv("SDK_NAME")
+    if (sdkName != null && sdkName.startsWith("iphoneos")) {
+        iosArm64("ios")
+    } else {
+        iosX64("ios")
+    }
+
     val coroutinesVersion = "1.4.3-native-mt"
     val serializationVersion = "1.0.0-RC"
     val ktorVersion = "1.5.2"
+    val sqlVersion = "1.4.4"
 
     sourceSets {
         val commonMain by getting {
@@ -27,6 +37,8 @@ kotlin {
 
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+
+                implementation("com.squareup.sqldelight:runtime:$sqlVersion")
             }
         }
         val commonTest by getting {
@@ -38,6 +50,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("com.google.android.material:material:1.2.1")
+                implementation("com.squareup.sqldelight:android-driver:$sqlVersion")
             }
         }
         val androidTest by getting {
@@ -46,7 +59,11 @@ kotlin {
                 implementation("junit:junit:4.13")
             }
         }
-        val iosMain by getting
+        val iosMain by getting {
+            dependencies {
+                implementation("com.squareup.sqldelight:native-driver:$sqlVersion")
+            }
+        }
         val iosTest by getting
     }
 }
@@ -60,12 +77,19 @@ android {
     }
 }
 
+sqldelight {
+    database("MyDatabase") {
+        packageName = "com.keller.yourpet.shared.data"
+    }
+}
+
 val packForXcode by tasks.creating(Sync::class) {
     group = "build"
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
     val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"
     val targetName = "ios" + if (sdkName.startsWith("iphoneos")) "Arm64" else "X64"
-    val framework = kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
+    val framework =
+        kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
     inputs.property("mode", mode)
     dependsOn(framework.linkTask)
     val targetDir = File(buildDir, "xcode-frameworks")

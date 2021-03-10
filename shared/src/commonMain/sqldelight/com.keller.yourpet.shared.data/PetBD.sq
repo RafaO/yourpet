@@ -1,0 +1,11 @@
+CREATE TABLE PetBD (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL
+);
+
+selectAllPets:
+SELECT * FROM PetBD;
+
+insertPet:
+INSERT INTO PetBD(id, name)
+VALUES(?, ?);
