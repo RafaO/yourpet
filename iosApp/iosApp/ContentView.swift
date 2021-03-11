@@ -12,12 +12,13 @@ struct ContentView: View {
             let database = DatabaseModule().createDataBase(driver: databaseDriverFactory.createDriver())
             let databaseHelper = PetsDataBaseHelper(database: database)
             
-            GetPetsUseCase(repository: PetsRepository(cacheSource:databaseHelper,
-                                                      networkSource: PetsApiClient())).execute { pets,_ in
-                                                        pets?.watch { (pets) in
-                                                            self.textToDisplay = Text((pets![0] as! Pet).name)
-                                                        }
-                                                      }
+            let useCase = GetPetsUseCase(repository: PetsRepository(cacheSource: databaseHelper, networkSource: PetsApiClient()))
+            
+            useCase.execute { (flow: CFlow<NSArray>?, _) in
+                flow?.watch(block: { (pets: NSArray?) in
+                    self.textToDisplay = Text((pets![0] as! Pet).name)
+                })
+            }
         }
     }
 }
