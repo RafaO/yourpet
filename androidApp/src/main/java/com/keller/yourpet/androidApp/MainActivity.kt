@@ -18,7 +18,10 @@ import com.keller.yourpet.shared.data.MyDatabase
 import com.keller.yourpet.shared.database.DatabaseDriverFactory
 import com.keller.yourpet.shared.database.DatabaseModule
 import com.keller.yourpet.shared.model.Pet
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
