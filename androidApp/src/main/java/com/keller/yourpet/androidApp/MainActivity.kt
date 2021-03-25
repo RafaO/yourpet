@@ -10,38 +10,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.keller.yourpet.androidApp.ui.YourPetUITheme
 import com.keller.yourpet.androidApp.viewmodel.PetsListViewModel
-import com.keller.yourpet.androidApp.viewmodel.ViewModelFactory
-import com.keller.yourpet.shared.data.MyDatabase
-import com.keller.yourpet.shared.database.DatabaseDriverFactory
-import com.keller.yourpet.shared.database.DatabaseModule
 import com.keller.yourpet.shared.model.Pet
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var viewModel: PetsListViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val databaseDriverFactory = DatabaseDriverFactory(this)
-        val database = DatabaseModule().createDataBase(databaseDriverFactory.createDriver())
-
         setContent {
             YourPetUITheme {
-                AppsHome(database)
+                AppsHome(viewModel)
             }
         }
     }
 }
 
 @Composable
-fun AppsHome(
-    database: MyDatabase,
-    viewModel: PetsListViewModel = viewModel(factory = ViewModelFactory(database))
-) {
+fun AppsHome(viewModel: PetsListViewModel) {
     val petsList by viewModel.pets.observeAsState(emptyList())
     Surface(color = MaterialTheme.colors.background) {
         PetsNames(pets = petsList)
