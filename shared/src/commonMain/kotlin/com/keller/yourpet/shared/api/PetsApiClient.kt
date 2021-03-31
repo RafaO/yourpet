@@ -9,6 +9,9 @@ import kotlinx.coroutines.withContext
 class PetsApiClient : IPetsSource {
     override suspend fun getPets() = withContext(Dispatchers.Main) {
         delay(2000)
-        listOf(Pet("Charlie"), Pet("Willy Fog"))
+        listOf(
+            Pet("Charlie", "https://picsum.photos/id/237/200/150"),
+            Pet("Willy Fog", "https://picsum.photos/id/237/200/150")
+        )
     }
 }

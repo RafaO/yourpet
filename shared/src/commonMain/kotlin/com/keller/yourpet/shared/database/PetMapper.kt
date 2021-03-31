@@ -5,6 +5,6 @@ import comkelleryourpetshareddata.PetBD
 
 class PetMapper {
     companion object {
-        fun from(p: PetBD) = Pet(p.name)
+        fun from(p: PetBD) = Pet(p.name, p.imageUrl)
     }
 }

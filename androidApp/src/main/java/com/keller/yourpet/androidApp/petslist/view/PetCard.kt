@@ -21,8 +21,7 @@ fun PetCard(pet: Pet, onPetClicked: (Pet) -> Unit) = Column(
         .padding(16.dp)
         .clickable { onPetClicked(pet) }) {
     GlideImage(
-        data = "https://picsum.photos/id/237/200/150",
-//        data = pet.imageUrl,
+        data = pet.imageUrl,
         contentDescription = "image for $pet.name",
         modifier = Modifier
             .fillMaxWidth()

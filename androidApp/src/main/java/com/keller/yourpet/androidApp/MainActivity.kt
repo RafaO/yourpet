@@ -49,6 +49,6 @@ fun AppsHome(viewModel: PetsListViewModel) {
 @Composable
 fun DefaultPreview() {
     YourPetUITheme {
-        PetsListScreen(listOf(Pet("charlie"))) {}
+        PetsListScreen(listOf(Pet("charlie", "https://picsum.photos/id/237/200/150"))) {}
     }
 }
