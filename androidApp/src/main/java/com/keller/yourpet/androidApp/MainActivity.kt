@@ -1,6 +1,7 @@
 package com.keller.yourpet.androidApp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
@@ -10,8 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
+import com.keller.yourpet.androidApp.petslist.view.PetsListScreen
 import com.keller.yourpet.androidApp.ui.YourPetUITheme
-import com.keller.yourpet.androidApp.viewmodel.PetsListViewModel
+import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewModel
 import com.keller.yourpet.shared.model.Pet
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -37,19 +39,16 @@ class MainActivity : AppCompatActivity() {
 fun AppsHome(viewModel: PetsListViewModel) {
     val petsList by viewModel.pets.observeAsState(emptyList())
     Surface(color = MaterialTheme.colors.background) {
-        PetsNames(pets = petsList)
-    }
-}
+        PetsListScreen(pets = petsList) {
 
-@Composable
-fun PetsNames(pets: List<Pet>) {
-    Text(text = pets.toString())
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     YourPetUITheme {
-        PetsNames(listOf(Pet("charlie")))
+        PetsListScreen(listOf(Pet("charlie"))) {}
     }
 }

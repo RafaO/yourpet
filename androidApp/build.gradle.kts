@@ -23,6 +23,8 @@ dependencies {
     implementation("androidx.compose.runtime:runtime:$composeVersion")
     implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
 
+    implementation("dev.chrisbanes.accompanist:accompanist-glide:0.6.1")
+
     val hiltVersion = "2.33-beta"
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-compiler:$hiltVersion")

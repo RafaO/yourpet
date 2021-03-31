@@ -1,4 +1,4 @@
-package com.keller.yourpet.androidApp.viewmodel
+package com.keller.yourpet.androidApp.petslist.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
