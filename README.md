@@ -8,8 +8,8 @@ Welcome to `YourPet`, a side project I started with three main goals:
 
 ## Things to try out
 
-- [ ] Jetpack compose
-- [ ] Swift UI
-- [ ] Hilt
-- [ ] Flow
-- [ ] Room
+- Jetpack compose
+- Swift UI
+- Hilt
+- Flow
+- SqlDelight
