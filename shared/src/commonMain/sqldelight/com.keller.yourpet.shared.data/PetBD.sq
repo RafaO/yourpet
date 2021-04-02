@@ -10,3 +10,6 @@ SELECT * FROM PetBD;
 insertPet:
 INSERT INTO PetBD(id, name, imageUrl)
 VALUES(?, ?, ?);
+
+deletePet:
+DELETE FROM PetBD WHERE id = ?;
