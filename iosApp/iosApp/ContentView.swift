@@ -2,11 +2,11 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-    @State var textToDisplay = Text("loading...")
+    @State var textToDisplay = "loading..."
     
     var body: some View {
         Group{
-            textToDisplay
+            Text(textToDisplay)
         }.onAppear {
             let databaseDriverFactory = DatabaseDriverFactory()
             let database = DatabaseModule().createDataBase(driver: databaseDriverFactory.createDriver())
@@ -16,7 +16,7 @@ struct ContentView: View {
             
             useCase.execute { (flow: CFlow<NSArray>?, _) in
                 flow?.watch(block: { (pets: NSArray?) in
-                    self.textToDisplay = Text((pets![0] as! Pet).name)
+                    self.textToDisplay = (pets![0] as! Pet).name
                 })
             }
         }
