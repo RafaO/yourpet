@@ -16,7 +16,7 @@ struct ContentView: View {
             
             useCase.execute { (flow: CFlow<NSArray>?, _) in
                 flow?.watch(block: { (pets: NSArray?) in
-                    self.textToDisplay = (pets![0] as! Pet).name
+                    self.textToDisplay = pets?.count ?? 0 > 0 ? (pets![0] as! Pet).name : "No pets"
                 })
             }
         }
