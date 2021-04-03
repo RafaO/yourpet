@@ -2,29 +2,19 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-    @State var textToDisplay = "loading..."
+    @ObservedObject var viewModel: PetsViewModel
     
     var body: some View {
         Group{
-            Text(textToDisplay)
+            Text(viewModel.textToDisplay)
         }.onAppear {
-            let databaseDriverFactory = DatabaseDriverFactory()
-            let database = DatabaseModule().createDataBase(driver: databaseDriverFactory.createDriver())
-            let databaseHelper = PetsDataBaseHelper(database: database)
-            
-            let useCase = GetPetsUseCase(repository: PetsRepository(cacheSource: databaseHelper, networkSource: PetsApiClient()))
-            
-            useCase.execute { (flow: CFlow<NSArray>?, _) in
-                flow?.watch(block: { (pets: NSArray?) in
-                    self.textToDisplay = pets?.count ?? 0 > 0 ? (pets![0] as! Pet).name : "No pets"
-                })
-            }
+            viewModel.viewCreated()
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}
