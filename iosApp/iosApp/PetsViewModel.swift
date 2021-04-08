@@ -11,17 +11,24 @@ import shared
 
 class PetsViewModel: ObservableObject {
     @Published private(set) var textToDisplay: String = "Loading..."
+    @Published private(set) var imageUrl: String?
     
     private let getPetsUseCase: GetPetsUseCase
     
     init(getPetsUseCase: GetPetsUseCase) {
         self.getPetsUseCase = getPetsUseCase
+        imageUrl = nil
     }
     
     func viewCreated() {
         getPetsUseCase.execute { (flow: CFlow<NSArray>?, _) in
             flow?.watch(block: { (pets: NSArray?) in
-                self.textToDisplay = pets?.count ?? 0 > 0 ? (pets![0] as! Pet).name : "No pets"
+                if pets?.count ?? 0 > 0 {
+                    self.textToDisplay = (pets![0] as! Pet).name
+                    self.imageUrl = (pets![0] as! Pet).imageUrl
+                } else {
+                    self.textToDisplay = "No pets"
+                }
             })
         }
     }
