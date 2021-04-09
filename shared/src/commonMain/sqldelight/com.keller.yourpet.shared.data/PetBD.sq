@@ -13,3 +13,6 @@ VALUES(?, ?, ?);
 
 deletePet:
 DELETE FROM PetBD WHERE id = ?;
+
+deletePets:
+DELETE FROM PetBD;

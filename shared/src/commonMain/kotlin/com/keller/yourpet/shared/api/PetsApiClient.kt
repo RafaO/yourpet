@@ -14,4 +14,8 @@ class PetsApiClient : IPetsSource {
             Pet("Willy Fog", "https://picsum.photos/id/237/200/150")
         )
     }
+
+    override fun saveOverride(pets: List<Pet>) {
+        throw NotImplementedError("api cannot save pets")
+    }
 }
