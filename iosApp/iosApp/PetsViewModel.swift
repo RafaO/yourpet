@@ -9,25 +9,35 @@
 import Foundation
 import shared
 
+enum PetsScreenState {
+    
+    struct Content {
+        let textToDisplay: String
+        let imageUrl: String
+    }
+    
+    case loading
+    case content(Content)
+    case error(String)
+}
+
 class PetsViewModel: ObservableObject {
-    @Published private(set) var textToDisplay: String = "Loading..."
-    @Published private(set) var imageUrl: String?
+    @Published private(set) var state: PetsScreenState = PetsScreenState.loading
     
     private let getPetsUseCase: GetPetsUseCase
     
     init(getPetsUseCase: GetPetsUseCase) {
         self.getPetsUseCase = getPetsUseCase
-        imageUrl = nil
     }
     
     func viewCreated() {
         getPetsUseCase.execute { (flow: CFlow<NSArray>?, _) in
             flow?.watch(block: { (pets: NSArray?) in
                 if pets?.count ?? 0 > 0 {
-                    self.textToDisplay = (pets![0] as! Pet).name
-                    self.imageUrl = (pets![0] as! Pet).imageUrl
+                    let firstPet = pets![0] as! Pet
+                    self.state = PetsScreenState.content(PetsScreenState.Content(textToDisplay: firstPet.name, imageUrl: firstPet.imageUrl))
                 } else {
-                    self.textToDisplay = "No pets"
+                    self.state = PetsScreenState.error("No pets")
                 }
             })
         }
