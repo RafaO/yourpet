@@ -12,8 +12,7 @@ import shared
 enum PetsScreenState {
     
     struct Content {
-        let textToDisplay: String
-        let imageUrl: String
+        let pet: Pet
     }
     
     case loading
@@ -35,7 +34,7 @@ class PetsViewModel: ObservableObject {
             flow?.watch(block: { (pets: NSArray?) in
                 if pets?.count ?? 0 > 0 {
                     let firstPet = pets![0] as! Pet
-                    self.state = PetsScreenState.content(PetsScreenState.Content(textToDisplay: firstPet.name, imageUrl: firstPet.imageUrl))
+                    self.state = PetsScreenState.content(PetsScreenState.Content(pet: firstPet))
                 } else {
                     self.state = PetsScreenState.error("No pets")
                 }
