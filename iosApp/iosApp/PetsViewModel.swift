@@ -12,7 +12,7 @@ import shared
 enum PetsScreenState {
     
     struct Content {
-        let pet: Pet
+        let pets: [Pet]
     }
     
     case loading
@@ -33,8 +33,7 @@ class PetsViewModel: ObservableObject {
         getPetsUseCase.execute { (flow: CFlow<NSArray>?, _) in
             flow?.watch(block: { (pets: NSArray?) in
                 if pets?.count ?? 0 > 0 {
-                    let firstPet = pets![0] as! Pet
-                    self.state = PetsScreenState.content(PetsScreenState.Content(pet: firstPet))
+                    self.state = PetsScreenState.content(PetsScreenState.Content(pets: pets as! [Pet]))
                 } else {
                     self.state = PetsScreenState.error("No pets")
                 }

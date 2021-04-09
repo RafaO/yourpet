@@ -11,8 +11,9 @@ struct ContentView: View {
                 Text("Loading..")
                 
             case .content (let content):
-                PetRow(pet: content.pet)
-                
+                List(content.pets, id: \.name) { pet in
+                    PetRow(pet: pet)
+                }
             case .error(let message):
                 Text(message)
             }
