@@ -1,21 +1,29 @@
 package com.keller.yourpet.androidApp
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
+import com.keller.yourpet.androidApp.Navigation.Companion.ARG_PET
+import com.keller.yourpet.androidApp.Navigation.Companion.ROUTE_PETS_LIST
+import com.keller.yourpet.androidApp.Navigation.Companion.ROUTE_PET_DETAILS
+import com.keller.yourpet.androidApp.petdetails.PetDetailsScreen
 import com.keller.yourpet.androidApp.petslist.view.PetsListScreen
-import com.keller.yourpet.androidApp.ui.YourPetUITheme
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewModel
+import com.keller.yourpet.androidApp.ui.YourPetUITheme
 import com.keller.yourpet.shared.model.Pet
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,20 +37,37 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             YourPetUITheme {
-                AppsHome(viewModel)
+                ComposeNavigation()
+            }
+        }
+    }
+
+    @Composable
+    fun ComposeNavigation() {
+        val navController = rememberNavController()
+        NavHost(navController = navController, startDestination = ROUTE_PETS_LIST) {
+            composable(ROUTE_PETS_LIST) {
+                PetsHome(viewModel) {
+                    navController.currentBackStackEntry?.arguments?.putString(
+                        ARG_PET,
+                        Json.encodeToString(it)
+                    )
+                    navController.navigate(ROUTE_PET_DETAILS)
+                }
+            }
+            composable(ROUTE_PET_DETAILS) {
+                navController.previousBackStackEntry?.arguments?.getString(ARG_PET)?.let {
+                    PetDetailsScreen(pet = Json.decodeFromString(it))
+                } ?: run { Text("Something went wrong") }
             }
         }
     }
 }
 
 @Composable
-fun AppsHome(viewModel: PetsListViewModel) {
+fun PetsHome(viewModel: PetsListViewModel, onPetClicked: (Pet) -> Unit) {
     val petsList by viewModel.pets.observeAsState(emptyList())
-    Surface(color = MaterialTheme.colors.background) {
-        PetsListScreen(pets = petsList) {
-
-        }
-    }
+    PetsListScreen(pets = petsList, onPetClicked)
 }
 
 @Preview(showBackground = true)

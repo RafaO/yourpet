@@ -13,6 +13,9 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0")
 
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
+
+
     // compose
     val composeVersion = "1.0.0-beta02"
     implementation("androidx.compose.ui:ui:$composeVersion")
@@ -22,6 +25,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha03")
     implementation("androidx.compose.runtime:runtime:$composeVersion")
     implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
+
+    // navigation
+    val navVersion = "2.3.3"
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-compose:1.0.0-alpha10")
 
     implementation("dev.chrisbanes.accompanist:accompanist-glide:0.6.1")
 
