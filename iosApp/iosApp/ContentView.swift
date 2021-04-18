@@ -17,6 +17,7 @@ struct ContentView: View {
                             PetRow(pet: pet)
                         }
                     }
+                    .customNavigationTitle(with: "Pets")
                 }
             case .error(let message):
                 Text(message)
