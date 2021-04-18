@@ -7,9 +7,12 @@
 //
 
 import SwiftUI
+import shared
 
 struct PetDetailsView: View {
+    var pet: Pet
+    
     var body: some View {
-        Text("Details")
+        Text(pet.name)
     }
 }

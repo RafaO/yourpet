@@ -13,7 +13,7 @@ struct ContentView: View {
             case .content (let content):
                 NavigationView {
                     List(content.pets, id: \.name) { pet in
-                        NavigationLink(destination: PetDetailsView()) {
+                        NavigationLink(destination: PetDetailsView(pet: pet)) {
                             PetRow(pet: pet)
                         }
                     }
