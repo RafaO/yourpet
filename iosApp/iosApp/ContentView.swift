@@ -11,8 +11,12 @@ struct ContentView: View {
                 Text("Loading..")
                 
             case .content (let content):
-                List(content.pets, id: \.name) { pet in
-                    PetRow(pet: pet)
+                NavigationView {
+                    List(content.pets, id: \.name) { pet in
+                        NavigationLink(destination: PetDetailsView()) {
+                            PetRow(pet: pet)
+                        }
+                    }
                 }
             case .error(let message):
                 Text(message)
