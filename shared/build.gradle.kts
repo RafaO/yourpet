@@ -70,6 +70,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
+                implementation(Ktor.clientAndroid)
                 implementation("com.google.android.material:material:1.2.1")
                 implementation("com.squareup.sqldelight:android-driver:$sqlVersion")
             }
@@ -83,6 +84,7 @@ kotlin {
         val iosMain by getting {
             dependencies {
                 implementation("com.squareup.sqldelight:native-driver:$sqlVersion")
+                implementation(Ktor.clientIos)
             }
         }
         val iosTest by getting

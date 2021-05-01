@@ -17,6 +17,8 @@ object Ktor {
     const val serverNetty = "io.ktor:ktor-server-netty:${Versions.ktor}"
 
     const val clientAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
+
+    const val clientIos = "io.ktor:ktor-client-ios:${Versions.ktor}"
 }
 
 object SqlDelight {

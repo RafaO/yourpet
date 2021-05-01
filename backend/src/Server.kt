@@ -16,7 +16,7 @@ fun main() {
         routing {
 
             get("/pets") {
-                val pets = listOf(Pet("charlie", ""))
+                val pets = listOf(Pet("Fatality", "https://picsum.photos/id/237/200/150"))
                 println(pets)
                 call.respond(pets)
             }
