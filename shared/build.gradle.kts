@@ -46,7 +46,6 @@ kotlin {
 
     val coroutinesVersion = "1.4.3-native-mt"
     val serializationVersion = "1.0.0-RC"
-    val ktorVersion = "1.5.2"
     val sqlVersion = "1.4.4"
 
     sourceSets {
@@ -55,10 +54,12 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
 
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+                implementation(Ktor.clientCore)
+                implementation(Ktor.clientJson)
+                implementation(Ktor.clientLogging)
+                implementation(Ktor.clientSerialization)
 
-                implementation("com.squareup.sqldelight:runtime:$sqlVersion")
+                implementation(SqlDelight.runtime)
             }
         }
         val commonTest by getting {
