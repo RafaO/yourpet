@@ -27,6 +27,7 @@ android {
 }
 
 kotlin {
+    jvm()
     android()
     ios {
         binaries {
@@ -84,6 +85,8 @@ kotlin {
             }
         }
         val iosTest by getting
+
+        val jvmMain by getting
     }
 }
 
