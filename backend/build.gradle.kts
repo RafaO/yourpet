@@ -17,6 +17,12 @@ kotlin {
 
             dependencies {
                 implementation(project(":shared"))
+
+                val ktor = "1.5.3"
+
+                implementation("io.ktor:ktor-server-core:$ktor")
+                implementation("io.ktor:ktor-server-netty:$ktor")
+                implementation("io.ktor:ktor-serialization:$ktor")
             }
         }
         val jvmTest by getting { }

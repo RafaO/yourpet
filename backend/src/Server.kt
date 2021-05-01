@@ -1,6 +1,26 @@
 import com.keller.yourpet.shared.model.Pet
+import io.ktor.application.*
+import io.ktor.features.*
+import io.ktor.response.*
+import io.ktor.routing.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
+import io.ktor.serialization.*
 
 fun main() {
-    val pets = listOf(Pet("charlie", ""))
-    println(pets)
+    embeddedServer(Netty, 9090) {
+        install(ContentNegotiation) {
+            json()
+        }
+
+        routing {
+
+            get("/pets") {
+                val pets = listOf(Pet("charlie", ""))
+                println(pets)
+                call.respond(pets)
+            }
+
+        }
+    }.start(wait = true)
 }

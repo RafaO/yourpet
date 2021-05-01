@@ -1,6 +1,8 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="backend-jvm">
     <output-path>$PROJECT_DIR$/backend/build/libs</output-path>
-    <root id="archive" name="backend-jvm.jar" />
+    <root id="archive" name="backend-jvm.jar">
+      <element id="module-output" name="YourPet.backend.jvmMain" />
+    </root>
   </artifact>
 </component>
