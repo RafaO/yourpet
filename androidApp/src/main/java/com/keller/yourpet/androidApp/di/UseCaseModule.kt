@@ -12,15 +12,19 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ActivityContext
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 @Module
 @InstallIn(ActivityComponent::class)
-object UseCaseModule {
+object UseCaseModule: KoinComponent {
+    private val api: PetsApiClient by inject()
+
     @Provides
     fun provideGetPetsUseCase(@ActivityContext context: Context): GetPetsUseCase {
         val databaseDriverFactory = DatabaseDriverFactory(context)
         val database = DatabaseModule().createDataBase(databaseDriverFactory.createDriver())
 
-        return GetPetsUseCase(PetsRepository(PetsDataBaseHelper(database), PetsApiClient()))
+        return GetPetsUseCase(PetsRepository(PetsDataBaseHelper(database), api))
     }
 }

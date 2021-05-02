@@ -54,6 +54,8 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
 
+                api(Koin.core)
+
                 implementation(Ktor.clientCore)
                 implementation(Ktor.clientJson)
                 implementation(Ktor.clientLogging)

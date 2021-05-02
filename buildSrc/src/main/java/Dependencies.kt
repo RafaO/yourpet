@@ -24,3 +24,7 @@ object Ktor {
 object SqlDelight {
     const val runtime = "com.squareup.sqldelight:runtime:${Versions.sqlDelight}"
 }
+
+object Koin {
+    const val core = "io.insert-koin:koin-core:3.0.1"
+}
