@@ -17,12 +17,12 @@ dependencies {
 
 
     // compose
-    val composeVersion = "1.0.0-beta02"
+    val composeVersion = "1.0.0-beta05"
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
-    implementation("androidx.activity:activity-compose:1.3.0-alpha04")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha03")
+    implementation("androidx.activity:activity-compose:1.3.0-alpha07")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha04")
     implementation("androidx.compose.runtime:runtime:$composeVersion")
     implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
 
@@ -40,11 +40,11 @@ dependencies {
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdk = 29
     defaultConfig {
         applicationId = "com.keller.yourpet.androidApp"
-        minSdkVersion(24)
-        targetSdkVersion(29)
+        minSdk = 24
+        targetSdk = 29
         versionCode = 1
         versionName = "1.0"
     }
@@ -65,6 +65,12 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
+        useIR = true
+
+        freeCompilerArgs = listOf(
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+        )
     }
 
     composeOptions {
