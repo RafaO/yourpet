@@ -2,7 +2,7 @@ object Versions {
     const val kotlin = "1.4.32"
     const val junit = "4.13"
     const val sqlDelight = "1.4.4"
-    const val hilt = "2.33-beta"
+    const val hilt = "2.35"
     const val ktor = "1.5.2"
 }
 
