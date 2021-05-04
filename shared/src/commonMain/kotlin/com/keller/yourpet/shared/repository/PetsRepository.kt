@@ -1,6 +1,5 @@
 package com.keller.yourpet.shared.repository
 
-import com.keller.yourpet.shared.wrap
 import kotlinx.coroutines.flow.flow
 
 class PetsRepository(private val cacheSource: IPetsSource, private val networkSource: IPetsSource) {
@@ -10,5 +9,5 @@ class PetsRepository(private val cacheSource: IPetsSource, private val networkSo
             emit(it)
             cacheSource.saveOverride(it)
         }
-    }.wrap()
+    }
 }

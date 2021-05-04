@@ -3,6 +3,8 @@ package com.keller.yourpet.androidApp.petslist.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.keller.yourpet.shared.common.usecase.FlowableUseCase.Result
+import com.keller.yourpet.shared.common.usecase.invoke
 import com.keller.yourpet.shared.model.Pet
 import com.keller.yourpet.shared.usecase.GetPetsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,6 +17,6 @@ class PetsListViewModel @Inject constructor(getPetsUseCase: GetPetsUseCase) : Vi
     // Observables
 
     val pets: LiveData<List<Pet>> = liveData {
-        getPetsUseCase.execute().collect { emit(it) }
+        getPetsUseCase().collect { emit((it as Result.Success).result) }
     }
 }

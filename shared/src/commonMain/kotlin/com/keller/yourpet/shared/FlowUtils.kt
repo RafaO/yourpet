@@ -14,7 +14,7 @@ fun <T> ConflatedBroadcastChannel<T>.wrap(): CFlow<T> = CFlow(asFlow())
 
 fun <T> Flow<T>.wrap(): CFlow<T> = CFlow(this)
 
-class CFlow<T>(private val origin: Flow<T>) : Flow<T> by origin {
+class CFlow<out T>(private val origin: Flow<T>) : Flow<T> by origin {
     fun watch(block: (T) -> Unit): Closeable {
         val job = Job()
 

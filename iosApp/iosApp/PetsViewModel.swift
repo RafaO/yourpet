@@ -30,8 +30,9 @@ class PetsViewModel: ObservableObject {
     }
     
     func viewCreated() {
-        getPetsUseCase.execute { (flow: CFlow<NSArray>?, _) in
-            flow?.watch(block: { (pets: NSArray?) in
+        getPetsUseCase.performAction(param: KotlinUnit()) { (flow: CFlow<FlowableUseCaseResultSuccess<NSArray>>?, _) in
+            flow?.watch(block: {(result: FlowableUseCaseResultSuccess<NSArray>?) in
+                let pets = result?.result
                 if pets?.count ?? 0 > 0 {
                     self.state = PetsScreenState.content(PetsScreenState.Content(pets: pets as! [Pet]))
                 } else {
