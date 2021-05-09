@@ -2,8 +2,8 @@ package com.keller.yourpet.shared.api
 
 import com.keller.yourpet.shared.model.Pet
 import com.keller.yourpet.shared.repository.IPetsSource
-import io.ktor.client.*
-import io.ktor.client.request.*
+import io.ktor.client.HttpClient
+import io.ktor.client.request.get
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
