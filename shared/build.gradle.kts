@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+apply(from = "../tools/detekt.gradle")
 
 plugins {
     kotlin("multiplatform")

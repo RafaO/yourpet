@@ -1,0 +1,7 @@
+apply plugin: "io.gitlab.arturbosch.detekt"
+
+detekt {
+    toolVersion = Versions.detekt
+    input = files("src")
+    config = files(file("$project.rootDir/tools/detekt.yml"))
+}

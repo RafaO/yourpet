@@ -1,3 +1,5 @@
+apply(from = "../tools/detekt.gradle")
+
 plugins {
     id("com.android.application")
     kotlin("android")

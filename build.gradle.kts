@@ -15,9 +15,18 @@ buildscript {
     }
 }
 
+plugins {
+    id("io.gitlab.arturbosch.detekt") version Versions.detekt
+}
+
 allprojects {
     repositories {
         google()
         mavenCentral()
     }
+}
+
+tasks.register("detektAll") {
+    dependsOn(":shared:detekt")
+    dependsOn(":androidApp:detekt")
 }

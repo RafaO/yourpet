@@ -4,6 +4,7 @@ object Versions {
     const val sqlDelight = "1.4.4"
     const val hilt = "2.35"
     const val ktor = "1.5.2"
+    const val detekt = "1.17.0-RC2"
 }
 
 object Ktor {
