@@ -6,8 +6,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,6 +15,7 @@ import com.keller.yourpet.androidApp.Navigation.Companion.ARG_PET
 import com.keller.yourpet.androidApp.Navigation.Companion.ROUTE_PETS_LIST
 import com.keller.yourpet.androidApp.Navigation.Companion.ROUTE_PET_DETAILS
 import com.keller.yourpet.androidApp.petdetails.PetDetailsScreen
+import com.keller.yourpet.androidApp.petslist.view.PetsHome
 import com.keller.yourpet.androidApp.petslist.view.PetsListScreen
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewModel
 import com.keller.yourpet.androidApp.ui.YourPetUITheme
@@ -61,12 +60,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-}
-
-@Composable
-fun PetsHome(viewModel: PetsListViewModel, onPetClicked: (Pet) -> Unit) {
-    val petsList by viewModel.pets.observeAsState(emptyList())
-    PetsListScreen(pets = petsList, onPetClicked)
 }
 
 @Preview(showBackground = true)

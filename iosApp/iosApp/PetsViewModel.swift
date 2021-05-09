@@ -30,13 +30,19 @@ class PetsViewModel: ObservableObject {
     }
     
     func viewCreated() {
-        getPetsUseCase.performAction(param: KotlinUnit()) { (flow: CFlow<FlowableUseCaseResultSuccess<NSArray>>?, _) in
-            flow?.watch(block: {(result: FlowableUseCaseResultSuccess<NSArray>?) in
-                let pets = result?.result
-                if pets?.count ?? 0 > 0 {
-                    self.state = PetsScreenState.content(PetsScreenState.Content(pets: pets as! [Pet]))
-                } else {
-                    self.state = PetsScreenState.error("No pets")
+        getPetsUseCase.invoke(param: KotlinUnit()) { (flow: CFlow<FlowableUseCaseResult<NSArray>>?, _) in
+            flow?.watch(block: {(result: FlowableUseCaseResult<NSArray>?) in
+                switch result {
+                case let success as FlowableUseCaseResultSuccess<NSArray>:
+                    let pets = success.result
+                    if pets?.count ?? 0 > 0 {
+                        self.state = PetsScreenState.content(PetsScreenState.Content(pets: pets as! [Pet]))
+                    } else {
+                        self.state = PetsScreenState.error("No pets")
+                    }
+                case let error as FlowableUseCaseResultFailure<NSArray>:
+                    self.state = PetsScreenState.error(error.error?.message ?? "something went wrong")
+                default: break
                 }
             })
         }

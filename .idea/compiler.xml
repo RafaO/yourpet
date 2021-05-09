@@ -2,14 +2,14 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="11">
-      <module name="YourPet.backend.commonMain" target="1.6" />
-      <module name="YourPet.backend.commonTest" target="1.6" />
-      <module name="YourPet.backend.jvmMain" target="1.6" />
-      <module name="YourPet.backend.jvmTest" target="1.6" />
-      <module name="YourPet.shared.commonMain" target="1.6" />
-      <module name="YourPet.shared.commonTest" target="1.6" />
-      <module name="YourPet.shared.jvmMain" target="1.6" />
-      <module name="YourPet.shared.jvmTest" target="1.6" />
+      <module name="YourPet.backend.commonMain" target="1.8" />
+      <module name="YourPet.backend.commonTest" target="1.8" />
+      <module name="YourPet.backend.jvmMain" target="1.8" />
+      <module name="YourPet.backend.jvmTest" target="1.8" />
+      <module name="YourPet.shared.commonMain" target="1.8" />
+      <module name="YourPet.shared.commonTest" target="1.8" />
+      <module name="YourPet.shared.jvmMain" target="1.8" />
+      <module name="YourPet.shared.jvmTest" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
