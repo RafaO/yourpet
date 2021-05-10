@@ -16,3 +16,6 @@ jobs:
         uses: eskatos/gradle-command-action@v1
         with:
           arguments: detektAll
+
+      - name: "tests"
+        run: ./gradlew testDebugUnitTest
