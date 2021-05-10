@@ -1,11 +1,11 @@
-name: detekt
+name: Android CI
 
 on:
   push:
     branches: [ master ]
 
 jobs:
-  detekt:
+  quality:
     runs-on: ubuntu-latest
 
     steps:
