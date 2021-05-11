@@ -15,6 +15,7 @@ class PetsListViewModel @Inject constructor(getPetsUseCase: GetPetsUseCase) : Vi
     // Observables
 
     val state = liveData {
+        emit(PetsListViewState.Loading)
         getPetsUseCase().collect {
             when (it) {
                 is Result.Success -> emit(PetsListViewState.Content(it.result))
