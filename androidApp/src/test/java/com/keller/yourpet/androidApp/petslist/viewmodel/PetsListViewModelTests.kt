@@ -45,10 +45,11 @@ class ViewStateTests(
         val subject = PetsListViewModel(useCase)
 
         // when
-        subject.state.getOrAwaitValue() // consume loading
-        val result = subject.state.getOrAwaitValue()
+        subject.onViewRefreshed()
 
         // then
+        subject.state.getOrAwaitValue() // consume loading
+        val result = subject.state.getOrAwaitValue()
         assertEquals(viewState, result)
     }
 }
@@ -63,9 +64,10 @@ class LoadingState : CoroutinesTest() {
         val subject = PetsListViewModel(useCase)
 
         // when
-        val result = subject.state.getOrAwaitValue()
+        subject.onViewRefreshed()
 
         // then
+        val result = subject.state.getOrAwaitValue()
         assertEquals(PetsListViewState.Loading, result)
     }
 }
