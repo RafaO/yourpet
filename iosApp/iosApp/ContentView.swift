@@ -11,9 +11,8 @@ struct ContentView: View {
                 Text("Loading..")
                 
             case .content (let content): PetsListView(content: content)
-
-            case .error(let message):
-                Text(message)
+                
+            case .error(let message): PetsListErrorView(message: message)
             }
         }.onAppear {
             viewModel.viewCreated()
