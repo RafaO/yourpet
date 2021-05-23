@@ -12,7 +12,7 @@ struct ContentView: View {
                 
             case .content (let content): PetsListView(content: content)
                 
-            case .error(let message): PetsListErrorView(message: message)
+            case .error(let message): PetsListErrorView(message: message) { viewModel.viewCreated() }
             }
         }.onAppear {
             viewModel.viewCreated()

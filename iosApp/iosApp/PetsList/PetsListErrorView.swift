@@ -9,9 +9,14 @@
 import SwiftUI
 
 struct PetsListErrorView: View {
-    var message: String
+    let message: String
+    let onButtonClicked: () -> Void
+    
     
     var body : some View{
         Text(message)
+        Button("Retry") {
+            onButtonClicked()
+        }
     }
 }
