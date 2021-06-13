@@ -13,3 +13,7 @@ Welcome to `YourPet`, a side project I started with three main goals:
 - Hilt
 - Flow
 - SqlDelight
+
+## Instructions
+To run the backend, execute `./gradlew backend:runServer` in the main directory. Then visit `http://localhost:8080/graphql`
+to reach the playground and documentation.
