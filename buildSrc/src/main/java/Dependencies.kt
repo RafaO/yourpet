@@ -6,6 +6,11 @@ object Versions {
     const val ktor = "1.5.2"
     const val detekt = "1.17.0-RC2"
     const val mockk = "1.11.0"
+    const val kGraphQL = "0.17.9"
+}
+
+object GraphQL {
+    const val kGraphQL = "com.apurebase:kgraphql:${Versions.kGraphQL}"
 }
 
 object Ktor {
@@ -14,7 +19,8 @@ object Ktor {
     const val clientLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
     const val clientSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
 
-    const val serialization = "io.ktor:ktor-serialization:${Versions.ktor}"
+    const val kGraphQLKtor = "com.apurebase:kgraphql-ktor:${Versions.kGraphQL}"
+
     const val serverCore = "io.ktor:ktor-server-core:${Versions.ktor}"
     const val serverNetty = "io.ktor:ktor-server-netty:${Versions.ktor}"
 

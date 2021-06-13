@@ -18,9 +18,11 @@ kotlin {
             dependencies {
                 implementation(project(":shared"))
 
+                implementation(GraphQL.kGraphQL)
+
                 implementation(Ktor.serverCore)
                 implementation(Ktor.serverNetty)
-                implementation(Ktor.serialization)
+                implementation(Ktor.kGraphQLKtor)
             }
         }
         val jvmTest by getting { }

@@ -1,26 +1,15 @@
-import com.keller.yourpet.shared.model.Pet
-import io.ktor.application.*
-import io.ktor.features.*
-import io.ktor.response.*
-import io.ktor.routing.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import io.ktor.serialization.*
+import com.apurebase.kgraphql.GraphQL
+import io.ktor.application.Application
+import io.ktor.application.install
+import io.ktor.server.netty.EngineMain
 
-fun main() {
-    embeddedServer(Netty, 9090) {
-        install(ContentNegotiation) {
-            json()
+fun main(args: Array<String>) = EngineMain.main(args)
+
+fun Application.module(testing: Boolean = false) {
+    install(GraphQL) {
+        playground = true
+        schema {
+            schemaValue()
         }
-
-        routing {
-
-            get("/pets") {
-                val pets = listOf(Pet("Fatality", "https://picsum.photos/id/237/200/150"))
-                println(pets)
-                call.respond(pets)
-            }
-
-        }
-    }.start(wait = true)
+    }
 }
