@@ -6,6 +6,7 @@ plugins {
     id("com.android.library")
     kotlin("plugin.serialization")
     id("com.squareup.sqldelight")
+    id("com.apollographql.apollo").version("2.5.9")
 }
 
 android {
@@ -52,7 +53,13 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+                implementation("com.apollographql.apollo:apollo-runtime-kotlin:2.5.9")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"){
+                    version {
+                        strictly(coroutinesVersion)
+                    }
+                }
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
 
                 api(Koin.core)
