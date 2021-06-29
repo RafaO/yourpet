@@ -1,6 +1,5 @@
-package com.keller.yourpet.shared.usecase
+package com.keller.yourpet.mobilemain.usecase
 
-import com.keller.yourpet.shared.common.usecase.FlowableUseCase
 import com.keller.yourpet.shared.model.Pet
 import com.keller.yourpet.shared.repository.PetsRepository
 

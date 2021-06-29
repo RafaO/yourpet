@@ -1,4 +1,4 @@
-package com.keller.yourpet.shared.common.usecase
+package com.keller.yourpet.mobilemain.usecase
 
 import com.keller.yourpet.shared.CFlow
 import com.keller.yourpet.shared.wrap

@@ -53,13 +53,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.apollographql.apollo:apollo-runtime-kotlin:2.5.9")
-
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"){
-                    version {
-                        strictly(coroutinesVersion)
-                    }
-                }
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
 
                 api(Koin.core)
@@ -72,6 +65,19 @@ kotlin {
                 implementation(SqlDelight.runtime)
             }
         }
+
+        val mobileMain by creating {
+            dependsOn(commonMain)
+            dependencies {
+                implementation("com.apollographql.apollo:apollo-runtime-kotlin:2.5.9")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"){
+                    version {
+                        strictly(coroutinesVersion)
+                    }
+                }
+            }
+        }
+
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
@@ -79,9 +85,8 @@ kotlin {
             }
         }
         val androidMain by getting {
+            dependsOn(mobileMain)
             dependencies {
-                implementation(Ktor.clientAndroid)
-                implementation("com.google.android.material:material:1.2.1")
                 implementation("com.squareup.sqldelight:android-driver:$sqlVersion")
             }
         }
@@ -92,6 +97,7 @@ kotlin {
             }
         }
         val iosMain by getting {
+            dependsOn(mobileMain)
             dependencies {
                 implementation("com.squareup.sqldelight:native-driver:$sqlVersion")
                 implementation(Ktor.clientIos)
