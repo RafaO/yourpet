@@ -2,7 +2,7 @@ object Versions {
     const val kotlin = "1.4.32"
     const val junit = "4.13"
     const val sqlDelight = "1.4.4"
-    const val hilt = "2.35"
+    const val hilt = "2.38.1"
     const val ktor = "1.5.2"
     const val detekt = "1.17.0-RC2"
     const val mockk = "1.11.0"
