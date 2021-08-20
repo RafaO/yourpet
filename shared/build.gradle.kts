@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 apply(from = "../tools/detekt.gradle")
 
 plugins {
@@ -10,11 +11,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdk = 30
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(29)
+        minSdk = 24
+        targetSdk = 30
     }
 
     // workaround needed: https://youtrack.jetbrains.com/issue/KT-43944
@@ -70,7 +71,7 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation("com.apollographql.apollo:apollo-runtime-kotlin:2.5.9")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"){
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion") {
                     version {
                         strictly(coroutinesVersion)
                     }
