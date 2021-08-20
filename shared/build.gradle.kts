@@ -31,7 +31,11 @@ android {
 
 kotlin {
     jvm()
-    android()
+    android {
+        compilations.all {
+            kotlinOptions.jvmTarget = "1.8"
+        }
+    }
     ios {
         binaries {
             framework {
