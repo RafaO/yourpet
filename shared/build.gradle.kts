@@ -51,7 +51,7 @@ kotlin {
         iosX64("ios")
     }
 
-    val coroutinesVersion = "1.4.3-native-mt"
+    val coroutinesVersion = "1.5.1-native-mt"
     val serializationVersion = "1.0.0-RC"
     val sqlVersion = "1.4.4"
 
