@@ -7,7 +7,7 @@ plugins {
     id("com.android.library")
     kotlin("plugin.serialization")
     id("com.squareup.sqldelight")
-    id("com.apollographql.apollo").version("2.5.9")
+    id("com.apollographql.apollo3").version(Versions.apollo)
 }
 
 android {
@@ -68,6 +68,8 @@ kotlin {
                 implementation(Ktor.clientSerialization)
 
                 implementation(SqlDelight.runtime)
+
+                implementation(GraphQL.apollo)
             }
         }
 

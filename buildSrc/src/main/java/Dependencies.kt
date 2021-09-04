@@ -7,10 +7,12 @@ object Versions {
     const val detekt = "1.17.0-RC2"
     const val mockk = "1.11.0"
     const val kGraphQL = "0.17.9"
+    const val apollo = "3.0.0-alpha03"
 }
 
 object GraphQL {
     const val kGraphQL = "com.apurebase:kgraphql:${Versions.kGraphQL}"
+    const val apollo = "com.apollographql.apollo3:apollo-runtime:${Versions.apollo}"
 }
 
 object Ktor {
