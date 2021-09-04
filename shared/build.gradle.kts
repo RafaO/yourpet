@@ -75,11 +75,7 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation("com.apollographql.apollo:apollo-runtime-kotlin:2.5.9")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion") {
-                    version {
-                        strictly(coroutinesVersion)
-                    }
-                }
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
             }
         }
 

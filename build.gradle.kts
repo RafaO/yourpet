@@ -24,6 +24,14 @@ allprojects {
         google()
         mavenCentral()
     }
+
+    configurations {
+        all {
+            resolutionStrategy {
+                force("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt")
+            }
+        }
+    }
 }
 
 tasks.register("detektAll") {
