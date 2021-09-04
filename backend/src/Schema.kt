@@ -12,4 +12,6 @@ fun SchemaBuilder.schemaValue() {
             }
         }
     }
+
+    type<Pet>()
 }
