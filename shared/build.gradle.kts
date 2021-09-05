@@ -11,11 +11,11 @@ plugins {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = AndroidSdk.compile
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = 24
-        targetSdk = 30
+        minSdk = AndroidSdk.min
+        targetSdk = AndroidSdk.target
     }
 
     // workaround needed: https://youtrack.jetbrains.com/issue/KT-43944

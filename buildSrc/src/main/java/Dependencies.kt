@@ -10,6 +10,12 @@ object Versions {
     const val apollo = "3.0.0-alpha03"
 }
 
+object AndroidSdk {
+    const val min = 24
+    const val compile = 30
+    const val target = compile
+}
+
 object GraphQL {
     const val kGraphQL = "com.apurebase:kgraphql:${Versions.kGraphQL}"
     const val apollo = "com.apollographql.apollo3:apollo-runtime:${Versions.apollo}"

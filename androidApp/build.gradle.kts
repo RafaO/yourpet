@@ -17,7 +17,6 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 
-
     // compose
     val composeVersion = "1.0.0-beta05"
     implementation("androidx.compose.ui:ui:$composeVersion")
@@ -47,11 +46,11 @@ dependencies {
 }
 
 android {
-    compileSdk = 29
+    compileSdk = AndroidSdk.compile
     defaultConfig {
         applicationId = "com.keller.yourpet.androidApp"
-        minSdk = 24
-        targetSdk = 29
+        minSdk = AndroidSdk.min
+        targetSdk = AndroidSdk.target
         versionCode = 1
         versionName = "1.0"
     }
