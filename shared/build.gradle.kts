@@ -76,7 +76,7 @@ kotlin {
         val mobileMain by creating {
             dependsOn(commonMain)
             dependencies {
-                implementation("com.apollographql.apollo:apollo-runtime-kotlin:2.5.9")
+                implementation(GraphQL.apollo)
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
             }
         }
