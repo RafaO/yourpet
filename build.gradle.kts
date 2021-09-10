@@ -7,7 +7,8 @@ buildscript {
 
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
-        classpath("com.android.tools.build:gradle:7.0.0-alpha15")
+        classpath("com.android.tools.build:gradle:7.1.0-alpha10")
+        classpath("com.apollographql.apollo3:apollo-gradle-plugin:${Versions.apollo}")
         classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}")
         classpath("com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}")
 
@@ -23,6 +24,14 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+    }
+
+    configurations {
+        all {
+            resolutionStrategy {
+                force("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt")
+            }
+        }
     }
 }
 

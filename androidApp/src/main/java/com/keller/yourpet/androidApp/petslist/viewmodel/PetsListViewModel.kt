@@ -4,11 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.keller.yourpet.shared.common.usecase.FlowableUseCase.Result
-import com.keller.yourpet.shared.common.usecase.invoke
-import com.keller.yourpet.shared.usecase.GetPetsUseCase
+import com.keller.yourpet.mobilemain.usecase.FlowableUseCase.Result
+import com.keller.yourpet.mobilemain.usecase.GetPetsUseCase
+import com.keller.yourpet.mobilemain.usecase.invoke
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject

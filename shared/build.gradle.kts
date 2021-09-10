@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 apply(from = "../tools/detekt.gradle")
 
 plugins {
@@ -6,14 +7,19 @@ plugins {
     id("com.android.library")
     kotlin("plugin.serialization")
     id("com.squareup.sqldelight")
+    id("com.apollographql.apollo3")
+}
+
+apollo {
+    packageName.set("com.keller.yourpet")
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdk = AndroidSdk.compile
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(29)
+        minSdk = AndroidSdk.min
+        targetSdk = AndroidSdk.target
     }
 
     // workaround needed: https://youtrack.jetbrains.com/issue/KT-43944
@@ -29,7 +35,11 @@ android {
 
 kotlin {
     jvm()
-    android()
+    android {
+        compilations.all {
+            kotlinOptions.jvmTarget = "1.8"
+        }
+    }
     ios {
         binaries {
             framework {
@@ -45,14 +55,13 @@ kotlin {
         iosX64("ios")
     }
 
-    val coroutinesVersion = "1.4.3-native-mt"
+    val coroutinesVersion = "1.5.1-native-mt"
     val serializationVersion = "1.0.0-RC"
     val sqlVersion = "1.4.4"
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
 
                 api(Koin.core)
@@ -63,8 +72,19 @@ kotlin {
                 implementation(Ktor.clientSerialization)
 
                 implementation(SqlDelight.runtime)
+
+                implementation(GraphQL.apollo)
             }
         }
+
+        val mobileMain by creating {
+            dependsOn(commonMain)
+            dependencies {
+                implementation(GraphQL.apollo)
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+            }
+        }
+
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
@@ -72,9 +92,8 @@ kotlin {
             }
         }
         val androidMain by getting {
+            dependsOn(mobileMain)
             dependencies {
-                implementation(Ktor.clientAndroid)
-                implementation("com.google.android.material:material:1.2.1")
                 implementation("com.squareup.sqldelight:android-driver:$sqlVersion")
             }
         }
@@ -85,6 +104,7 @@ kotlin {
             }
         }
         val iosMain by getting {
+            dependsOn(mobileMain)
             dependencies {
                 implementation("com.squareup.sqldelight:native-driver:$sqlVersion")
                 implementation(Ktor.clientIos)

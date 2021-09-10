@@ -1,5 +1,6 @@
 package com.keller.yourpet.androidApp.petslist.view
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,21 +13,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
+import coil.size.OriginalSize
 import com.keller.yourpet.shared.model.Pet
-import dev.chrisbanes.accompanist.glide.GlideImage
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun PetCard(pet: Pet, onPetClicked: (Pet) -> Unit) = Column(
     modifier = Modifier
         .padding(16.dp)
         .clickable { onPetClicked(pet) }) {
-    GlideImage(
-        data = pet.imageUrl,
+    Image(
+        painter = rememberImagePainter(
+            data = pet.imageUrl,
+            builder = { size(OriginalSize) }
+        ),
         contentDescription = "image for $pet.name",
         modifier = Modifier
             .fillMaxWidth()
             .clip(shape = RoundedCornerShape(12.dp)),
-        contentScale = ContentScale.Crop
+        contentScale = ContentScale.FillWidth,
     )
     Text(pet.name, style = MaterialTheme.typography.h6)
 }

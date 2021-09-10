@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import com.keller.yourpet.androidApp.Navigation.Companion.ARG_PET
 import com.keller.yourpet.androidApp.Navigation.Companion.ROUTE_PETS_LIST

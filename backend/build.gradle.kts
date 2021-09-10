@@ -1,10 +1,15 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinCommonOptions
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilationToRunnableFiles
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("multiplatform")
     application
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 kotlin {
@@ -18,9 +23,11 @@ kotlin {
             dependencies {
                 implementation(project(":shared"))
 
+                implementation(GraphQL.kGraphQL)
+
                 implementation(Ktor.serverCore)
                 implementation(Ktor.serverNetty)
-                implementation(Ktor.serialization)
+                implementation(Ktor.kGraphQLKtor)
             }
         }
         val jvmTest by getting { }

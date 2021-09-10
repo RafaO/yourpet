@@ -1,0 +1,6 @@
+query GetAllPets {
+    pets {
+        name,
+        imageUrl
+    }
+}
