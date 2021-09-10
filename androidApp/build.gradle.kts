@@ -10,15 +10,15 @@ plugins {
 dependencies {
     implementation(project(":shared"))
     implementation("com.google.android.material:material:1.2.1")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2")
+    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
 
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
     // compose
-    val composeVersion = "1.0.0-beta05"
+    val composeVersion = "1.0.2"
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
@@ -31,9 +31,9 @@ dependencies {
     val navVersion = "2.3.3"
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-compose:1.0.0-alpha10")
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha08")
 
-    implementation("dev.chrisbanes.accompanist:accompanist-glide:0.6.1")
+    implementation("io.coil-kt:coil-compose:1.3.2")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:${Versions.hilt}")
@@ -80,6 +80,6 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.0-beta01"
+        kotlinCompilerExtensionVersion = "1.0.2"
     }
 }

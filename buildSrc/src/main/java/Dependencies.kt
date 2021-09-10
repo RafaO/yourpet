@@ -1,9 +1,9 @@
 object Versions {
-    const val kotlin = "1.4.32"
+    const val kotlin = "1.5.21"
     const val junit = "4.13"
     const val sqlDelight = "1.4.4"
     const val hilt = "2.38.1"
-    const val ktor = "1.5.2"
+    const val ktor = "1.6.0"
     const val detekt = "1.17.0-RC2"
     const val mockk = "1.11.0"
     const val kGraphQL = "0.17.9"
@@ -12,7 +12,7 @@ object Versions {
 
 object AndroidSdk {
     const val min = 24
-    const val compile = 30
+    const val compile = 31
     const val target = compile
 }
 
