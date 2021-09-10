@@ -15,6 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import coil.size.OriginalSize
 import com.keller.yourpet.shared.model.Pet
 
 @OptIn(ExperimentalCoilApi::class)
@@ -24,12 +25,15 @@ fun PetCard(pet: Pet, onPetClicked: (Pet) -> Unit) = Column(
         .padding(16.dp)
         .clickable { onPetClicked(pet) }) {
     Image(
-        painter = rememberImagePainter(data = pet.imageUrl),
+        painter = rememberImagePainter(
+            data = pet.imageUrl,
+            builder = { size(OriginalSize) }
+        ),
         contentDescription = "image for $pet.name",
         modifier = Modifier
             .fillMaxWidth()
             .clip(shape = RoundedCornerShape(12.dp)),
-        contentScale = ContentScale.Crop
+        contentScale = ContentScale.FillWidth,
     )
     Text(pet.name, style = MaterialTheme.typography.h6)
 }
