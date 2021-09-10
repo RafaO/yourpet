@@ -1,6 +1,6 @@
 package com.keller.yourpet.shared.api
 
-import GetAllPetsQuery
+import com.keller.yourpet.GetAllPetsQuery
 import com.apollographql.apollo3.ApolloClient
 import com.keller.yourpet.shared.model.Pet
 import com.keller.yourpet.shared.repository.IPetsSource

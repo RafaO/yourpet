@@ -7,7 +7,11 @@ plugins {
     id("com.android.library")
     kotlin("plugin.serialization")
     id("com.squareup.sqldelight")
-    id("com.apollographql.apollo3").version(Versions.apollo)
+    id("com.apollographql.apollo3")
+}
+
+apollo {
+    packageName.set("com.keller.yourpet")
 }
 
 android {
