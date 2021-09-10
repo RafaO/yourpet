@@ -2,6 +2,7 @@ package com.keller.yourpet.shared.di
 
 import com.apollographql.apollo3.ApolloClient
 import com.keller.yourpet.shared.api.PetsApiClient
+import com.keller.yourpet.shared.localhost
 import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
@@ -17,7 +18,5 @@ fun initKoin() = initKoin {}
 
 fun commonModule(enableNetworkLogs: Boolean) = module {
     single { PetsApiClient() }
-    single { ApolloClient(serverUrl = "http:10.0.2.2:8080/graphql") }
+    single { ApolloClient(serverUrl = "$localhost:8080/graphql") }
 }
-
-private fun createJson() = Json { isLenient = true; ignoreUnknownKeys = true }
