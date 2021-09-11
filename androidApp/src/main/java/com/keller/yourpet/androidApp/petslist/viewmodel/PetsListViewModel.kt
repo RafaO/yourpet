@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.keller.yourpet.mobilemain.usecase.FlowableUseCase.Result
 import com.keller.yourpet.mobilemain.usecase.GetPetsUseCase
 import com.keller.yourpet.mobilemain.usecase.invoke
+import com.keller.yourpet.shared.model.Pet
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -27,12 +28,15 @@ class PetsListViewModel @Inject constructor(private val getPetsUseCase: GetPetsU
         getPetsUseCase().collect {
             when (it) {
                 is Result.Success -> _state.postValue(PetsListViewState.Content(it.result))
-                is Result.Failure -> _state.postValue(
-                    PetsListViewState.Error(
-                        it.error?.message ?: "Something went wrong"
-                    )
-                )
+                is Result.Failure -> errorReceived(it)
             }
         }
+    }
+
+    private fun errorReceived(it: Result.Failure<List<Pet>>) {
+        if (_state.value !is PetsListViewState.Content)
+            _state.postValue(
+                PetsListViewState.Error(it.error?.message ?: "Something went wrong")
+            )
     }
 }
