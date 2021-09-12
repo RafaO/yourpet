@@ -1,11 +1,15 @@
 package com.keller.yourpet.androidApp.petslist.view
 
 import PetsListError
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.res.stringResource
+import com.keller.yourpet.androidApp.R
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewModel
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewState
 import com.keller.yourpet.shared.model.Pet
@@ -16,7 +20,11 @@ fun PetsHome(viewModel: PetsListViewModel, onPetClicked: (Pet) -> Unit) {
 
     LaunchedEffect(key1 = null) { viewModel.onViewRefreshed() }
 
-    Content(state, onPetClicked) { viewModel.onViewRefreshed() }
+    Column {
+        TopAppBar(title = { Text(text = stringResource(id = R.string.title_pets_list)) })
+
+        Content(state, onPetClicked) { viewModel.onViewRefreshed() }
+    }
 }
 
 @Composable
