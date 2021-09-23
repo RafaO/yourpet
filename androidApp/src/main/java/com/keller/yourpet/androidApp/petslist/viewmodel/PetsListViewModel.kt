@@ -1,5 +1,6 @@
 package com.keller.yourpet.androidApp.petslist.viewmodel
 
+import androidx.compose.material.DrawerState
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,6 +32,13 @@ class PetsListViewModel @Inject constructor(private val getPetsUseCase: GetPetsU
                 is Result.Failure -> errorReceived(it)
             }
         }
+    }
+
+    suspend fun onFiltersClicked(drawerState: DrawerState) {
+        if (drawerState.isClosed)
+            drawerState.open()
+        else
+            drawerState.close()
     }
 
     private fun errorReceived(it: Result.Failure<List<Pet>>) {
