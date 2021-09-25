@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import com.keller.yourpet.androidApp.R
+import com.keller.yourpet.androidApp.petslist.view.menu.SideMenu
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewModel
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewState
 import com.keller.yourpet.shared.model.Pet
@@ -50,9 +51,7 @@ fun PetsHome(viewModel: PetsListViewModel, onPetClicked: (Pet) -> Unit) {
 
         ModalDrawer(
             drawerState = drawerState,
-            drawerContent = {
-                Text("Filter")
-            }) {
+            drawerContent = { SideMenu() }) {
             Content(state, onPetClicked) { viewModel.onViewRefreshed() }
         }
     }
