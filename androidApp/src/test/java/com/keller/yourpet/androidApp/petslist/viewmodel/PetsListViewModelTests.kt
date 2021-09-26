@@ -6,6 +6,8 @@ import com.keller.yourpet.mobilemain.usecase.FlowableUseCase.Result
 import com.keller.yourpet.mobilemain.usecase.GetPetsUseCase
 import com.keller.yourpet.mobilemain.usecase.invoke
 import com.keller.yourpet.shared.CFlow
+import com.keller.yourpet.shared.model.Filter
+import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
 import com.keller.yourpet.shared.wrap
 import io.mockk.coEvery
@@ -69,5 +71,37 @@ class ViewStateTests(
         subject.state.getOrAwaitValue() // consume loading
         val result = subject.state.getOrAwaitValue()
         assertEquals(viewState, result)
+    }
+}
+
+@RunWith(Parameterized::class)
+class FiltersTests(
+    private val male: Boolean,
+    private val female: Boolean,
+    private val expectedFilter: Filter
+) {
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters
+        fun data() = listOf(
+            arrayOf(true, true, Filter(mutableSetOf(Gender.Female, Gender.Male))),
+            arrayOf(true, false, Filter(mutableSetOf(Gender.Male))),
+            arrayOf(false, false, Filter(mutableSetOf())),
+            arrayOf(false, true, Filter(mutableSetOf(Gender.Female)))
+        )
+    }
+
+    @Test
+    fun `when gender selected, updates filter accordingly`() {
+        // given
+        val filter = Filter()
+        val subject = PetsListViewModel(mockk(), filter)
+
+        // when
+        subject.onGenderSelected(Gender.Male, male)
+        subject.onGenderSelected(Gender.Female, female)
+
+        // then
+        assertEquals(filter, expectedFilter)
     }
 }

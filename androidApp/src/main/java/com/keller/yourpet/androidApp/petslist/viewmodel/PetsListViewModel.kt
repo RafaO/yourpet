@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.keller.yourpet.mobilemain.usecase.FlowableUseCase.Result
 import com.keller.yourpet.mobilemain.usecase.GetPetsUseCase
 import com.keller.yourpet.mobilemain.usecase.invoke
+import com.keller.yourpet.shared.model.Filter
+import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -15,8 +17,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PetsListViewModel @Inject constructor(private val getPetsUseCase: GetPetsUseCase) :
-    ViewModel() {
+class PetsListViewModel @Inject constructor(
+    private val getPetsUseCase: GetPetsUseCase,
+    private val filters: Filter = Filter()
+) : ViewModel() {
 
     // Observables
 
@@ -39,6 +43,14 @@ class PetsListViewModel @Inject constructor(private val getPetsUseCase: GetPetsU
             drawerState.open()
         else
             drawerState.close()
+    }
+
+    fun onGenderSelected(gender: Gender, selected: Boolean) {
+        if (selected) {
+            filters.genders.add(gender)
+        } else {
+            filters.genders.remove(gender)
+        }
     }
 
     private fun errorReceived(it: Result.Failure<List<Pet>>) {
