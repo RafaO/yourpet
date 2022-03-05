@@ -10,25 +10,29 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.keller.yourpet.shared.model.Gender
 
 @Composable
-fun SideMenu() {
+fun SideMenu(onGenderSelected: (Gender, Boolean) -> Unit) {
     Column(modifier = Modifier.padding(8.dp)) {
         Text("Filters")
-        LabelledCheckbox("male")
-        LabelledCheckbox("female")
+        LabelledCheckbox(Gender.Male, onGenderSelected)
+        LabelledCheckbox(Gender.Female, onGenderSelected)
     }
 }
 
 @Composable
-fun LabelledCheckbox(label: String) {
-    Row {
-        val isChecked = remember { mutableStateOf(true) }
+fun LabelledCheckbox(gender: Gender, onGenderSelected: (Gender, Boolean) -> Unit) {
+    val isChecked = remember { mutableStateOf(true) }
 
+    Row {
         Checkbox(
             checked = isChecked.value,
-            onCheckedChange = { isChecked.value = it },
+            onCheckedChange = {
+                isChecked.value = it
+                onGenderSelected(gender, it)
+            },
         )
-        Text(text = label)
+        Text(text = gender.toString())
     }
 }

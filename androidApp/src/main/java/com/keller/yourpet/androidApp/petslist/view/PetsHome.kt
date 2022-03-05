@@ -51,7 +51,7 @@ fun PetsHome(viewModel: PetsListViewModel, onPetClicked: (Pet) -> Unit) {
 
         ModalDrawer(
             drawerState = drawerState,
-            drawerContent = { SideMenu() }) {
+            drawerContent = { SideMenu(viewModel::onGenderSelected) }) {
             Content(state, onPetClicked) { viewModel.onViewRefreshed() }
         }
     }
