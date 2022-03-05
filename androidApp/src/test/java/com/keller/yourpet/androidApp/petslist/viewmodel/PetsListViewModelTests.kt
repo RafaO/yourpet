@@ -4,7 +4,6 @@ import com.keller.yourpet.androidApp.utils.CoroutinesTest
 import com.keller.yourpet.androidApp.utils.getOrAwaitValue
 import com.keller.yourpet.mobilemain.usecase.FlowableUseCase.Result
 import com.keller.yourpet.mobilemain.usecase.GetPetsUseCase
-import com.keller.yourpet.mobilemain.usecase.invoke
 import com.keller.yourpet.shared.CFlow
 import com.keller.yourpet.shared.model.Filter
 import com.keller.yourpet.shared.model.Gender
@@ -61,7 +60,7 @@ class ViewStateTests(
     fun `delivers corresponding state for the given flow of results`() {
         // given
         val useCase = mockk<GetPetsUseCase>()
-        coEvery { useCase() } returns useCaseResult
+        coEvery { useCase(Filter()) } returns useCaseResult
         val subject = PetsListViewModel(useCase)
 
         // when
