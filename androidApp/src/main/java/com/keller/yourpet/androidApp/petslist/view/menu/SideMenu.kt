@@ -16,8 +16,8 @@ import com.keller.yourpet.shared.model.Gender
 fun SideMenu(onGenderSelected: (Gender, Boolean) -> Unit) {
     Column(modifier = Modifier.padding(8.dp)) {
         Text("Filters")
-        LabelledCheckbox(Gender.Male, onGenderSelected)
-        LabelledCheckbox(Gender.Female, onGenderSelected)
+        for (gender in Gender.values())
+            LabelledCheckbox(gender, onGenderSelected)
     }
 }
 

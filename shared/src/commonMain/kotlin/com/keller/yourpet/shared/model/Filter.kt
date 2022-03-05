@@ -1,11 +1,10 @@
 package com.keller.yourpet.shared.model
 
-sealed class Gender {
-    object Male : Gender() {
+enum class Gender {
+    Male {
         override fun toString() = "male"
-    }
-
-    object Female : Gender() {
+    },
+    Female {
         override fun toString() = "female"
     }
 }
