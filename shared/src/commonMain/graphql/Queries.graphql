@@ -1,6 +1,7 @@
-query GetAllPets {
-    pets {
+query GetAllPets($filter: Filter!) {
+    pets(filter: $filter) {
         name,
-        imageUrl
+        imageUrl,
+        gender
     }
 }

@@ -18,6 +18,7 @@ import com.keller.yourpet.androidApp.petslist.view.PetsHome
 import com.keller.yourpet.androidApp.petslist.view.PetsListScreen
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewModel
 import com.keller.yourpet.androidApp.ui.YourPetUITheme
+import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.decodeFromString
@@ -65,6 +66,14 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun DefaultPreview() {
     YourPetUITheme {
-        PetsListScreen(listOf(Pet("charlie", "https://picsum.photos/id/237/200/150"))) {}
+        PetsListScreen(
+            listOf(
+                Pet(
+                    "charlie",
+                    "https://picsum.photos/id/237/200/150",
+                    Gender.Female
+                )
+            )
+        ) {}
     }
 }

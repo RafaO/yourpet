@@ -6,5 +6,5 @@ import com.keller.yourpet.shared.repository.PetsRepository
 
 class GetPetsUseCase(private val repository: PetsRepository) :
     FlowableUseCase<Filter, List<Pet>>() {
-    override suspend fun performAction(param: Filter) = repository.getPets()
+    override suspend fun performAction(param: Filter) = repository.getPets(param)
 }

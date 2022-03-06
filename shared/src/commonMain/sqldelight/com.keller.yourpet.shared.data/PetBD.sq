@@ -1,15 +1,16 @@
 CREATE TABLE PetBD (
     id INTEGER NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,
-    imageUrl TEXT NOT NULL
+    imageUrl TEXT NOT NULL,
+    gender TEXT NOT NULL
 );
 
 selectAllPets:
 SELECT * FROM PetBD;
 
 insertPet:
-INSERT INTO PetBD(id, name, imageUrl)
-VALUES(?, ?, ?);
+INSERT INTO PetBD(id, name, imageUrl, gender)
+VALUES(?, ?, ?, ?);
 
 deletePet:
 DELETE FROM PetBD WHERE id = ?;
