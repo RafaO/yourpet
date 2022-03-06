@@ -2,6 +2,7 @@ package com.keller.yourpet.androidApp.petslist.viewmodel
 
 import com.keller.yourpet.androidApp.utils.CoroutinesTest
 import com.keller.yourpet.androidApp.utils.getOrAwaitValue
+import com.keller.yourpet.androidApp.utils.mockPetsList
 import com.keller.yourpet.mobilemain.usecase.FlowableUseCase.Result
 import com.keller.yourpet.mobilemain.usecase.GetPetsUseCase
 import com.keller.yourpet.shared.CFlow
@@ -35,8 +36,8 @@ class ViewStateTests(
                 PetsListViewState.Content(emptyList())
             ),
             arrayOf(
-                flowOf(Result.Success(listOf(Pet("Charlie", "")))).wrap(),
-                PetsListViewState.Content(listOf(Pet("Charlie", "")))
+                flowOf(Result.Success(mockPetsList())).wrap(),
+                PetsListViewState.Content(mockPetsList())
             ),
             arrayOf(
                 flowOf(Result.Failure<List<Pet>>()).wrap(),
@@ -48,10 +49,10 @@ class ViewStateTests(
             ),
             arrayOf(
                 flowOf(
-                    Result.Success(listOf(Pet("charlie", ""))),
+                    Result.Success(mockPetsList()),
                     Result.Failure()
                 ).wrap(),
-                PetsListViewState.Content(listOf(Pet("charlie", "")))
+                PetsListViewState.Content(mockPetsList())
             )
         )
     }
@@ -61,7 +62,7 @@ class ViewStateTests(
         // given
         val useCase = mockk<GetPetsUseCase>()
         coEvery { useCase(Filter()) } returns useCaseResult
-        val subject = PetsListViewModel(useCase)
+        val subject = PetsListViewModel(useCase, Filter())
 
         // when
         subject.onViewRefreshed()
