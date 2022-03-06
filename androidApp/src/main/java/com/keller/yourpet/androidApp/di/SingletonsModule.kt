@@ -6,6 +6,7 @@ import com.keller.yourpet.shared.data.MyDatabase
 import com.keller.yourpet.shared.database.DatabaseDriverFactory
 import com.keller.yourpet.shared.database.DatabaseModule
 import com.keller.yourpet.shared.model.Filter
+import com.keller.yourpet.shared.model.Gender
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,5 +30,5 @@ object SingletonsModule : KoinComponent {
     }
 
     @Provides
-    fun provideFilters() = Filter()
+    fun provideFilters() = Filter(Gender.values().toMutableSet())
 }

@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PetsListViewModel @Inject constructor(
     private val getPetsUseCase: GetPetsUseCase,
-    private val filters: Filter = Filter()
+    private val filters: Filter,
 ) : ViewModel() {
 
     // Observables
