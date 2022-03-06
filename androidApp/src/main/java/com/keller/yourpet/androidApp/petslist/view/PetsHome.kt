@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun PetsHome(viewModel: PetsListViewModel, onPetClicked: (Pet) -> Unit) {
     val state by viewModel.state.observeAsState(PetsListViewState.Content(emptyList()))
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val drawerState = rememberDrawerState(DrawerValue.Closed, viewModel::onDrawerStateChanged)
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(key1 = null) { viewModel.onViewRefreshed() }

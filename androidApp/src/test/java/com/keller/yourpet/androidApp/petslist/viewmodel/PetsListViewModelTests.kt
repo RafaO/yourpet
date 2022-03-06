@@ -1,5 +1,6 @@
 package com.keller.yourpet.androidApp.petslist.viewmodel
 
+import androidx.compose.material.DrawerValue
 import com.keller.yourpet.androidApp.utils.CoroutinesTest
 import com.keller.yourpet.androidApp.utils.getOrAwaitValue
 import com.keller.yourpet.androidApp.utils.mockPetsList
@@ -11,6 +12,7 @@ import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
 import com.keller.yourpet.shared.wrap
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -19,6 +21,8 @@ import kotlinx.coroutines.flow.flowOf
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
+
+fun mockedSuccess() = flowOf(Result.Success(emptyList<Pet>())).wrap()
 
 @ExperimentalCoroutinesApi
 @RunWith(Parameterized::class)
@@ -32,11 +36,11 @@ class ViewStateTests(
         @Parameterized.Parameters
         fun data() = listOf(
             arrayOf(
-                flowOf(Result.Success(emptyList<Pet>())).wrap(),
+                mockedSuccess(),
                 PetsListViewState.Content(emptyList())
             ),
             arrayOf(
-                flowOf(Result.Success(mockPetsList())).wrap(),
+                mockedSuccess(),
                 PetsListViewState.Content(mockPetsList())
             ),
             arrayOf(
@@ -103,5 +107,51 @@ class FiltersTests(
 
         // then
         assertEquals(filter, expectedFilter)
+    }
+}
+
+@OptIn(ExperimentalCoroutinesApi::class)
+@RunWith(Parameterized::class)
+class DrawerStateChangeTests(
+    private val newValue: DrawerValue,
+    private val useCaseExecution: Int,
+) : CoroutinesTest() {
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters
+        fun data() = listOf(
+            arrayOf(DrawerValue.Closed, 1),
+            arrayOf(DrawerValue.Open, 0),
+        )
+    }
+
+    @Test
+    fun `when drawer closes, executes the use case`() {
+        // given
+        val useCase = mockk<GetPetsUseCase>()
+        val filter = Filter()
+        coEvery { useCase(filter) } returns mockedSuccess()
+        val subject = PetsListViewModel(useCase, filter)
+
+        // when
+        subject.onDrawerStateChanged(newValue)
+
+        // then
+        coVerify(exactly = useCaseExecution) { useCase(filter) }
+    }
+
+    @Test
+    fun `when drawer state changes, returns true`() {
+        // given
+        val useCase = mockk<GetPetsUseCase>()
+        val filter = Filter()
+        coEvery { useCase(filter) } returns mockedSuccess()
+        val subject = PetsListViewModel(useCase, filter)
+
+        // when
+        val result = subject.onDrawerStateChanged(newValue)
+
+        // then
+        assert(result)
     }
 }

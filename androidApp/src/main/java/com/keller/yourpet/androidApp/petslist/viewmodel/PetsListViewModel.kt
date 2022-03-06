@@ -1,6 +1,7 @@
 package com.keller.yourpet.androidApp.petslist.viewmodel
 
 import androidx.compose.material.DrawerState
+import androidx.compose.material.DrawerValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -50,6 +51,13 @@ class PetsListViewModel @Inject constructor(
         } else {
             filters.genders.remove(gender)
         }
+    }
+
+    fun onDrawerStateChanged(newValue: DrawerValue): Boolean {
+        if (newValue == DrawerValue.Closed) {
+            onViewRefreshed()
+        }
+        return true
     }
 
     private fun errorReceived(it: Result.Failure<List<Pet>>) {
