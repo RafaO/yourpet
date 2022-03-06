@@ -8,9 +8,9 @@ fun pets() = listOf(Pet("Fatality", "https://picsum.photos/id/237/200/150", Gend
 fun SchemaBuilder.schemaValue() {
     query("pets") {
         description = "Retrieve all pets"
-        resolver { filter: Filter ->
+        resolver { filter: Filter? ->
             try {
-                filter.applyTo(pets())
+                filter?.applyTo(pets()) ?: pets()
             } catch (e: Exception) {
                 emptyList()
             }
