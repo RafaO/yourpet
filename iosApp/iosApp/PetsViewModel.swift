@@ -42,7 +42,11 @@ class PetsViewModel: ObservableObject {
                         self.state = PetsScreenState.error("No pets")
                     }
                 case let error as FlowableUseCaseResultFailure<NSArray>:
-                    self.state = PetsScreenState.error(error.error?.message ?? "something went wrong")
+                    switch self.state {
+                    case .content: break
+                    default:
+                        self.state = PetsScreenState.error(error.error?.message ?? "something went wrong")
+                    }
                 default: break
                 }
             })
