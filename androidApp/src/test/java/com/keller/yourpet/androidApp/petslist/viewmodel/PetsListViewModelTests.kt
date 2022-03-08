@@ -22,7 +22,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
-fun mockedSuccess() = flowOf(Result.Success(emptyList<Pet>())).wrap()
+fun mockedSuccess(pets: List<Pet> = emptyList()) = flowOf(Result.Success(pets)).wrap()
 
 @ExperimentalCoroutinesApi
 @RunWith(Parameterized::class)
@@ -40,7 +40,7 @@ class ViewStateTests(
                 PetsListViewState.Content(emptyList())
             ),
             arrayOf(
-                mockedSuccess(),
+                mockedSuccess(mockPetsList()),
                 PetsListViewState.Content(mockPetsList())
             ),
             arrayOf(
