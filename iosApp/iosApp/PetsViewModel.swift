@@ -30,7 +30,8 @@ class PetsViewModel: ObservableObject {
     }
     
     func viewCreated() {
-        getPetsUseCase.invoke(param: Filter_(genders: KotlinMutableSet<Gender_>())) { (flow: CFlow<FlowableUseCaseResult<NSArray>>?, _) in
+        let genders = KotlinMutableSet<Gender_>(objects: Gender_.male, Gender_.female)
+        getPetsUseCase.invoke(param: Filter_(genders: genders)) { (flow: CFlow<FlowableUseCaseResult<NSArray>>?, _) in
             flow?.watch(block: {(result: FlowableUseCaseResult<NSArray>?) in
                 switch result {
                 case let success as FlowableUseCaseResultSuccess<NSArray>:
