@@ -6,16 +6,25 @@ struct ContentView: View {
     @State var showMenu = false
     
     var body: some View {
-        NavigationView {
+        let drag = DragGesture()
+            .onEnded {
+                if $0.translation.width < -100 {
+                    withAnimation {
+                        self.showMenu = false
+                    }
+                }
+            }
+        
+        return NavigationView {
             GeometryReader { geometry in
-                ZStack(alignment: .leading, content: {
+                ZStack(alignment: .leading) {
                     Group{
                         switch viewModel.state {
                         case .loading:
                             Text("Loading..")
-                            
+
                         case .content (let content): PetsListView(content: content)
-                            
+
                         case .error(let message): PetsListErrorView(message: message) { viewModel.viewCreated() }
                         }
                     }.onAppear {
@@ -26,8 +35,9 @@ struct ContentView: View {
                     if self.showMenu {
                         MenuView()
                             .frame(width: geometry.size.width/2)
+                            .transition(.move(edge: .leading))
                     }
-                })
+                }                .gesture(drag)
             }
             .navigationBarItems(leading: (
                 Button(action: {

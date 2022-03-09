@@ -12,13 +12,11 @@ struct PetsListView: View {
     var content: PetsScreenState.Content
     
     var body : some View{
-        NavigationView {
-            List(content.pets, id: \.name) { pet in
-                NavigationLink(destination: PetDetailsView(pet: pet)) {
-                    PetRow(pet: pet)
-                }
+        List(content.pets, id: \.name) { pet in
+            NavigationLink(destination: PetDetailsView(pet: pet)) {
+                PetRow(pet: pet)
             }
-            .customNavigationTitle(with: "Pets")
         }
+        .customNavigationTitle(with: "Pets")
     }
 }
