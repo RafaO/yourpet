@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import shared
 
 struct MenuView: View {
     var body: some View {
@@ -15,6 +16,10 @@ struct MenuView: View {
                 .foregroundColor(.gray)
                 .font(.headline)
                 .padding(.top, 100)
+            ForEach(Array(Gender_.values()), id: \.name) { gender in
+                Text(gender.name)
+                    .foregroundColor(.gray)
+            }
             Spacer()
         }
         .padding()
