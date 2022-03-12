@@ -8,6 +8,7 @@
 
 import Foundation
 import shared
+import SwiftUI
 
 extension Array where Element: AnyObject{
     init(_ kotlinArray: KotlinArray<Element>){
@@ -17,4 +18,11 @@ extension Array where Element: AnyObject{
             self.append(iterator.next_() as! Element)
         }
     }
+}
+
+func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
+    Binding(
+        get: { lhs.wrappedValue ?? rhs },
+        set: { lhs.wrappedValue = $0 }
+    )
 }

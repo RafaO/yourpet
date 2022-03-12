@@ -3,14 +3,13 @@ import shared
 
 struct ContentView: View {
     @ObservedObject var viewModel: PetsViewModel
-    @State var showMenu = false
     
     var body: some View {
         let drag = DragGesture()
             .onEnded {
                 if $0.translation.width < -100 {
                     withAnimation {
-                        self.showMenu = false
+                        viewModel.showMenu = false
                     }
                 }
             }
@@ -30,19 +29,19 @@ struct ContentView: View {
                     }.onAppear {
                         viewModel.viewCreated()
                     }
-                    .offset(x: self.showMenu ? geometry.size.width/2 : 0)
-                    .disabled(self.showMenu)
-                    if self.showMenu {
-                        MenuView()
+                    .offset(x: viewModel.showMenu ? geometry.size.width/2 : 0)
+                    .disabled(viewModel.showMenu)
+                    if viewModel.showMenu {
+                        MenuView(viewModel: viewModel)
                             .frame(width: geometry.size.width/2)
                             .transition(.move(edge: .leading))
                     }
-                }                .gesture(drag)
+                }.gesture(drag)
             }
             .navigationBarItems(leading: (
                 Button(action: {
                     withAnimation {
-                        self.showMenu.toggle()
+                        viewModel.showMenu.toggle()
                     }
                 }) {
                     Image(systemName: "line.horizontal.3")

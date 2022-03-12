@@ -10,6 +10,8 @@ import SwiftUI
 import shared
 
 struct MenuView: View {
+    @ObservedObject var viewModel: PetsViewModel
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("Genders")
@@ -17,7 +19,7 @@ struct MenuView: View {
                 .font(.headline)
                 .padding(.top, 100)
             ForEach(Array(Gender_.values()), id: \.name) { gender in
-                Text(gender.name)
+                Toggle(gender.name, isOn: $viewModel.genders[gender] ?? false)
                     .foregroundColor(.gray)
             }
             Spacer()
