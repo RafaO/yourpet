@@ -1,12 +1,19 @@
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
+import com.keller.yourpet.shared.model.Filter
+import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
+
+fun pets() = listOf(
+    Pet("Fatality", "https://picsum.photos/id/237/200/150", Gender.Female),
+    Pet("Charlie", "https://picsum.photos/id/1025/200/150", Gender.Male)
+)
 
 fun SchemaBuilder.schemaValue() {
     query("pets") {
         description = "Retrieve all pets"
-        resolver { ->
+        resolver { filter: Filter? ->
             try {
-                listOf(Pet("Fatality", "https://picsum.photos/id/237/200/150"))
+                filter?.applyTo(pets()) ?: pets()
             } catch (e: Exception) {
                 emptyList()
             }
@@ -14,4 +21,5 @@ fun SchemaBuilder.schemaValue() {
     }
 
     type<Pet>()
+    enum<Gender>()
 }

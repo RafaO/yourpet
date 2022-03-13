@@ -23,6 +23,19 @@ enum PetsScreenState {
 class PetsViewModel: ObservableObject {
     @Published private(set) var state: PetsScreenState = PetsScreenState.loading
     
+    @Published var showMenu = true {
+        didSet {
+            if (!showMenu) {
+                viewCreated()
+            }
+        }
+    }
+    
+    @Published var genders = [
+        Gender_.female: true,
+        Gender_.male: true,
+    ]
+    
     private let getPetsUseCase: GetPetsUseCase
     
     init(getPetsUseCase: GetPetsUseCase) {
@@ -30,7 +43,8 @@ class PetsViewModel: ObservableObject {
     }
     
     func viewCreated() {
-        getPetsUseCase.invoke(param: KotlinUnit()) { (flow: CFlow<FlowableUseCaseResult<NSArray>>?, _) in
+        let applicable = KotlinMutableSet<Gender_>(array: genders.filter { $0.value }.map {$0.key})
+        getPetsUseCase.invoke(param: Filter_(genders: applicable)) { (flow: CFlow<FlowableUseCaseResult<NSArray>>?, _) in
             flow?.watch(block: {(result: FlowableUseCaseResult<NSArray>?) in
                 switch result {
                 case let success as FlowableUseCaseResultSuccess<NSArray>:
@@ -41,7 +55,11 @@ class PetsViewModel: ObservableObject {
                         self.state = PetsScreenState.error("No pets")
                     }
                 case let error as FlowableUseCaseResultFailure<NSArray>:
-                    self.state = PetsScreenState.error(error.error?.message ?? "something went wrong")
+                    switch self.state {
+                    case .content: break
+                    default:
+                        self.state = PetsScreenState.error(error.error?.message ?? "something went wrong")
+                    }
                 default: break
                 }
             })

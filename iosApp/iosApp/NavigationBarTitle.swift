@@ -33,6 +33,7 @@ extension View {
         if #available(iOS 14, *) {
             self
                 .modifier(NavigationTitleViewModifier(text: text))
+                .navigationBarTitle(text, displayMode: .inline)
         }
         else {
             self.modifier(NavigationBarTitleViewModifier(text: text))

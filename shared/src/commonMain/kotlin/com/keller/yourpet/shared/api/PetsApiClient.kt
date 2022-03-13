@@ -1,7 +1,9 @@
 package com.keller.yourpet.shared.api
 
-import com.keller.yourpet.GetAllPetsQuery
 import com.apollographql.apollo3.ApolloClient
+import com.keller.yourpet.GetAllPetsQuery
+import com.keller.yourpet.shared.model.Filter
+import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
 import com.keller.yourpet.shared.repository.IPetsSource
 import kotlinx.coroutines.Dispatchers
@@ -13,8 +15,14 @@ class PetsApiClient : IPetsSource, KoinComponent {
 
     private val apolloClient: ApolloClient by inject()
 
-    override suspend fun getPets() = withContext(Dispatchers.Main) {
-        apolloClient.query(GetAllPetsQuery()).dataOrThrow.pets.map { Pet(it.name, it.imageUrl) }
+    override suspend fun getPets(filter: Filter) = withContext(Dispatchers.Main) {
+        apolloClient.query(GetAllPetsQuery(filter.toQueryParam())).dataOrThrow.pets.map {
+            Pet(
+                it.name,
+                it.imageUrl,
+                Gender.valueOf(it.gender.rawValue)
+            )
+        }
     }
 
     override fun saveOverride(pets: List<Pet>) {

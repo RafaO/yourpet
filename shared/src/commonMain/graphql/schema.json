@@ -505,6 +505,18 @@
         "description": "",
         "fields": [
           {
+            "name": "gender",
+            "isDeprecated": false,
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "ENUM",
+                "name": "Gender"
+              }
+            },
+            "args": []
+          },
+          {
             "name": "imageUrl",
             "isDeprecated": false,
             "type": {
@@ -527,6 +539,30 @@
               }
             },
             "args": []
+          }
+        ]
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "Filter",
+        "description": "",
+        "inputFields": [
+          {
+            "name": "genders",
+            "isDeprecated": false,
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "LIST",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "Gender"
+                  }
+                }
+              }
+            }
           }
         ]
       },
@@ -605,6 +641,21 @@
         ]
       },
       {
+        "kind": "ENUM",
+        "name": "Gender",
+        "description": "",
+        "enumValues": [
+          {
+            "name": "Male",
+            "isDeprecated": false
+          },
+          {
+            "name": "Female",
+            "isDeprecated": false
+          }
+        ]
+      },
+      {
         "kind": "SCALAR",
         "name": "String",
         "description": "The String scalar type represents textual data, represented as UTF-8 character sequences"
@@ -651,7 +702,19 @@
                 }
               }
             },
-            "args": []
+            "args": [
+              {
+                "name": "filter",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "Filter"
+                  }
+                }
+              }
+            ]
           }
         ]
       }
