@@ -39,6 +39,10 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${Versions.hilt}")
     kapt("com.google.dagger:hilt-compiler:${Versions.hilt}")
 
+    // Showkase
+    implementation(Showkase.base)
+    kapt(Showkase.annotations)
+
     testImplementation(Test.junit)
     testImplementation(Test.mockk)
     testImplementation(Test.androidx)

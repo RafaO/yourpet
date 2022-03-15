@@ -8,12 +8,18 @@ object Versions {
     const val mockk = "1.11.0"
     const val kGraphQL = "0.17.9"
     const val apollo = "3.0.0-alpha03"
+    const val showkase = "1.0.0-beta12"
 }
 
 object AndroidSdk {
     const val min = 24
     const val compile = 31
     const val target = compile
+}
+
+object Showkase {
+    const val base = "com.airbnb.android:showkase:${Versions.showkase}"
+    const val annotations = "com.airbnb.android:showkase-processor:${Versions.showkase}"
 }
 
 object GraphQL {
