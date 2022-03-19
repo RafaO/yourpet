@@ -42,7 +42,7 @@ fun PetCard(pet: Pet, onPetClicked: (Pet) -> Unit) = Column(
     Text(pet.name, style = MaterialTheme.typography.h6)
 }
 
-@Preview(showBackground = true, name = "Custom name for component", group = UIGroups.PetsElements)
+@Preview(showBackground = true, name = "Pet card", group = UIGroups.PetsElements)
 @Composable
 fun DefaultPreview() {
     YourPetUITheme {

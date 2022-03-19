@@ -4,8 +4,9 @@ import com.airbnb.android.showkase.annotation.ShowkaseRoot
 import com.airbnb.android.showkase.annotation.ShowkaseRootModule
 
 @ShowkaseRoot
-class ShowkaseRoot: ShowkaseRootModule
+class ShowkaseRoot : ShowkaseRootModule
 
 object UIGroups {
     const val PetsElements = "Pets elements"
+    const val GeneralElements = "General elements"
 }

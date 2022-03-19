@@ -12,9 +12,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.airbnb.android.showkase.models.Showkase
 import com.keller.yourpet.androidApp.BuildConfig
+import com.keller.yourpet.androidApp.ui.UIGroups
+import com.keller.yourpet.androidApp.ui.YourPetUITheme
 import com.keller.yourpet.androidApp.ui.getBrowserIntent
 import com.keller.yourpet.shared.model.Gender
 
@@ -51,5 +54,13 @@ fun LabelledCheckbox(gender: Gender, onGenderSelected: (Gender, Boolean) -> Unit
             },
         )
         Text(text = gender.toString())
+    }
+}
+
+@Preview(showBackground = true, name = "side menu", group = UIGroups.GeneralElements)
+@Composable
+fun DefaultPreview() {
+    YourPetUITheme {
+        SideMenu { _, _ -> }
     }
 }
