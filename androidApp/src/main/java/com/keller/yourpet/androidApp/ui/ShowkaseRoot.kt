@@ -9,4 +9,5 @@ class ShowkaseRoot : ShowkaseRootModule
 object UIGroups {
     const val PetsElements = "Pets elements"
     const val GeneralElements = "General elements"
+    const val Screens = "Screens"
 }
