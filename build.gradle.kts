@@ -13,6 +13,8 @@ buildscript {
         classpath("com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}")
 
         classpath("com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}")
+
+        classpath("com.karumi:shot:5.13.0")
     }
 }
 

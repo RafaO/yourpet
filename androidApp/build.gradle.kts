@@ -5,6 +5,11 @@ plugins {
     kotlin("android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("shot")
+}
+
+shot {
+    applicationId = "com.keller.yourpet.androidApp"
 }
 
 dependencies {
@@ -18,14 +23,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
     // compose
-    val composeVersion = "1.0.2"
-    implementation("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.compose.ui:ui-tooling:$composeVersion")
-    implementation("androidx.compose.material:material:$composeVersion")
+    implementation("androidx.compose.ui:ui:${Versions.compose}")
+    implementation("androidx.compose.ui:ui-tooling:${Versions.compose}")
+    implementation("androidx.compose.material:material:${Versions.compose}")
     implementation("androidx.activity:activity-compose:1.3.0-alpha07")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha04")
-    implementation("androidx.compose.runtime:runtime:$composeVersion")
-    implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
+    implementation("androidx.compose.runtime:runtime:${Versions.compose}")
+    implementation("androidx.compose.runtime:runtime-livedata:${Versions.compose}")
 
     // navigation
     val navVersion = "2.3.3"
@@ -47,10 +51,21 @@ dependencies {
     testImplementation(Test.mockk)
     testImplementation(Test.androidx)
     testImplementation(Test.coroutines)
+
+    androidTestImplementation(AndroidTest.composeJunit)
+    androidTestImplementation(AndroidTest.espresso)
+    androidTestImplementation(AndroidTest.coreKtx)
+    androidTestImplementation(AndroidTest.core)
+    androidTestImplementation(AndroidTest.runner)
+    androidTestImplementation(AndroidTest.extJunit)
+    androidTestImplementation(AndroidTest.extJunitKtx)
 }
 
 android {
     compileSdk = AndroidSdk.compile
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
     defaultConfig {
         applicationId = "com.keller.yourpet.androidApp"
         minSdk = AndroidSdk.min
@@ -58,6 +73,7 @@ android {
         versionCode = 1
         versionName = "1.0"
         signingConfig = signingConfigs.getByName("debug")
+        testInstrumentationRunner = "com.karumi.shot.ShotTestRunner"
     }
     buildTypes {
         getByName("release") {

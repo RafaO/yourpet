@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import coil.size.OriginalSize
+import com.keller.yourpet.androidApp.R
 import com.keller.yourpet.androidApp.ui.UIGroups
 import com.keller.yourpet.androidApp.ui.YourPetUITheme
 import com.keller.yourpet.shared.model.Gender
@@ -31,7 +32,10 @@ fun PetCard(pet: Pet, onPetClicked: (Pet) -> Unit) = Column(
     Image(
         painter = rememberImagePainter(
             data = pet.imageUrl,
-            builder = { size(OriginalSize) }
+            builder = {
+                placeholder(R.drawable.filter_list_white_24dp) // TODO
+                size(OriginalSize)
+            }
         ),
         contentDescription = "image for $pet.name",
         modifier = Modifier
