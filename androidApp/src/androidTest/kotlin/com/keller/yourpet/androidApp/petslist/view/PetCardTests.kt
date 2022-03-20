@@ -13,7 +13,7 @@ class PetCardTests : ScreenshotTest {
     val composeRule = createComposeRule()
 
     @Test
-    fun rendersGreetingMessageForTheSpecifiedPerson() {
+    fun rendersPetCard() {
         composeRule.setContent {
             PetCard(
                 pet = Pet(
