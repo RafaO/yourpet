@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.keller.yourpet.androidApp">
+    package="com.keller.yourpet.androidApp"
+    android:sharedUserId="com.keller.yourpet.androidApp.uid">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:requestLegacyExternalStorage="true"
         android:name="YourPetApplication"
         android:allowBackup="false"
         android:supportsRtl="true"
@@ -17,5 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="androidx.activity.ComponentActivity" />
     </application>
 </manifest>

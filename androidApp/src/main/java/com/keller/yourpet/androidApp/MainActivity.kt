@@ -17,6 +17,7 @@ import com.keller.yourpet.androidApp.petdetails.PetDetailsScreen
 import com.keller.yourpet.androidApp.petslist.view.PetsHome
 import com.keller.yourpet.androidApp.petslist.view.PetsListScreen
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewModel
+import com.keller.yourpet.androidApp.ui.UIGroups
 import com.keller.yourpet.androidApp.ui.YourPetUITheme
 import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "Pets list", group = UIGroups.Screens)
 @Composable
 fun DefaultPreview() {
     YourPetUITheme {

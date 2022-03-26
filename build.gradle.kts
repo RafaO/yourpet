@@ -7,12 +7,14 @@ buildscript {
 
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
-        classpath("com.android.tools.build:gradle:7.3.0-alpha05")
+        classpath("com.android.tools.build:gradle:7.3.0-alpha07")
         classpath("com.apollographql.apollo3:apollo-gradle-plugin:${Versions.apollo}")
         classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}")
         classpath("com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}")
 
         classpath("com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}")
+
+        classpath("com.karumi:shot:5.13.0")
     }
 }
 

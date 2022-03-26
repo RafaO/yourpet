@@ -8,12 +8,21 @@ object Versions {
     const val mockk = "1.11.0"
     const val kGraphQL = "0.17.9"
     const val apollo = "3.0.0-alpha03"
+    const val showkase = "1.0.0-beta12"
+    const val compose = "1.0.2"
+    const val androidTestJunit = "1.4.0"
+    const val androidTestExtJunit = "1.1.3"
 }
 
 object AndroidSdk {
     const val min = 24
     const val compile = 31
     const val target = compile
+}
+
+object Showkase {
+    const val base = "com.airbnb.android:showkase:${Versions.showkase}"
+    const val annotations = "com.airbnb.android:showkase-processor:${Versions.showkase}"
 }
 
 object GraphQL {
@@ -48,4 +57,14 @@ object Test {
     const val mockk = "io.mockk:mockk:${Versions.mockk}"
     const val androidx = "androidx.arch.core:core-testing:2.1.0"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.0"
+}
+
+object AndroidTest {
+    const val composeJunit = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
+    const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
+    const val coreKtx = "androidx.test:core-ktx:${Versions.androidTestJunit}"
+    const val core = "androidx.test:core:${Versions.androidTestJunit}"
+    const val runner = "androidx.test:runner:${Versions.androidTestJunit}"
+    const val extJunit = "androidx.test.ext:junit:${Versions.androidTestExtJunit}"
+    const val extJunitKtx = "androidx.test.ext:junit-ktx:${Versions.androidTestExtJunit}"
 }
