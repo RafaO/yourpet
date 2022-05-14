@@ -28,6 +28,7 @@ kotlin {
                 implementation(Ktor.serverCore)
                 implementation(Ktor.serverNetty)
                 implementation(Ktor.kGraphQLKtor)
+                implementation(MongoDB.kmongo)
             }
         }
         val jvmTest by getting { }
