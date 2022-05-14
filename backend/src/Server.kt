@@ -21,7 +21,7 @@ fun Application.module(testing: Boolean = false) {
     install(GraphQL) {
         playground = true
         schema {
-            schemaValue()
+            schemaValue(dbHelper)
         }
     }
     println("server started")
