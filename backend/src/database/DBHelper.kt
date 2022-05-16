@@ -10,15 +10,7 @@ object DbConstants {
     const val DB_NAME_PETS = "pets"
 }
 
-class DBHelper {
-
-    private val collection: CoroutineCollection<Pet>
-
-    init {
-        val client = KMongo.createClient().coroutine
-        val database = client.getDatabase(DbConstants.DB_NAME_PETS)
-        collection = database.getCollection()
-    }
+class DBHelper(private val collection: CoroutineCollection<Pet>) {
 
     suspend fun addContent(): Result<Unit> {
         return dbExecute { collection.insertMany(mockPets()) }
