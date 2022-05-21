@@ -11,8 +11,7 @@ fun SchemaBuilder.schemaValue(dbHelper: DBHelper) {
         resolver { filter: Filter? ->
             try {
                 runBlocking {
-                    val pets = dbHelper.getPets().getOrThrow()
-                    filter?.applyTo(pets) ?: pets
+                    dbHelper.getPets(filter).getOrThrow()
                 }
             } catch (e: Exception) {
                 emptyList()
