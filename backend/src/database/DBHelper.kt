@@ -11,22 +11,18 @@ object DbConstants {
 
 class DBHelper(private val collection: CoroutineCollection<Pet>) {
 
-    suspend fun addContent(): Result<Unit> {
-        return dbExecute { collection.insertMany(mockPets()) }
-    }
+    suspend fun addContent() = dbExecute { collection.insertMany(mockPets()) }
 
     suspend fun getPets(filter: Filter?) = if (filter != null)
         dbExecute { collection.find(filter.toMongoQuery()).toList() }
     else
         dbExecute { collection.find().toList() }
 
-    private inline fun <T> dbExecute(f: () -> T): Result<T> {
-        return try {
-            val r = f()
-            Result.success(r)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    private inline fun <T> dbExecute(f: () -> T) = try {
+        val r = f()
+        Result.success(r)
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 
     private fun mockPets() = listOf(
