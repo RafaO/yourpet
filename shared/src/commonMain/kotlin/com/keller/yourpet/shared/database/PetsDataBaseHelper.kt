@@ -8,7 +8,7 @@ import kotlin.random.Random
 
 class PetsDataBaseHelper(private val database: MyDatabase) : IPetsSource {
     override suspend fun getPets(filter: Filter) =
-        filter.applyTo(database.petBDQueries.selectAllPets().executeAsList().map(PetMapper::from))
+        filter.applyTo(database.petBDQueries.selectAllPets(PetMapper::from).executeAsList())
 
     override fun saveOverride(pets: List<Pet>) {
         database.petBDQueries.deletePets()

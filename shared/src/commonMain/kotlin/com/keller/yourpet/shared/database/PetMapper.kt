@@ -6,6 +6,8 @@ import comkelleryourpetshareddata.PetBD
 
 class PetMapper {
     companion object {
-        fun from(p: PetBD) = Pet(p.name, p.imageUrl, Gender.valueOf(p.gender))
+        // id kept despite unused so the method can be passed as reference
+        fun from(id: Long, name: String, imageUrl: String, gender: String) =
+            Pet(name, imageUrl, Gender.valueOf(gender))
     }
 }
