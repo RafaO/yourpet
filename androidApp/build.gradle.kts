@@ -14,11 +14,11 @@ shot {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("com.google.android.material:material:1.2.1")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+    implementation("com.google.android.material:material:1.6.1")
+    implementation("androidx.appcompat:appcompat:1.4.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
 
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
