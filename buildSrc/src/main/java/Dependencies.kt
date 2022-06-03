@@ -20,6 +20,10 @@ object AndroidSdk {
     const val target = compile
 }
 
+object MongoDB {
+    const val kmongo = "org.litote.kmongo:kmongo-coroutine:4.5.0"
+}
+
 object Showkase {
     const val base = "com.airbnb.android:showkase:${Versions.showkase}"
     const val annotations = "com.airbnb.android:showkase-processor:${Versions.showkase}"

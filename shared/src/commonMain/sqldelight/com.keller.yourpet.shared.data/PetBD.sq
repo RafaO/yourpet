@@ -8,6 +8,10 @@ CREATE TABLE PetBD (
 selectAllPets:
 SELECT * FROM PetBD;
 
+selectFilteredPets:
+SELECT * FROM PetBD
+WHERE gender IN ?;
+
 insertPet:
 INSERT INTO PetBD(id, name, imageUrl, gender)
 VALUES(?, ?, ?, ?);

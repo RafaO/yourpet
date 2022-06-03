@@ -23,4 +23,11 @@ data class Filter(val genders: MutableSet<Gender> = mutableSetOf()) {
             Gender.Female -> gGender.Female
         }
     })
+
+    fun toMongoQuery(): String {
+        val strBuilder = StringBuilder("""{ gender: { ${'$'}in: [""")
+        strBuilder.append(genders.joinToString { "\"${it}\"" })
+        strBuilder.append("] } }")
+        return strBuilder.toString()
+    }
 }

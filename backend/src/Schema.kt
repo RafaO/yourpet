@@ -2,18 +2,17 @@ import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import com.keller.yourpet.shared.model.Filter
 import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
+import database.DBHelper
+import kotlinx.coroutines.runBlocking
 
-fun pets() = listOf(
-    Pet("Fatality", "https://picsum.photos/id/237/200/150", Gender.Female),
-    Pet("Charlie", "https://picsum.photos/id/1025/200/150", Gender.Male)
-)
-
-fun SchemaBuilder.schemaValue() {
+fun SchemaBuilder.schemaValue(dbHelper: DBHelper) {
     query("pets") {
         description = "Retrieve all pets"
         resolver { filter: Filter? ->
             try {
-                filter?.applyTo(pets()) ?: pets()
+                runBlocking {
+                    dbHelper.getPets(filter).getOrThrow()
+                }
             } catch (e: Exception) {
                 emptyList()
             }
