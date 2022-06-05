@@ -1,3 +1,4 @@
+import Versions.coroutinesVersion
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 apply(from = "../tools/detekt.gradle")
@@ -55,9 +56,7 @@ kotlin {
         iosX64("ios")
     }
 
-    val coroutinesVersion = "1.5.1-native-mt"
     val serializationVersion = "1.0.0-RC"
-    val sqlVersion = "1.4.4"
 
     sourceSets {
         val commonMain by getting {
@@ -94,7 +93,7 @@ kotlin {
         val androidMain by getting {
             dependsOn(mobileMain)
             dependencies {
-                implementation("com.squareup.sqldelight:android-driver:$sqlVersion")
+                implementation("com.squareup.sqldelight:android-driver:${Versions.sqlDelight}")
             }
         }
         val androidTest by getting {
@@ -106,7 +105,7 @@ kotlin {
         val iosMain by getting {
             dependsOn(mobileMain)
             dependencies {
-                implementation("com.squareup.sqldelight:native-driver:$sqlVersion")
+                implementation("com.squareup.sqldelight:native-driver:${Versions.sqlDelight}")
                 implementation(Ktor.clientIos)
             }
         }

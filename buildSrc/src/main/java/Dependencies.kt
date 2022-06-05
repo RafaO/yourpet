@@ -1,7 +1,7 @@
 object Versions {
-    const val kotlin = "1.5.21"
+    const val kotlin = "1.6.20"
     const val junit = "4.13"
-    const val sqlDelight = "1.4.4"
+    const val sqlDelight = "1.5.2"
     const val hilt = "2.38.1"
     const val ktor = "1.6.0"
     const val detekt = "1.17.0-RC2"
@@ -12,6 +12,7 @@ object Versions {
     const val compose = "1.2.0-beta03"
     const val androidTestJunit = "1.4.0"
     const val androidTestExtJunit = "1.1.3"
+    const val coroutinesVersion = "1.6.1-native-mt"
 }
 
 object AndroidSdk {
