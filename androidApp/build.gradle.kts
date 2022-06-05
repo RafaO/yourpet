@@ -14,11 +14,11 @@ shot {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("com.google.android.material:material:1.2.1")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+    implementation("com.google.android.material:material:1.6.1")
+    implementation("androidx.appcompat:appcompat:1.4.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
 
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
@@ -26,8 +26,8 @@ dependencies {
     implementation("androidx.compose.ui:ui:${Versions.compose}")
     implementation("androidx.compose.ui:ui-tooling:${Versions.compose}")
     implementation("androidx.compose.material:material:${Versions.compose}")
-    implementation("androidx.activity:activity-compose:1.3.0-alpha07")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha04")
+    implementation("androidx.activity:activity-compose:1.6.0-alpha03")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0-rc01")
     implementation("androidx.compose.runtime:runtime:${Versions.compose}")
     implementation("androidx.compose.runtime:runtime-livedata:${Versions.compose}")
 
@@ -94,7 +94,6 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
-        useIR = true
 
         freeCompilerArgs = listOf(
             "-P",
@@ -103,6 +102,6 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.2"
+        kotlinCompilerExtensionVersion = Versions.compose
     }
 }

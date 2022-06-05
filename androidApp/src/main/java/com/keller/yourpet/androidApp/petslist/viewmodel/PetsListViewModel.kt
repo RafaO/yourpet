@@ -13,6 +13,7 @@ import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,12 +31,12 @@ class PetsListViewModel @Inject constructor(
 
     fun onViewRefreshed() = viewModelScope.launch {
         _state.postValue(PetsListViewState.Loading)
-        getPetsUseCase(filters).collect {
+        getPetsUseCase(filters).onEach {
             when (it) {
                 is Result.Success -> _state.postValue(PetsListViewState.Content(it.result))
                 is Result.Failure -> errorReceived(it)
             }
-        }
+        }.collect()
     }
 
     suspend fun onFiltersClicked(drawerState: DrawerState) {
