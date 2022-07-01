@@ -1,7 +1,5 @@
 package com.keller.yourpet.androidApp.petslist.viewmodel
 
-import androidx.compose.material.DrawerState
-import androidx.compose.material.DrawerValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.keller.yourpet.mobilemain.usecase.FlowableUseCase.Result
 import com.keller.yourpet.mobilemain.usecase.GetPetsUseCase
 import com.keller.yourpet.shared.model.Filter
-import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -37,28 +34,6 @@ class PetsListViewModel @Inject constructor(
                 is Result.Failure -> errorReceived(it)
             }
         }.collect()
-    }
-
-    suspend fun onFiltersClicked(drawerState: DrawerState) {
-        if (drawerState.isClosed)
-            drawerState.open()
-        else
-            drawerState.close()
-    }
-
-    fun onGenderSelected(gender: Gender, selected: Boolean) {
-        if (selected) {
-            filters.genders.add(gender)
-        } else {
-            filters.genders.remove(gender)
-        }
-    }
-
-    fun onDrawerStateChanged(newValue: DrawerValue): Boolean {
-        if (newValue == DrawerValue.Closed) {
-            onViewRefreshed()
-        }
-        return true
     }
 
     private fun errorReceived(it: Result.Failure<List<Pet>>) {

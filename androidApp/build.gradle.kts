@@ -42,6 +42,7 @@ dependencies {
     // Hilt
     implementation("com.google.dagger:hilt-android:${Versions.hilt}")
     kapt("com.google.dagger:hilt-compiler:${Versions.hilt}")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     // Showkase
     implementation(Showkase.base)
