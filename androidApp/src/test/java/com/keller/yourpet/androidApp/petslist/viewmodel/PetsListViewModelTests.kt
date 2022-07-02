@@ -1,18 +1,14 @@
 package com.keller.yourpet.androidApp.petslist.viewmodel
 
-import androidx.compose.material.DrawerValue
 import com.keller.yourpet.androidApp.utils.CoroutinesTest
-import com.keller.yourpet.androidApp.utils.getOrAwaitValue
 import com.keller.yourpet.androidApp.utils.mockPetsList
 import com.keller.yourpet.mobilemain.usecase.FlowableUseCase.Result
 import com.keller.yourpet.mobilemain.usecase.GetPetsUseCase
 import com.keller.yourpet.shared.CFlow
 import com.keller.yourpet.shared.model.Filter
-import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
 import com.keller.yourpet.shared.wrap
 import io.mockk.coEvery
-import io.mockk.coVerify
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -72,8 +68,6 @@ class ViewStateTests(
         subject.onViewRefreshed()
 
         // then
-        subject.state.getOrAwaitValue() // consume loading
-        val result = subject.state.getOrAwaitValue()
-        assertEquals(viewState, result)
+        assertEquals(viewState, subject.uiState.value)
     }
 }

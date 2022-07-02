@@ -5,8 +5,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewModel
@@ -28,7 +28,7 @@ fun Content(state: PetsListViewState, onPetClicked: (Pet) -> Unit, onRetry: () -
 @Composable
 fun PetsListScreen(update: Boolean, updated: () -> Unit, onPetClicked: (Pet) -> Unit) {
     val viewModel: PetsListViewModel = hiltViewModel()
-    val state by viewModel.state.observeAsState(PetsListViewState.Content(emptyList()))
+    val state by viewModel.uiState.collectAsState()
 
     if (update) {
         viewModel.onViewRefreshed()
