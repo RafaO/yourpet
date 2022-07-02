@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -37,6 +38,11 @@ fun HomeScreen(navController: NavHostController) {
         MenuOption.Settings()
     )
     val innerNavController = rememberNavController()
+
+    // vm will notify the side menu so filters are available
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onOptionSelected(options[0])
+    }
 
     if (uiState.shouldNavigate) {
         innerNavController.navigate(uiState.optionSelected.text)
