@@ -26,7 +26,7 @@ dependencies {
     implementation("androidx.compose.ui:ui:${Versions.compose}")
     implementation("androidx.compose.ui:ui-tooling:${Versions.compose}")
     implementation("androidx.compose.material:material:${Versions.compose}")
-    implementation("androidx.activity:activity-compose:1.6.0-alpha03")
+    implementation("androidx.activity:activity-compose:1.5.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0-rc01")
     implementation("androidx.compose.runtime:runtime:${Versions.compose}")
     implementation("androidx.compose.runtime:runtime-livedata:${Versions.compose}")
@@ -103,6 +103,6 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
+        kotlinCompilerExtensionVersion = "1.2.0"
     }
 }

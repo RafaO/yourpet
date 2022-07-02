@@ -1,5 +1,5 @@
 object Versions {
-    const val kotlin = "1.6.20"
+    const val kotlin = "1.7.0"
     const val junit = "4.13"
     const val sqlDelight = "1.5.2"
     const val hilt = "2.38.1"
@@ -8,8 +8,8 @@ object Versions {
     const val mockk = "1.11.0"
     const val kGraphQL = "0.17.9"
     const val apollo = "3.0.0-alpha03"
-    const val showkase = "1.0.0-beta12"
-    const val compose = "1.2.0-beta03"
+    const val showkase = "1.0.0-beta13"
+    const val compose = "1.2.0-rc03"
     const val androidTestJunit = "1.4.0"
     const val androidTestExtJunit = "1.1.3"
     const val coroutinesVersion = "1.6.1-native-mt"

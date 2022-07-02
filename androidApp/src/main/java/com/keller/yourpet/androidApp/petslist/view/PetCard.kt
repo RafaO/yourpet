@@ -48,7 +48,7 @@ fun PetCard(pet: Pet, onPetClicked: (Pet) -> Unit) = Column(
 
 @Preview(showBackground = true, name = "Pet card", group = UIGroups.PetsElements)
 @Composable
-fun DefaultPreview() {
+fun PetCardPreview() {
     YourPetUITheme {
         PetCard(
             pet = Pet("Charlie", "https://picsum.photos/id/237/200/150", Gender.Female),
