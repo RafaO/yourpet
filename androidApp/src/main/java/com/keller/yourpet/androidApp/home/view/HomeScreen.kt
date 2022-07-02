@@ -38,6 +38,11 @@ fun HomeScreen(navController: NavHostController) {
     )
     val innerNavController = rememberNavController()
 
+    if (uiState.shouldNavigate) {
+        innerNavController.navigate(uiState.optionSelected.text)
+        viewModel.navigated()
+    }
+
     Column {
         TopAppBar(
             title = { Text(text = stringResource(id = R.string.title_pets_list)) },

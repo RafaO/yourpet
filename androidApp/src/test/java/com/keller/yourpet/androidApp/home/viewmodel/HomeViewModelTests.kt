@@ -1,6 +1,7 @@
 package com.keller.yourpet.androidApp.home.viewmodel
 
 import androidx.compose.material.DrawerValue
+import com.keller.yourpet.androidApp.home.view.menu.MenuOption
 import com.keller.yourpet.androidApp.petslist.viewmodel.mockedSuccess
 import com.keller.yourpet.androidApp.utils.CoroutinesTest
 import com.keller.yourpet.mobilemain.usecase.GetPetsUseCase
@@ -47,9 +48,34 @@ class FiltersTests(
     }
 }
 
+@RunWith(Parameterized::class)
+class NavigationTests(private val selectedOption: MenuOption) {
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters
+        fun data() = listOf(
+            arrayOf(MenuOption.Settings()),
+            arrayOf(MenuOption.Pets(mockk(), false) {}),
+        )
+    }
+
+    @Test
+    fun `when option is selected, it navigates`() {
+        // given
+        val subject = HomeViewModel(mockk())
+
+        // when
+        subject.onOptionSelected(selectedOption)
+
+        // then
+        val state = subject.uiState.value
+        assertEquals(true, state.shouldNavigate)
+        assertEquals(selectedOption, state.optionSelected)
+    }
+}
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class DrawerStateUiStateTests : CoroutinesTest() {
+class SimpleTests : CoroutinesTest() {
     @Test
     fun `when drawer closes, emits the ui state with update true`() {
         // given
@@ -61,6 +87,18 @@ class DrawerStateUiStateTests : CoroutinesTest() {
 
         // then
         assertEquals(true, subject.uiState.value.filterUpdated)
+    }
+
+    @Test
+    fun `when navigated, state reflects it`() {
+        // given
+        val subject = HomeViewModel(mockk())
+
+        // when
+        subject.navigated()
+
+        // then
+        assertEquals(false, subject.uiState.value.shouldNavigate)
     }
 }
 

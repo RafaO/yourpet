@@ -16,8 +16,18 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(val filter: Filter) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(HomeUiState(MenuOption.Settings(), false))
+    private val _uiState = MutableStateFlow(
+        HomeUiState(
+            MenuOption.Settings(),
+            filterUpdated = false,
+            shouldNavigate = false
+        )
+    )
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
+
+    fun navigated() {
+        _uiState.update { it.copy(shouldNavigate = false) }
+    }
 
     suspend fun onDrawerIconClicked(drawerState: DrawerState) {
         if (drawerState.isClosed)
@@ -36,7 +46,7 @@ class HomeViewModel @Inject constructor(val filter: Filter) : ViewModel() {
     }
 
     fun onOptionSelected(option: MenuOption) {
-        _uiState.update { it.copy(optionSelected = option) }
+        _uiState.update { it.copy(optionSelected = option, shouldNavigate = true) }
     }
 
     fun onGenderSelected(gender: Gender, selected: Boolean) {
