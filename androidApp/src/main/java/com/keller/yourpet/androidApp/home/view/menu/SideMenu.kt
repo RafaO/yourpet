@@ -54,14 +54,14 @@ fun SideMenu(
     val context = LocalContext.current
 
     Column(modifier = Modifier.padding(8.dp)) {
-        if (selectedOption is MenuOption.Pets) {
-            Text("Filters")
-            for (gender in Gender.values())
-                LabelledCheckbox(filter, gender, onGenderSelected)
-        }
-
-        for (option in options)
+        for (option in options) {
             MenuItem(option = option, onOptionSelected = onOptionSelected)
+            if (option is MenuOption.Pets && selectedOption is MenuOption.Pets) {
+                Text("Filters")
+                for (gender in Gender.values())
+                    LabelledCheckbox(filter, gender, onGenderSelected)
+            }
+        }
 
         Spacer(modifier = Modifier.weight(1.0f))
         if (BuildConfig.DEBUG) {
@@ -77,7 +77,7 @@ fun SideMenu(
 @Composable
 fun LabelledCheckbox(filter: Filter, gender: Gender, onGenderSelected: (Gender, Boolean) -> Unit) {
     val isChecked = remember { mutableStateOf(filter.genders.contains(gender)) }
-    Row {
+    Row(verticalAlignment = Alignment.CenterVertically) {
         Checkbox(
             checked = isChecked.value,
             onCheckedChange = {
@@ -85,7 +85,10 @@ fun LabelledCheckbox(filter: Filter, gender: Gender, onGenderSelected: (Gender, 
                 onGenderSelected(gender, it)
             },
         )
-        Text(text = gender.toString())
+        Text(
+            modifier = Modifier.wrapContentHeight(Alignment.CenterVertically),
+            text = gender.toString()
+        )
     }
 }
 
@@ -95,7 +98,7 @@ fun DefaultPreview() {
     YourPetUITheme {
         SideMenu(
             Filter(),
-            emptyList(),
+            listOf(MenuOption.Pets(rememberNavController(), false) {}, MenuOption.Settings()),
             MenuOption.Pets(rememberNavController(), false) {},
             { _, _ -> },
             {})
