@@ -5,7 +5,7 @@ import androidx.navigation.NavController
 import com.keller.yourpet.androidApp.Navigation.Companion.ARG_PET
 import com.keller.yourpet.androidApp.Navigation.Companion.ROUTE_PET_DETAILS
 import com.keller.yourpet.androidApp.petslist.view.PetsListScreen
-import com.keller.yourpet.androidApp.settings.SettingsScreen
+import com.keller.yourpet.androidApp.settings.view.SettingsScreen
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
