@@ -51,7 +51,7 @@ fun HomeScreen(navController: NavHostController) {
 
     Column {
         TopAppBar(
-            title = { Text(text = stringResource(id = R.string.title_pets_list)) },
+            title = { Text(text = uiState.optionSelected.text) },
             navigationIcon = {
                 IconButton(onClick = {
                     scope.launch {
