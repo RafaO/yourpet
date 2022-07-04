@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.PopupProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.keller.yourpet.androidApp.settings.viewmodel.SettingsViewModel
+import com.keller.yourpet.androidApp.settings.viewmodel.ThemeColor
 import com.keller.yourpet.androidApp.ui.UIGroups
 
 @Composable
@@ -51,10 +52,15 @@ fun SettingsScreen() {
                     onDismissRequest = { themeMenuExpanded = false },
                     properties = PopupProperties(focusable = true),
                 ) {
-                    DropdownMenuItem(
-                        onClick = {},
-                    ) {
-                        Text(text = "Light")
+                    ThemeColor.values().forEach {
+                        DropdownMenuItem(
+                            onClick = {
+                                viewModel.onThemeColorSelected(it)
+                                themeMenuExpanded = false
+                            },
+                        ) {
+                            Text(text = it.name)
+                        }
                     }
                 }
             }
