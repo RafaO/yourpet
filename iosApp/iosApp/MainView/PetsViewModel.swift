@@ -23,7 +23,7 @@ enum PetsScreenState {
 class PetsViewModel: ObservableObject {
     @Published private(set) var state: PetsScreenState = PetsScreenState.loading
     
-    @Published var showMenu = true {
+    @Published var showMenu = false {
         didSet {
             if (!showMenu) {
                 viewCreated()
