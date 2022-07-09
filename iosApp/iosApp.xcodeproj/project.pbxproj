@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D7EF2D5261F992F00BF7691 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7EF2D4261F992F00BF7691 /* ImageLoader.swift */; };
 		1D7EF2D92620B94700BF7691 /* PetRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7EF2D82620B94700BF7691 /* PetRow.swift */; };
+		1D985DD4287A2492008C0D54 /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D985DD3287A2492008C0D54 /* TextStyles.swift */; };
 		1D988A2427DBACD600AD7E83 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D988A2327DBACD600AD7E83 /* SwiftExtensions.swift */; };
 		1D988A2527DBACD600AD7E83 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D988A2327DBACD600AD7E83 /* SwiftExtensions.swift */; };
 		1D988A2627DBACD600AD7E83 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D988A2327DBACD600AD7E83 /* SwiftExtensions.swift */; };
@@ -64,6 +65,7 @@
 /* Begin PBXFileReference section */
 		1D7EF2D4261F992F00BF7691 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		1D7EF2D82620B94700BF7691 /* PetRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRow.swift; sourceTree = "<group>"; };
+		1D985DD3287A2492008C0D54 /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
 		1D988A2327DBACD600AD7E83 /* SwiftExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftExtensions.swift; sourceTree = "<group>"; };
 		1DAFE879262C84B20051820E /* PetDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDetailsView.swift; sourceTree = "<group>"; };
 		1DAFE87D262C89290051820E /* NavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarTitle.swift; sourceTree = "<group>"; };
@@ -124,6 +126,14 @@
 			path = MainView;
 			sourceTree = "<group>";
 		};
+		1D985DD2287A247E008C0D54 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1D985DD3287A2492008C0D54 /* TextStyles.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		1DBDA274265ABEFF0023F56F /* PetsList */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +168,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				1D985DD2287A247E008C0D54 /* UI */,
 				1D184E1927D92A5700D82D08 /* MainView */,
 				1DBDA274265ABEFF0023F56F /* PetsList */,
 				7555FF7E242A565900829871 /* AppDelegate.swift */,
@@ -370,6 +381,7 @@
 				1DED74802617777B003F9DBC /* PetsViewModel.swift in Sources */,
 				7555FF83242A565900829871 /* MainView.swift in Sources */,
 				1DD1313D27D8FEF90063B724 /* MenuView.swift in Sources */,
+				1D985DD4287A2492008C0D54 /* TextStyles.swift in Sources */,
 				1DBDA276265ABF530023F56F /* PetsListView.swift in Sources */,
 				1DAFE87A262C84B20051820E /* PetDetailsView.swift in Sources */,
 				1DBDA27A265AC3730023F56F /* PetsListErrorView.swift in Sources */,
