@@ -14,9 +14,15 @@ struct PetsListErrorView: View {
     
     
     var body : some View{
-        Text(message)
-        Button("Retry") {
-            onButtonClicked()
+        GeometryReader { geometry in
+            VStack {
+                Text(message).multilineTextAlignment(.center)
+                Button("Retry") {
+                    onButtonClicked()
+                }
+            }
+            .padding(.all, CGFloat(20))
+            .frame(width: geometry.size.width)
         }
     }
 }
