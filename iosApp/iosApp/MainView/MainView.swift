@@ -3,6 +3,26 @@ import shared
 
 struct ContentView: View {
     @ObservedObject var viewModel: PetsViewModel
+    @ObservedObject var mainViewModel: MainViewModel
+    
+    @ViewBuilder
+    func content() -> some View {
+        switch viewModel.selectedOption {
+        case .Pets:
+            Group{
+                switch viewModel.state {
+                case .loading:
+                    Text("Loading..")
+
+                case .content (let content): PetsListView(content: content)
+
+                case .error(let message): PetsListErrorView(message: message) { viewModel.viewCreated() }
+                }
+            }
+        case .Settings:
+            SettingsView()
+        }
+    }
     
     var body: some View {
         let drag = DragGesture()
@@ -17,16 +37,7 @@ struct ContentView: View {
         return NavigationView {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
-                    Group{
-                        switch viewModel.state {
-                        case .loading:
-                            Text("Loading..")
-
-                        case .content (let content): PetsListView(content: content)
-
-                        case .error(let message): PetsListErrorView(message: message) { viewModel.viewCreated() }
-                        }
-                    }.onAppear {
+                    content().onAppear {
                         viewModel.viewCreated()
                     }
                     .offset(x: viewModel.showMenu ? geometry.size.width/2 : 0)
@@ -48,7 +59,7 @@ struct ContentView: View {
                         .imageScale(.large)
                 }
             ))
-        }
+        }.environment(\.colorScheme, mainViewModel.state.colorScheme)
     }
 }
 

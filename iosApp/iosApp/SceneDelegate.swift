@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let useCase = GetPetsUseCase(repository: PetsRepository(cacheSource: databaseHelper, networkSource: PetsApiClient()))
         
-        let contentView = ContentView(viewModel: PetsViewModel(getPetsUseCase: useCase))
+        let contentView = ContentView(viewModel: PetsViewModel(getPetsUseCase: useCase), mainViewModel: MainViewModel())
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

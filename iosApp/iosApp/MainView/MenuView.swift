@@ -14,12 +14,20 @@ struct MenuView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Genders").textStyle(MenuStyle()).padding(.top, 100)
+            Button(action: {
+                viewModel.selectedOption(newOption: .Pets)
+            }) {
+                Text("Genders").textStyle(MenuStyle()).padding(.top, 100)
+            }
             ForEach(Array(Gender_.values()), id: \.name) { gender in
                 Toggle(gender.name, isOn: $viewModel.genders[gender] ?? false)
                     .foregroundColor(.gray)
             }
-            Text("Settings").textStyle(MenuStyle())
+            Button(action: {
+                viewModel.selectedOption(newOption: .Settings)
+            }) {
+                Text("Settings").textStyle(MenuStyle())
+            }
             Spacer()
         }
         .padding()
