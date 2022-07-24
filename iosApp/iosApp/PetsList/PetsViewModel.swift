@@ -20,32 +20,16 @@ enum PetsScreenState {
     case error(String)
 }
 
-enum MenuOption {
-    case Pets
-    case Settings
-}
-
 class PetsViewModel: ObservableObject {
     @Published private(set) var state = PetsScreenState.loading
-    @Published private(set) var selectedOption = MenuOption.Pets
     
-    @Published var showMenu = false {
-        didSet {
-            if (!showMenu) {
-                viewCreated()
-            }
-        }
-    }
-    
-    @Published var genders = [
-        Gender_.female: true,
-        Gender_.male: true,
-    ]
+    private let genders: [Gender_: Bool]
     
     private let getPetsUseCase: GetPetsUseCase
     
-    init(getPetsUseCase: GetPetsUseCase) {
+    init(getPetsUseCase: GetPetsUseCase, genders: [Gender_: Bool]) {
         self.getPetsUseCase = getPetsUseCase
+        self.genders = genders
     }
     
     func viewCreated() {
@@ -70,9 +54,5 @@ class PetsViewModel: ObservableObject {
                 }
             })
         }
-    }
-    
-    func selectedOption(newOption: MenuOption) {
-        selectedOption = newOption
     }
 }

@@ -9,6 +9,11 @@
 import Foundation
 import SwiftUI
 
+enum MenuOption {
+    case Pets
+    case Settings
+}
+
 struct GlobalState {
     let colorScheme: ColorScheme
 }

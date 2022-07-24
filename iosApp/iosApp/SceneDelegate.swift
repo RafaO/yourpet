@@ -14,13 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         
-        let databaseDriverFactory = DatabaseDriverFactory()
-        let database = DatabaseModule().createDataBase(driver: databaseDriverFactory.createDriver())
-        let databaseHelper = PetsDataBaseHelper(database: database)
-        
-        let useCase = GetPetsUseCase(repository: PetsRepository(cacheSource: databaseHelper, networkSource: PetsApiClient()))
-        
-        let contentView = ContentView(viewModel: PetsViewModel(getPetsUseCase: useCase), mainViewModel: MainViewModel())
+        let contentView = ContentView(viewModel: MainViewModel())
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

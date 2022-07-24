@@ -10,7 +10,7 @@ import SwiftUI
 import shared
 
 struct MenuView: View {
-    @ObservedObject var viewModel: PetsViewModel
+    @ObservedObject var viewModel: HomeViewModel
 
     var body: some View {
         VStack(alignment: .leading) {
