@@ -17,7 +17,7 @@ struct MenuView: View {
             Button(action: {
                 viewModel.selectedOption(newOption: .Pets)
             }) {
-                Text("Genders").textStyle(MenuStyle()).padding(.top, 100)
+                Text("Pets").textStyle(MenuStyle()).padding(.top, 100)
             }
             ForEach(Array(Gender_.values()), id: \.name) { gender in
                 Toggle(gender.name, isOn: $viewModel.genders[gender] ?? false)
