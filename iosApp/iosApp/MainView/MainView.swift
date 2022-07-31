@@ -7,7 +7,7 @@ struct ContentView: View {
     private let filter = Filter(genders: [.Female(), .Male()])
     
     var body: some View {
-        HomeView(viewModel: HomeViewModel())
+        HomeView(homeViewModel: HomeViewModel())
             .environment(\.colorScheme, viewModel.state.colorScheme)
     }
 }

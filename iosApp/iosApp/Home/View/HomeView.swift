@@ -4,17 +4,30 @@ import shared
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     
+    let petsScreen: PetsScreen
+    
+    init (homeViewModel: HomeViewModel){
+        self.viewModel = homeViewModel
+        let databaseDriverFactory = DatabaseDriverFactory()
+        let database = DatabaseModule().createDataBase(driver: databaseDriverFactory.createDriver())
+        let databaseHelper = PetsDataBaseHelper(database: database)
+        
+        let useCase = GetPetsUseCase(repository: PetsRepository(
+            cacheSource: databaseHelper,
+            networkSource: PetsApiClient()
+        ))
+        
+        self.petsScreen = PetsScreen(viewModel: PetsViewModel(
+            getPetsUseCase: useCase,
+            genders: homeViewModel.genders
+        ))
+    }
+    
     @ViewBuilder
     func content() -> some View {
         switch viewModel.selectedOption {
         case .Pets:
-            let databaseDriverFactory = DatabaseDriverFactory()
-            let database = DatabaseModule().createDataBase(driver: databaseDriverFactory.createDriver())
-            let databaseHelper = PetsDataBaseHelper(database: database)
-            
-            let useCase = GetPetsUseCase(repository: PetsRepository(cacheSource: databaseHelper, networkSource: PetsApiClient()))
-            PetsScreen(viewModel: PetsViewModel(getPetsUseCase: useCase,
-                                                genders: viewModel.genders))
+            petsScreen
         case .Settings:
             SettingsView()
         }
