@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-struct ContentView: View {
+struct MainView: View {
     @ObservedObject var viewModel: MainViewModel
     
     private let filter = Filter(genders: [.Female(), .Male()])
