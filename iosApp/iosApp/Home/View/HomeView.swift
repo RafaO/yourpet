@@ -4,7 +4,7 @@ import shared
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     
-    let petsScreen: PetsScreen
+    private let petsScreen: PetsScreen
     
     init (homeViewModel: HomeViewModel){
         self.viewModel = homeViewModel
