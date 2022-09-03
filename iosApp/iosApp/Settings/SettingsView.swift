@@ -9,6 +9,19 @@
 import Foundation
 import SwiftUI
 
+extension ColorScheme {
+    public func name() -> String {
+        switch(self) {
+        case .dark:
+            return "dark"
+        case .light:
+            return "light"
+        @unknown default:
+            return ""
+        }
+    }
+}
+
 struct SettingsView: View {
     @State private var selectedTheme = 0
     
@@ -19,8 +32,9 @@ struct SettingsView: View {
                     Text("Theme")
                     Spacer()
                     Picker(selection: $selectedTheme, label: Text("Theme")) {
-                        Text("light")
-                        Text("dark")
+                        ForEach (0..<ColorScheme.allCases.count, id: \.self) {
+                            Text(ColorScheme.allCases[$0].name())
+                        }
                     }.pickerStyle(MenuPickerStyle())
                 }
             }
