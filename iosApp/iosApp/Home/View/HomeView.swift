@@ -17,10 +17,10 @@ struct HomeView: View {
             networkSource: PetsApiClient()
         ))
         
-        self.petsScreen = PetsScreen(viewModel: PetsViewModel(
-            getPetsUseCase: useCase,
-            genders: homeViewModel.genders
-        ))
+        self.petsScreen = PetsScreen(
+            viewModel: PetsViewModel(getPetsUseCase: useCase),
+            homeViewModel: homeViewModel
+        )
     }
     
     @ViewBuilder
@@ -42,6 +42,10 @@ struct HomeView: View {
                     }
                 }
             }
+        
+        if (viewModel.selectedOption == .Pets && !viewModel.showMenu) {
+            petsScreen.menuHidden()
+        }
         
         return NavigationView {
             GeometryReader { geometry in

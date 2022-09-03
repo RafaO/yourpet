@@ -1,8 +1,10 @@
 import SwiftUI
+import shared
 
 struct PetsScreen: View {
     
     @ObservedObject var viewModel: PetsViewModel
+    @ObservedObject var homeViewModel: HomeViewModel
     
     var body: some View {
         Group{
@@ -12,12 +14,16 @@ struct PetsScreen: View {
                 case .content (let content): PetsListView(content: content)
 
                 case .error(let message): PetsListErrorView(message: message) {
-                    viewModel.viewCreated()
+                    viewModel.viewCreated(genders: homeViewModel.genders)
 
                 }
             }
         }.onAppear {
-            viewModel.viewCreated()
+            viewModel.viewCreated(genders: homeViewModel.genders)
         }
+    }
+    
+    func menuHidden() {
+        viewModel.viewCreated(genders: homeViewModel.genders)
     }
 }
