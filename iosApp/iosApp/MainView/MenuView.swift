@@ -10,17 +10,23 @@ import SwiftUI
 import shared
 
 struct MenuView: View {
-    @ObservedObject var viewModel: PetsViewModel
+    @ObservedObject var viewModel: HomeViewModel
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Genders")
-                .foregroundColor(.gray)
-                .font(.headline)
-                .padding(.top, 100)
+            Button(action: {
+                viewModel.selectedOption(newOption: .Pets)
+            }) {
+                Text("Pets").textStyle(MenuStyle()).padding(.top, 100)
+            }
             ForEach(Array(Gender_.values()), id: \.name) { gender in
                 Toggle(gender.name, isOn: $viewModel.genders[gender] ?? false)
                     .foregroundColor(.gray)
+            }
+            Button(action: {
+                viewModel.selectedOption(newOption: .Settings)
+            }) {
+                Text("Settings").textStyle(MenuStyle())
             }
             Spacer()
         }

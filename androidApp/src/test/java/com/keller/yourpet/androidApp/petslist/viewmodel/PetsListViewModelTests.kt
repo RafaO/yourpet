@@ -1,18 +1,14 @@
 package com.keller.yourpet.androidApp.petslist.viewmodel
 
-import androidx.compose.material.DrawerValue
 import com.keller.yourpet.androidApp.utils.CoroutinesTest
-import com.keller.yourpet.androidApp.utils.getOrAwaitValue
 import com.keller.yourpet.androidApp.utils.mockPetsList
 import com.keller.yourpet.mobilemain.usecase.FlowableUseCase.Result
 import com.keller.yourpet.mobilemain.usecase.GetPetsUseCase
 import com.keller.yourpet.shared.CFlow
 import com.keller.yourpet.shared.model.Filter
-import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
 import com.keller.yourpet.shared.wrap
 import io.mockk.coEvery
-import io.mockk.coVerify
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -72,86 +68,6 @@ class ViewStateTests(
         subject.onViewRefreshed()
 
         // then
-        subject.state.getOrAwaitValue() // consume loading
-        val result = subject.state.getOrAwaitValue()
-        assertEquals(viewState, result)
-    }
-}
-
-@RunWith(Parameterized::class)
-class FiltersTests(
-    private val male: Boolean,
-    private val female: Boolean,
-    private val expectedFilter: Filter
-) {
-    companion object {
-        @JvmStatic
-        @Parameterized.Parameters
-        fun data() = listOf(
-            arrayOf(true, true, Filter(mutableSetOf(Gender.Female, Gender.Male))),
-            arrayOf(true, false, Filter(mutableSetOf(Gender.Male))),
-            arrayOf(false, false, Filter(mutableSetOf())),
-            arrayOf(false, true, Filter(mutableSetOf(Gender.Female)))
-        )
-    }
-
-    @Test
-    fun `when gender selected, updates filter accordingly`() {
-        // given
-        val filter = Filter()
-        val subject = PetsListViewModel(mockk(), filter)
-
-        // when
-        subject.onGenderSelected(Gender.Male, male)
-        subject.onGenderSelected(Gender.Female, female)
-
-        // then
-        assertEquals(filter, expectedFilter)
-    }
-}
-
-@OptIn(ExperimentalCoroutinesApi::class)
-@RunWith(Parameterized::class)
-class DrawerStateChangeTests(
-    private val newValue: DrawerValue,
-    private val useCaseExecution: Int,
-) : CoroutinesTest() {
-    companion object {
-        @JvmStatic
-        @Parameterized.Parameters
-        fun data() = listOf(
-            arrayOf(DrawerValue.Closed, 1),
-            arrayOf(DrawerValue.Open, 0),
-        )
-    }
-
-    @Test
-    fun `when drawer closes, executes the use case`() {
-        // given
-        val useCase = mockk<GetPetsUseCase>()
-        val filter = Filter()
-        coEvery { useCase(filter) } returns mockedSuccess()
-        val subject = PetsListViewModel(useCase, filter)
-
-        // when
-        subject.onDrawerStateChanged(newValue)
-
-        // then
-        coVerify(exactly = useCaseExecution) { useCase(filter) }
-    }
-
-    @Test
-    fun `when drawer state changes, returns true`() {
-        // given
-        val useCase = mockk<GetPetsUseCase>()
-        val filter = Filter()
-        coEvery { useCase(filter) } returns mockedSuccess()
-        val subject = PetsListViewModel(useCase, filter)
-
-        // when
-        val result = subject.onDrawerStateChanged(newValue)
-
-        // then
-        assert(result)
+        assertEquals(viewState, subject.uiState.value)
     }
 }

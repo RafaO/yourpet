@@ -14,6 +14,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -29,6 +30,7 @@ object SingletonsModule : KoinComponent {
         return DatabaseModule().createDataBase(databaseDriverFactory.createDriver())
     }
 
+    @Singleton
     @Provides
     fun provideFilters() = Filter(Gender.values().toMutableSet())
 }

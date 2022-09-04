@@ -21,20 +21,7 @@ enum PetsScreenState {
 }
 
 class PetsViewModel: ObservableObject {
-    @Published private(set) var state: PetsScreenState = PetsScreenState.loading
-    
-    @Published var showMenu = true {
-        didSet {
-            if (!showMenu) {
-                viewCreated()
-            }
-        }
-    }
-    
-    @Published var genders = [
-        Gender_.female: true,
-        Gender_.male: true,
-    ]
+    @Published private(set) var state = PetsScreenState.loading
     
     private let getPetsUseCase: GetPetsUseCase
     
@@ -42,7 +29,7 @@ class PetsViewModel: ObservableObject {
         self.getPetsUseCase = getPetsUseCase
     }
     
-    func viewCreated() {
+    func viewCreated(genders: [Gender_: Bool]) {
         let applicable = KotlinMutableSet<Gender_>(array: genders.filter { $0.value }.map {$0.key})
         getPetsUseCase.invoke(param: Filter_(genders: applicable)) { (flow: CFlow<FlowableUseCaseResult<NSArray>>?, _) in
             flow?.watch(block: {(result: FlowableUseCaseResult<NSArray>?) in

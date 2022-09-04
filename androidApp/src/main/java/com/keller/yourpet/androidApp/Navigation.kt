@@ -2,8 +2,8 @@ package com.keller.yourpet.androidApp
 
 class Navigation {
     companion object {
-        // pets list
-        const val ROUTE_PETS_LIST = "pets_list"
+        // home
+        const val ROUTE_HOME = "home"
 
         // pet details
         const val ROUTE_PET_DETAILS = "detail"
