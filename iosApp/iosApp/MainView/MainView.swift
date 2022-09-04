@@ -5,7 +5,7 @@ struct MainView: View {
     @ObservedObject var viewModel: MainViewModel
     
     var body: some View {
-        HomeView(homeViewModel: HomeViewModel())
+        HomeView(homeViewModel: HomeViewModel(), mainViewModel: viewModel)
             .environment(\.colorScheme, viewModel.state.colorScheme)
     }
 }
