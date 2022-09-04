@@ -23,7 +23,13 @@ extension ColorScheme {
 }
 
 struct SettingsView: View {
-    @State private var selectedTheme = 0
+    private let mainViewModel: MainViewModel
+    @State private var selectedTheme: ColorScheme
+    
+    init(mainViewModel: MainViewModel) {
+        self.mainViewModel = mainViewModel
+        self._selectedTheme = State(initialValue: mainViewModel.state.colorScheme)
+    }
     
     var body: some View {
         return VStack(spacing: 10) {
@@ -32,10 +38,12 @@ struct SettingsView: View {
                     Text("Theme")
                     Spacer()
                     Picker(selection: $selectedTheme, label: Text("Theme")) {
-                        ForEach (0..<ColorScheme.allCases.count, id: \.self) {
-                            Text(ColorScheme.allCases[$0].name())
+                        ForEach(ColorScheme.allCases, id: \.self) {
+                            Text($0.name())
                         }
-                    }.pickerStyle(MenuPickerStyle())
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                    .onChange(of: selectedTheme) { new in mainViewModel.colorSchemeSelected(selected: new) }
                 }
             }
     }

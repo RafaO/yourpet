@@ -3,10 +3,11 @@ import shared
 
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
+    private let mainViewModel: MainViewModel
     
     private let petsScreen: PetsScreen
     
-    init (homeViewModel: HomeViewModel){
+    init (homeViewModel: HomeViewModel, mainViewModel: MainViewModel){
         self.viewModel = homeViewModel
         let databaseDriverFactory = DatabaseDriverFactory()
         let database = DatabaseModule().createDataBase(driver: databaseDriverFactory.createDriver())
@@ -21,6 +22,8 @@ struct HomeView: View {
             viewModel: PetsViewModel(getPetsUseCase: useCase),
             homeViewModel: homeViewModel
         )
+        
+        self.mainViewModel = mainViewModel
     }
     
     @ViewBuilder
@@ -29,7 +32,7 @@ struct HomeView: View {
         case .Pets:
             petsScreen
         case .Settings:
-            SettingsView()
+            SettingsView(mainViewModel: mainViewModel)
         }
     }
     
