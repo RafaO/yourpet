@@ -25,6 +25,14 @@ jobs:
       - name: "tests"
         run: ./gradlew testDebugUnitTest
 
+      - name: "iOS tests"
+        run: xcodebuild \
+          -project iOSApp/iOSApp.xcodeproj \
+          -scheme iosApp \
+          -sdk iphonesimulator \
+          -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.5' \
+          test
+
 #  screenshot-tests:
 #    runs-on: macos-latest
 #    steps:
