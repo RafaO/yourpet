@@ -14,7 +14,6 @@
 		1D985DD9287B384B008C0D54 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D985DD8287B384B008C0D54 /* SettingsView.swift */; };
 		1D988A2427DBACD600AD7E83 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D988A2327DBACD600AD7E83 /* SwiftExtensions.swift */; };
 		1D988A2527DBACD600AD7E83 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D988A2327DBACD600AD7E83 /* SwiftExtensions.swift */; };
-		1D988A2627DBACD600AD7E83 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D988A2327DBACD600AD7E83 /* SwiftExtensions.swift */; };
 		1DAFE87A262C84B20051820E /* PetDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFE879262C84B20051820E /* PetDetailsView.swift */; };
 		1DAFE87E262C89290051820E /* NavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFE87D262C89290051820E /* NavigationBarTitle.swift */; };
 		1DB72C9C288DACA10053389D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB72C9B288DACA10053389D /* HomeView.swift */; };
@@ -22,6 +21,7 @@
 		1DB72CA1288DADBD0053389D /* PetsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB72CA0288DADBD0053389D /* PetsScreen.swift */; };
 		1DBDA276265ABF530023F56F /* PetsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBDA275265ABF530023F56F /* PetsListView.swift */; };
 		1DBDA27A265AC3730023F56F /* PetsListErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBDA279265AC3730023F56F /* PetsListErrorView.swift */; };
+		1DC7966128CC912000E1A374 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC7966028CC912000E1A374 /* MainViewModelTests.swift */; };
 		1DD1313D27D8FEF90063B724 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1313C27D8FEF90063B724 /* MenuView.swift */; };
 		1DED74802617777B003F9DBC /* PetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED747F2617777B003F9DBC /* PetsViewModel.swift */; };
 		7555FF7F242A565900829871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF7E242A565900829871 /* AppDelegate.swift */; };
@@ -81,6 +81,7 @@
 		1DB72CA0288DADBD0053389D /* PetsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsScreen.swift; sourceTree = "<group>"; };
 		1DBDA275265ABF530023F56F /* PetsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsListView.swift; sourceTree = "<group>"; };
 		1DBDA279265AC3730023F56F /* PetsListErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsListErrorView.swift; sourceTree = "<group>"; };
+		1DC7966028CC912000E1A374 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		1DD1313C27D8FEF90063B724 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		1DED747F2617777B003F9DBC /* PetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsViewModel.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,6 +190,14 @@
 			path = PetsList;
 			sourceTree = "<group>";
 		};
+		1DC7965F28CC910C00E1A374 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				1DC7966028CC912000E1A374 /* MainViewModelTests.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +252,7 @@
 		7555FF94242A565B00829871 /* iosAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				1DC7965F28CC910C00E1A374 /* MainView */,
 				7555FF95242A565B00829871 /* iosAppTests.swift */,
 				7555FF97242A565B00829871 /* Info.plist */,
 			);
@@ -444,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DC7966128CC912000E1A374 /* MainViewModelTests.swift in Sources */,
 				7555FF96242A565B00829871 /* iosAppTests.swift in Sources */,
 				1D988A2527DBACD600AD7E83 /* SwiftExtensions.swift in Sources */,
 			);
@@ -454,7 +465,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7555FFA1242A565B00829871 /* iosAppUITests.swift in Sources */,
-				1D988A2627DBACD600AD7E83 /* SwiftExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,7 +658,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = iosAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -669,7 +679,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = iosAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
