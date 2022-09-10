@@ -14,7 +14,6 @@
 		1D985DD9287B384B008C0D54 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D985DD8287B384B008C0D54 /* SettingsView.swift */; };
 		1D988A2427DBACD600AD7E83 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D988A2327DBACD600AD7E83 /* SwiftExtensions.swift */; };
 		1D988A2527DBACD600AD7E83 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D988A2327DBACD600AD7E83 /* SwiftExtensions.swift */; };
-		1D988A2627DBACD600AD7E83 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D988A2327DBACD600AD7E83 /* SwiftExtensions.swift */; };
 		1DAFE87A262C84B20051820E /* PetDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFE879262C84B20051820E /* PetDetailsView.swift */; };
 		1DAFE87E262C89290051820E /* NavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFE87D262C89290051820E /* NavigationBarTitle.swift */; };
 		1DB72C9C288DACA10053389D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB72C9B288DACA10053389D /* HomeView.swift */; };
@@ -466,7 +465,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7555FFA1242A565B00829871 /* iosAppUITests.swift in Sources */,
-				1D988A2627DBACD600AD7E83 /* SwiftExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
