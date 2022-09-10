@@ -24,7 +24,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: "iOS tests"
-        run: xcodebuild -project iOSApp/iOSApp.xcodeproj -scheme iosApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8,OS=15.2' test
+        run: |
+          xcodebuild -project iOSApp/iOSApp.xcodeproj \
+          -scheme iosApp -sdk iphonesimulator \
+          -destination 'platform=iOS Simulator,name=iPhone 8,OS=15.2' \
+          test
 
       - name: "run detekt"
         run: ./gradlew detektAll
