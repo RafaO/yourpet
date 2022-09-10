@@ -1,4 +1,4 @@
-name: Android tests CI
+name: YourPet CI
 
 on:
   pull_request:
