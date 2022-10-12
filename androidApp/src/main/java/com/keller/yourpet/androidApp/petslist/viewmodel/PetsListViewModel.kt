@@ -2,7 +2,7 @@ package com.keller.yourpet.androidApp.petslist.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.keller.yourpet.mobilemain.usecase.FlowableUseCase.Result
+import com.keller.yourpet.mobilemain.usecase.BaseFlowableUseCase.Result
 import com.keller.yourpet.mobilemain.usecase.GetPetsUseCase
 import com.keller.yourpet.shared.model.Filter
 import com.keller.yourpet.shared.model.Pet

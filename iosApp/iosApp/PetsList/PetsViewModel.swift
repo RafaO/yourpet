@@ -23,25 +23,25 @@ enum PetsScreenState {
 class PetsViewModel: ObservableObject {
     @Published private(set) var state = PetsScreenState.loading
     
-    private let getPetsUseCase: GetPetsUseCase
+    private let getPetsUseCase: GetPetsUseCaseInterface
     
-    init(getPetsUseCase: GetPetsUseCase) {
+    init(getPetsUseCase: GetPetsUseCaseInterface) {
         self.getPetsUseCase = getPetsUseCase
     }
     
     func viewCreated(genders: [Gender_: Bool]) {
         let applicable = KotlinMutableSet<Gender_>(array: genders.filter { $0.value }.map {$0.key})
-        getPetsUseCase.invoke(param: Filter_(genders: applicable)) { (flow: CFlow<FlowableUseCaseResult<NSArray>>?, _) in
-            flow?.watch(block: {(result: FlowableUseCaseResult<NSArray>?) in
+        getPetsUseCase.invoke(param: Filter_(genders: applicable)) { (flow: CFlow<BaseFlowableUseCaseResult<AnyObject>>?, _) in
+            flow?.watch(block: {(result: BaseFlowableUseCaseResult<AnyObject>?) in
                 switch result {
-                case let success as FlowableUseCaseResultSuccess<NSArray>:
+                case let success as BaseFlowableUseCaseResultSuccess<NSArray>:
                     let pets = success.result
                     if pets?.count ?? 0 > 0 {
                         self.state = PetsScreenState.content(PetsScreenState.Content(pets: pets as! [Pet]))
                     } else {
                         self.state = PetsScreenState.error("No pets")
                     }
-                case let error as FlowableUseCaseResultFailure<NSArray>:
+                case let error as BaseFlowableUseCaseResultFailure<NSArray>:
                     switch self.state {
                     case .content: break
                     default:
