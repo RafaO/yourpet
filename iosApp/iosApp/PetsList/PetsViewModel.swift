@@ -9,14 +9,9 @@
 import Foundation
 import shared
 
-enum PetsScreenState {
-    
-    struct Content {
-        let pets: [Pet]
-    }
-    
+enum PetsScreenState: Equatable {
     case loading
-    case content(Content)
+    case content([Pet])
     case error(String)
 }
 
@@ -37,7 +32,7 @@ class PetsViewModel: ObservableObject {
                 case let success as BaseFlowableUseCaseResultSuccess<NSArray>:
                     let pets = success.result
                     if pets?.count ?? 0 > 0 {
-                        self.state = PetsScreenState.content(PetsScreenState.Content(pets: pets as! [Pet]))
+                        self.state = PetsScreenState.content(pets as! [Pet])
                     } else {
                         self.state = PetsScreenState.error("No pets")
                     }
