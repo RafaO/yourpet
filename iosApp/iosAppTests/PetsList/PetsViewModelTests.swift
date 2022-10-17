@@ -64,4 +64,18 @@ class PetsViewModelTests: XCTestCase {
         let expected = PetsScreenState.content([petMock])
         XCTAssertTrue(state == expected)
     }
+    
+    func testInitialStateIsLoading() throws {
+        // given
+        let useCaseMock = GetPetsUseCaseMock()
+        let subject = PetsViewModel(getPetsUseCase: useCaseMock)
+        
+        // when
+        subject.viewCreated(genders: genders)
+        
+        // then
+        let statePublisher = subject.$state.collectInitial()
+        let state = try awaitPublisher(statePublisher)
+        XCTAssertEqual(state, PetsScreenState.loading)
+    }
 }

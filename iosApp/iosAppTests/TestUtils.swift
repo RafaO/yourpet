@@ -71,3 +71,9 @@ extension Published.Publisher {
             .eraseToAnyPublisher()
     }
 }
+
+extension Published.Publisher {
+    func collectInitial() -> AnyPublisher<Output, Never> {
+        self.first().eraseToAnyPublisher()
+    }
+}
