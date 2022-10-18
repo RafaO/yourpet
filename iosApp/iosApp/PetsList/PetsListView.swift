@@ -6,13 +6,14 @@
 //  Copyright © 2021 orgName. All rights reserved.
 //
 
+import shared
 import SwiftUI
 
 struct PetsListView: View {
-    var content: PetsScreenState.Content
+    var content: [Pet]
     
     var body : some View{
-        List(content.pets, id: \.name) { pet in
+        List(content, id: \.name) { pet in
             NavigationLink(destination: PetDetailsView(pet: pet)) {
                 PetRow(pet: pet)
             }

@@ -25,10 +25,10 @@ jobs:
 
       - name: "iOS tests"
         run: |
-          xcodebuild -project iOSApp/iOSApp.xcodeproj \
+          xcodebuild test \
+          -project iOSApp/iOSApp.xcodeproj \
           -scheme iosApp -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 8,OS=15.2' \
-          test
+          -destination 'platform=iOS Simulator,name=iPhone 8,OS=15.2' | xcpretty -s
 
       - name: "run detekt"
         run: ./gradlew detektAll
