@@ -28,7 +28,13 @@ kotlin {
                 implementation(MongoDB.kmongo)
             }
         }
-        val jvmTest by getting { }
+        val jvmTest by getting {
+            dependencies {
+                implementation(Test.junit)
+                implementation(Test.mockk)
+                implementation(Test.coroutines)
+            }
+        }
     }
 }
 
