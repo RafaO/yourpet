@@ -17,9 +17,6 @@ kotlin {
 
     sourceSets {
         val jvmMain by getting {
-            kotlin.srcDir("src")
-            resources.srcDir("resources")
-
             dependencies {
                 implementation(project(":shared"))
 
