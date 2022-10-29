@@ -10,6 +10,7 @@
       <module name="YourPet.shared.commonTest" target="1.8" />
       <module name="YourPet.shared.jvmMain" target="1.8" />
       <module name="YourPet.shared.jvmTest" target="1.8" />
+      <module name="YourPet.shared.testResources" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

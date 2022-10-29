@@ -1,3 +1,4 @@
+import com.keller.yourpet.shared.mock.mockPetsList
 import com.keller.yourpet.shared.model.Filter
 import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
@@ -10,8 +11,6 @@ import org.junit.Test
 
 class RequestHandlerTest {
 
-    // TODO move this to a common mock factory module
-    private fun mockPetsList() = listOf(Pet("Charlie", "", Gender.Female))
     private val filter = Filter(mutableSetOf(Gender.Female, Gender.Male))
 
     @Test
