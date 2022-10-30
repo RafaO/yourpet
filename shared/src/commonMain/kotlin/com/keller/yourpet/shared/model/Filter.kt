@@ -13,6 +13,10 @@ enum class Gender {
 }
 
 data class Filter(val genders: MutableSet<Gender> = mutableSetOf()) {
+    companion object {
+        fun everything() = Filter(Gender.values().toMutableSet())
+    }
+
     fun applyTo(pets: List<Pet>) = pets.filter {
         genders.contains(it.gender)
     }

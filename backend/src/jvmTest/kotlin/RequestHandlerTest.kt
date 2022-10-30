@@ -1,6 +1,5 @@
 import com.keller.yourpet.shared.mock.mockPetsList
 import com.keller.yourpet.shared.model.Filter
-import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
 import database.DBHelper
 import io.mockk.coEvery
@@ -11,7 +10,7 @@ import org.junit.Test
 
 class RequestHandlerTest {
 
-    private val filter = Filter(mutableSetOf(Gender.Female, Gender.Male))
+    private val filter = Filter.everything()
 
     @Test
     fun `when pets are requested, returns the pets in the db`() = runTest {
