@@ -32,5 +32,5 @@ object SingletonsModule : KoinComponent {
 
     @Singleton
     @Provides
-    fun provideFilters() = Filter(Gender.values().toMutableSet())
+    fun provideFilters() = Filter.everything()
 }

@@ -5,7 +5,7 @@ object Versions {
     const val hilt = "2.38.1"
     const val ktor = "1.6.0"
     const val detekt = "1.17.0-RC2"
-    const val mockk = "1.11.0"
+    const val mockk = "1.13.2"
     const val kGraphQL = "0.17.9"
     const val apollo = "3.0.0-alpha03"
     const val showkase = "1.0.0-beta13"

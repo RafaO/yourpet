@@ -41,3 +41,7 @@ tasks.register("detektAll") {
     dependsOn(":shared:detekt")
     dependsOn(":androidApp:detekt")
 }
+
+tasks.register(":testDebugUnitTest") {
+    dependsOn(":backend:jvmTest")
+}

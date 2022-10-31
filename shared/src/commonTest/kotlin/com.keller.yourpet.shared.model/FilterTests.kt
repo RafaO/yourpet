@@ -10,7 +10,7 @@ class FilterTests {
     fun `when applied to list - filters it properly`() {
         // given
         val list = mockPetsList()
-        val filter = Filter(Gender.values().toMutableSet())
+        val filter = Filter.everything()
 
         // when
         val result = filter.applyTo(list)

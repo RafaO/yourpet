@@ -90,8 +90,12 @@ kotlin {
                 implementation(kotlin("test-annotations-common"))
             }
         }
+        val testResources by creating {
+            dependsOn(commonMain)
+        }
         val androidMain by getting {
             dependsOn(mobileMain)
+            dependsOn(testResources)
             dependencies {
                 implementation("com.squareup.sqldelight:android-driver:${Versions.sqlDelight}")
             }
@@ -111,7 +115,9 @@ kotlin {
         }
         val iosTest by getting
 
-        val jvmMain by getting
+        val jvmMain by getting {
+            dependsOn(testResources)
+        }
     }
 }
 

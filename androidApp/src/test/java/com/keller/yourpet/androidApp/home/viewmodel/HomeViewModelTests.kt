@@ -26,9 +26,9 @@ class FiltersTests(
         @JvmStatic
         @Parameterized.Parameters
         fun data() = listOf(
-            arrayOf(true, true, Filter(mutableSetOf(Gender.Female, Gender.Male))),
+            arrayOf(true, true, Filter.everything()),
             arrayOf(true, false, Filter(mutableSetOf(Gender.Male))),
-            arrayOf(false, false, Filter(mutableSetOf())),
+            arrayOf(false, false, Filter()),
             arrayOf(false, true, Filter(mutableSetOf(Gender.Female)))
         )
     }

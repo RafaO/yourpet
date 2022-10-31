@@ -1,10 +1,10 @@
 package com.keller.yourpet.androidApp.petslist.viewmodel
 
 import com.keller.yourpet.androidApp.utils.CoroutinesTest
-import com.keller.yourpet.androidApp.utils.mockPetsList
 import com.keller.yourpet.mobilemain.usecase.BaseFlowableUseCase.Result
 import com.keller.yourpet.mobilemain.usecase.GetPetsUseCase
 import com.keller.yourpet.shared.CFlow
+import com.keller.yourpet.shared.mock.mockPetsList
 import com.keller.yourpet.shared.model.Filter
 import com.keller.yourpet.shared.model.Pet
 import com.keller.yourpet.shared.wrap
