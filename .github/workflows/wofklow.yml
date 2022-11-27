@@ -23,6 +23,21 @@ jobs:
       - name: "checkout"
         uses: actions/checkout@v2
 
+      - name: "install maestro"
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+
+      - name: "export path"
+        run: export PATH="$PATH":"$HOME/.maestro/bin"
+
+      - name: "e2e tests"
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          profile: pixel_4
+          script: |
+            maestro test automation/open-list.yaml
+
       - name: "iOS tests"
         run: |
           xcodebuild test \
