@@ -36,6 +36,20 @@ jobs:
       - name: "tests"
         run: ./gradlew testDebugUnitTest
 
+      - name: "install maestro"
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+          echo "$HOME/.maestro/bin" >> $GITHUB_PATH
+
+      - name: "e2e tests"
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          profile: pixel_4
+          script: |
+            ./gradlew androidApp:installDebug
+            maestro test automation/open-list.yaml
+
 #  screenshot-tests:
 #    runs-on: macos-latest
 #    steps:

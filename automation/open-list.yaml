@@ -1,0 +1,5 @@
+appId: com.keller.yourpet.androidApp
+---
+- launchApp
+- assertVisible:
+    text: "Pets"
