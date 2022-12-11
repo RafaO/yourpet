@@ -8,9 +8,10 @@ import com.keller.yourpet.shared.model.Filter
 import com.keller.yourpet.shared.model.Pet
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,11 +22,18 @@ class PetsListViewModel @Inject constructor(
     private val filters: Filter,
 ) : ViewModel() {
 
+    companion object {
+        private val initialValue = PetsListViewState.Content(emptyList())
+    }
+
     // Observables
 
-    private val _uiState: MutableStateFlow<PetsListViewState> =
-        MutableStateFlow(PetsListViewState.Content(emptyList()))
-    val uiState = _uiState.asStateFlow()
+    private val _uiState: MutableStateFlow<PetsListViewState> = MutableStateFlow(initialValue)
+    val uiState = _uiState.stateIn(
+        viewModelScope,
+        WhileSubscribed(5000),
+        initialValue
+    )
 
     fun onViewRefreshed() = viewModelScope.launch {
         _uiState.update { PetsListViewState.Loading }

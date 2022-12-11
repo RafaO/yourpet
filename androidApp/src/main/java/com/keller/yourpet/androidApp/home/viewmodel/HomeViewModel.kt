@@ -3,27 +3,34 @@ package com.keller.yourpet.androidApp.home.viewmodel
 import androidx.compose.material.DrawerState
 import androidx.compose.material.DrawerValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.keller.yourpet.androidApp.home.view.menu.MenuOption
 import com.keller.yourpet.shared.model.Filter
 import com.keller.yourpet.shared.model.Gender
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(val filter: Filter) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(
-        HomeUiState(
+    companion object {
+        private val initialValue = HomeUiState(
             MenuOption.Settings(),
             filterUpdated = false,
             shouldNavigate = false
         )
+    }
+
+    private val _uiState = MutableStateFlow(initialValue)
+    val uiState = _uiState.stateIn(
+        viewModelScope,
+        WhileSubscribed(5000),
+        initialValue
     )
-    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
     fun navigated() {
         _uiState.update { it.copy(shouldNavigate = false) }

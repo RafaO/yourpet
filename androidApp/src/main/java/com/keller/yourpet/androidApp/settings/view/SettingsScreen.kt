@@ -27,15 +27,18 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.PopupProperties
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.keller.yourpet.androidApp.R
 import com.keller.yourpet.androidApp.main.viewmodel.MainViewModel
 import com.keller.yourpet.androidApp.main.viewmodel.ThemeColor
 import com.keller.yourpet.androidApp.ui.UIGroups
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun SettingsScreen() {
     val mainViewModel: MainViewModel = hiltViewModel(LocalContext.current as ComponentActivity)
-    val uiState by mainViewModel.uiState.collectAsState()
+    val uiState by mainViewModel.uiState.collectAsStateWithLifecycle()
     var themeMenuExpanded by remember { mutableStateOf(false) }
 
     Column {
