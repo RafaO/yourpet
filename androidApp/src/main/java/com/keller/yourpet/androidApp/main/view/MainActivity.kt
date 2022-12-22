@@ -7,10 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -19,8 +20,8 @@ import com.keller.yourpet.androidApp.Navigation.Companion.ROUTE_HOME
 import com.keller.yourpet.androidApp.Navigation.Companion.ROUTE_PET_DETAILS
 import com.keller.yourpet.androidApp.home.view.HomeScreen
 import com.keller.yourpet.androidApp.main.viewmodel.MainViewModel
-import com.keller.yourpet.androidApp.petdetails.PetDetailsScreen
 import com.keller.yourpet.androidApp.main.viewmodel.isDark
+import com.keller.yourpet.androidApp.petdetails.PetDetailsScreen
 import com.keller.yourpet.androidApp.ui.YourPetUITheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.decodeFromString
@@ -39,10 +40,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @OptIn(ExperimentalLifecycleComposeApi::class)
     @Composable
     fun ComposeNavigation() {
         val viewModel: MainViewModel = hiltViewModel(LocalContext.current as ComponentActivity)
-        val state by viewModel.uiState.collectAsState()
+        val state by viewModel.uiState.collectAsStateWithLifecycle()
         val navController = rememberNavController()
 
         YourPetUITheme(darkTheme = state.themeColor.isDark(isSystemInDarkTheme())) {

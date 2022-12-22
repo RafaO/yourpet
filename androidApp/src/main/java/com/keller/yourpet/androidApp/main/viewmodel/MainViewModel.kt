@@ -1,9 +1,11 @@
 package com.keller.yourpet.androidApp.main.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
@@ -14,9 +16,17 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class MainViewModel @Inject constructor() : ViewModel() {
-    private val _uiState: MutableStateFlow<MainViewState> =
-        MutableStateFlow(MainViewState(ThemeColor.SYSTEM))
-    val uiState = _uiState.asStateFlow()
+    companion object {
+        private val initialState = MainViewState(ThemeColor.SYSTEM)
+    }
+
+    private val _uiState: MutableStateFlow<MainViewState> = MutableStateFlow(initialState)
+    val uiState = _uiState
+        .stateIn(
+            viewModelScope,
+            WhileSubscribed(5000),
+            initialState,
+        )
 
     fun onThemeColorSelected(selectedColor: ThemeColor) {
         _uiState.update { it.copy(themeColor = selectedColor) }

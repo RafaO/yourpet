@@ -12,6 +12,9 @@ import io.mockk.mockk
 import junit.framework.TestCase
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -48,8 +51,9 @@ class FiltersTests(
     }
 }
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(Parameterized::class)
-class NavigationTests(private val selectedOption: MenuOption) {
+class NavigationTests(private val selectedOption: MenuOption) : CoroutinesTest() {
     companion object {
         @JvmStatic
         @Parameterized.Parameters
@@ -60,9 +64,12 @@ class NavigationTests(private val selectedOption: MenuOption) {
     }
 
     @Test
-    fun `when option is selected, it navigates`() {
+    fun `when option is selected, it navigates`() = runTest {
         // given
         val subject = HomeViewModel(mockk())
+        val collectJob = launch(UnconfinedTestDispatcher(testScheduler)) {
+            subject.uiState.collect {}
+        }
 
         // when
         subject.onOptionSelected(selectedOption)
@@ -71,22 +78,31 @@ class NavigationTests(private val selectedOption: MenuOption) {
         val state = subject.uiState.value
         assertEquals(true, state.shouldNavigate)
         assertEquals(selectedOption, state.optionSelected)
+
+        // tear down
+        collectJob.cancel()
     }
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class SimpleTests : CoroutinesTest() {
     @Test
-    fun `when drawer closes, emits the ui state with update true`() {
+    fun `when drawer closes, emits the ui state with update true`() = runTest {
         // given
         val filter = Filter()
         val subject = HomeViewModel(filter)
+        val collectJob = launch(UnconfinedTestDispatcher(testScheduler)) {
+            subject.uiState.collect {}
+        }
 
         // when
         subject.onDrawerStateChanged(DrawerValue.Closed)
 
         // then
         assertEquals(true, subject.uiState.value.filterUpdated)
+
+        // tear down
+        collectJob.cancel()
     }
 
     @Test
