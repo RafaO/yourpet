@@ -21,11 +21,12 @@ class MainViewModel @Inject constructor() : ViewModel() {
     }
 
     private val _uiState: MutableStateFlow<MainViewState> = MutableStateFlow(initialState)
-    val uiState = _uiState.stateIn(
-        viewModelScope,
-        initialValue = initialState,
-        started = WhileSubscribed(5000),
-    )
+    val uiState = _uiState
+        .stateIn(
+            viewModelScope,
+            WhileSubscribed(5000),
+            initialState,
+        )
 
     fun onThemeColorSelected(selectedColor: ThemeColor) {
         _uiState.update { it.copy(themeColor = selectedColor) }

@@ -14,6 +14,9 @@ import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -58,16 +61,22 @@ class ViewStateTests(
     }
 
     @Test
-    fun `delivers corresponding state for the given flow of results`() {
+    fun `delivers corresponding state for the given flow of results`() = runTest {
         // given
         val useCase = mockk<GetPetsUseCase>()
         coEvery { useCase(Filter()) } returns useCaseResult
         val subject = PetsListViewModel(useCase, Filter())
+        val collectJob = launch(UnconfinedTestDispatcher(testScheduler)) {
+            subject.uiState.collect {}
+        }
 
         // when
         subject.onViewRefreshed()
 
         // then
         assertEquals(viewState, subject.uiState.value)
+
+        // tear down
+        collectJob.cancel()
     }
 }
