@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -40,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @OptIn(ExperimentalLifecycleComposeApi::class)
     @Composable
     fun ComposeNavigation() {
         val viewModel: MainViewModel = hiltViewModel(LocalContext.current as ComponentActivity)

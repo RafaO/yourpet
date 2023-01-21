@@ -8,7 +8,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewModel
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewState
@@ -26,7 +25,6 @@ fun Content(state: PetsListViewState, onPetClicked: (Pet) -> Unit, onRetry: () -
     }
 }
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun PetsListScreen(update: Boolean, updated: () -> Unit, onPetClicked: (Pet) -> Unit) {
     val viewModel: PetsListViewModel = hiltViewModel()
