@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Button
 import androidx.compose.material.Checkbox
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,22 +55,26 @@ fun SideMenu(
 ) {
     val context = LocalContext.current
 
-    Column(modifier = Modifier.padding(8.dp)) {
-        for (option in options) {
-            MenuItem(option = option, onOptionSelected = onOptionSelected)
-            if (option is MenuOption.Pets && selectedOption is MenuOption.Pets) {
-                Text("Filters")
-                for (gender in Gender.values())
-                    LabelledCheckbox(filter, gender, onGenderSelected)
+    Surface(color = MaterialTheme.colorScheme.surfaceVariant) {
+        Column(
+            modifier = Modifier.padding(8.dp)
+        ) {
+            for (option in options) {
+                MenuItem(option = option, onOptionSelected = onOptionSelected)
+                if (option is MenuOption.Pets && selectedOption is MenuOption.Pets) {
+                    Text("Filters")
+                    for (gender in Gender.values())
+                        LabelledCheckbox(filter, gender, onGenderSelected)
+                }
             }
-        }
 
-        Spacer(modifier = Modifier.weight(1.0f))
-        if (BuildConfig.DEBUG) {
-            Button(onClick = {
-                context.startActivity(Showkase.getBrowserIntent(context))
-            }) {
-                Text("Showkase browser")
+            Spacer(modifier = Modifier.weight(1.0f))
+            if (BuildConfig.DEBUG) {
+                Button(onClick = {
+                    context.startActivity(Showkase.getBrowserIntent(context))
+                }) {
+                    Text("Showkase browser")
+                }
             }
         }
     }
