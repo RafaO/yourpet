@@ -13,6 +13,13 @@ object Versions {
     const val androidTestJunit = "1.4.0"
     const val androidTestExtJunit = "1.1.3"
     const val coroutinesVersion = "1.6.1-native-mt"
+    const val material = "1.0.1"
+}
+
+object Compose {
+    const val material = "androidx.compose.material3:material3:${Versions.material}"
+    const val materialWindowSizeClass =
+        "androidx.compose.material3:material3-window-size-class:${Versions.material}"
 }
 
 object AndroidSdk {

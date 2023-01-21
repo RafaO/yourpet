@@ -14,7 +14,6 @@ shot {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.appcompat:appcompat:1.4.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
 
@@ -31,6 +30,8 @@ dependencies {
     implementation("androidx.compose.runtime:runtime:${Versions.compose}")
     implementation("androidx.compose.runtime:runtime-livedata:${Versions.compose}")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha03")
+    implementation(Compose.material)
+    implementation(Compose.materialWindowSizeClass)
 
     // navigation
     val navVersion = "2.3.3"
