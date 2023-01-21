@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -43,7 +43,11 @@ fun PetCard(pet: Pet, onPetClicked: (Pet) -> Unit) = Column(
             .clip(shape = RoundedCornerShape(12.dp)),
         contentScale = ContentScale.FillWidth,
     )
-    Text(pet.name, style = MaterialTheme.typography.h6)
+    Text(
+        pet.name,
+        style = MaterialTheme.typography.headlineSmall,
+        color = MaterialTheme.colorScheme.onSurface
+    )
 }
 
 @Preview(showBackground = true, name = "Pet card", group = UIGroups.PetsElements)
