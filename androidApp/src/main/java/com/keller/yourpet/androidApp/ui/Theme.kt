@@ -79,7 +79,7 @@ fun YourPetUITheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composa
     }
 
     MaterialTheme(
-        colorScheme = DarkColorPalette,
+        colorScheme = colors,
         content = content
     )
 }
