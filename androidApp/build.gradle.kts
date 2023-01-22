@@ -61,8 +61,8 @@ dependencies {
     androidTestImplementation(AndroidTest.runner)
     androidTestImplementation(AndroidTest.extJunit)
     androidTestImplementation(AndroidTest.extJunitKtx)
-    kaptAndroidTest("com.airbnb.android:showkase-processor:1.0.0-beta12")
-    androidTestImplementation("com.airbnb.android:showkase-screenshot-testing:1.0.0-beta08")
+    kaptAndroidTest(Showkase.annotations)
+    androidTestImplementation(Showkase.screenshotTesting)
 }
 
 android {
