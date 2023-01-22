@@ -1,6 +1,9 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.keller.yourpet.androidApp.home.viewmodel
 
-import androidx.compose.material.DrawerValue
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
 import com.keller.yourpet.androidApp.home.view.menu.MenuOption
 import com.keller.yourpet.androidApp.petslist.viewmodel.mockedSuccess
 import com.keller.yourpet.androidApp.utils.CoroutinesTest
