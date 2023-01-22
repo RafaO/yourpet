@@ -15,3 +15,5 @@ style:
     excludePackageStatements: true
     excludeImportStatements: true
     excludeCommentStatements: true
+  UnusedImports:
+    active: true
