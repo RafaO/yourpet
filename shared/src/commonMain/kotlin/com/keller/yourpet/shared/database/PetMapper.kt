@@ -2,7 +2,6 @@ package com.keller.yourpet.shared.database
 
 import com.keller.yourpet.shared.model.Gender
 import com.keller.yourpet.shared.model.Pet
-import comkelleryourpetshareddata.PetBD
 
 class PetMapper {
     companion object {
