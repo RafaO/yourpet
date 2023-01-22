@@ -74,7 +74,7 @@ fun SettingsScreen() {
     }
 }
 
-@Preview(showBackground = true, name = "side menu", group = UIGroups.GeneralElements)
+@Preview(showBackground = true, name = "settings screen", group = UIGroups.Screens)
 @Composable
 fun DefaultPreview() {
     SettingsScreen()
