@@ -3,7 +3,7 @@ build:
     complexity: 2
     formatting: 0
     LongParameterList: 1
-    comments: 0.5
+    comments: 1
 
 style:
   active: true
@@ -15,3 +15,5 @@ style:
     excludePackageStatements: true
     excludeImportStatements: true
     excludeCommentStatements: true
+  UnusedImports:
+    active: true

@@ -1,7 +1,8 @@
 package com.keller.yourpet.androidApp.home.viewmodel
 
-import androidx.compose.material.DrawerState
-import androidx.compose.material.DrawerValue
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keller.yourpet.androidApp.home.view.menu.MenuOption
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
+@OptIn(ExperimentalMaterial3Api::class)
 @HiltViewModel
 class HomeViewModel @Inject constructor(val filter: Filter) : ViewModel() {
 

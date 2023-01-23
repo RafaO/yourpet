@@ -1,13 +1,15 @@
 package com.keller.yourpet.androidApp.home.view
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.DrawerValue
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.ModalDrawer
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.rememberDrawerState
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -15,7 +17,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -27,7 +28,7 @@ import com.keller.yourpet.androidApp.home.view.menu.SideMenu
 import com.keller.yourpet.androidApp.home.viewmodel.HomeViewModel
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val viewModel: HomeViewModel = hiltViewModel()
@@ -67,19 +68,23 @@ fun HomeScreen(navController: NavHostController) {
             },
         )
 
-        ModalDrawer(
+        ModalNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {
-                SideMenu(
-                    viewModel.filter,
-                    options,
-                    uiState.optionSelected,
-                    onGenderSelected = viewModel::onGenderSelected,
-                    onOptionSelected = {
-                        viewModel.onOptionSelected(it)
-                        scope.launch {
-                            drawerState.close()
-                        }
+                ModalDrawerSheet(
+                    content = {
+                        SideMenu(
+                            viewModel.filter,
+                            options,
+                            uiState.optionSelected,
+                            onGenderSelected = viewModel::onGenderSelected,
+                            onOptionSelected = {
+                                viewModel.onOptionSelected(it)
+                                scope.launch {
+                                    drawerState.close()
+                                }
+                            }
+                        )
                     }
                 )
             }) {

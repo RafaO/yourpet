@@ -8,11 +8,18 @@ object Versions {
     const val mockk = "1.13.2"
     const val kGraphQL = "0.17.9"
     const val apollo = "3.0.0-alpha03"
-    const val showkase = "1.0.0-beta13"
+    const val showkase = "1.0.0-beta17"
     const val compose = "1.2.0-rc03"
     const val androidTestJunit = "1.4.0"
     const val androidTestExtJunit = "1.1.3"
     const val coroutinesVersion = "1.6.1-native-mt"
+    const val material = "1.0.1"
+}
+
+object Compose {
+    const val material = "androidx.compose.material3:material3:${Versions.material}"
+    const val materialWindowSizeClass =
+        "androidx.compose.material3:material3-window-size-class:${Versions.material}"
 }
 
 object AndroidSdk {
@@ -28,6 +35,8 @@ object MongoDB {
 object Showkase {
     const val base = "com.airbnb.android:showkase:${Versions.showkase}"
     const val annotations = "com.airbnb.android:showkase-processor:${Versions.showkase}"
+    const val screenshotTesting =
+        "com.airbnb.android:showkase-screenshot-testing:${Versions.showkase}"
 }
 
 object GraphQL {

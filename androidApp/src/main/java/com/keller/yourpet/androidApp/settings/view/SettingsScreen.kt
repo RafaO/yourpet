@@ -7,13 +7,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,14 +26,12 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.PopupProperties
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.keller.yourpet.androidApp.R
 import com.keller.yourpet.androidApp.main.viewmodel.MainViewModel
 import com.keller.yourpet.androidApp.main.viewmodel.ThemeColor
 import com.keller.yourpet.androidApp.ui.UIGroups
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun SettingsScreen() {
     val mainViewModel: MainViewModel = hiltViewModel(LocalContext.current as ComponentActivity)
@@ -67,9 +65,8 @@ fun SettingsScreen() {
                                 mainViewModel.onThemeColorSelected(it)
                                 themeMenuExpanded = false
                             },
-                        ) {
-                            Text(text = it.name)
-                        }
+                            text = { Text(text = it.name) }
+                        )
                     }
                 }
             }
@@ -77,7 +74,7 @@ fun SettingsScreen() {
     }
 }
 
-@Preview(showBackground = true, name = "side menu", group = UIGroups.GeneralElements)
+@Preview(showBackground = true, name = "settings screen", group = UIGroups.Screens)
 @Composable
 fun DefaultPreview() {
     SettingsScreen()

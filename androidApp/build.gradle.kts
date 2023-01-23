@@ -14,7 +14,6 @@ shot {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.appcompat:appcompat:1.4.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
 
@@ -25,18 +24,19 @@ dependencies {
     // compose
     implementation("androidx.compose.ui:ui:${Versions.compose}")
     implementation("androidx.compose.ui:ui-tooling:${Versions.compose}")
-    implementation("androidx.compose.material:material:${Versions.compose}")
-    implementation("androidx.activity:activity-compose:1.5.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0-rc01")
+    implementation("androidx.activity:activity-compose:1.6.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
     implementation("androidx.compose.runtime:runtime:${Versions.compose}")
     implementation("androidx.compose.runtime:runtime-livedata:${Versions.compose}")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha03")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha04")
+    implementation(Compose.material)
+    implementation(Compose.materialWindowSizeClass)
 
     // navigation
     val navVersion = "2.3.3"
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha08")
+    implementation("androidx.navigation:navigation-compose:2.5.3")
 
     implementation("io.coil-kt:coil-compose:1.3.2")
 
@@ -61,8 +61,8 @@ dependencies {
     androidTestImplementation(AndroidTest.runner)
     androidTestImplementation(AndroidTest.extJunit)
     androidTestImplementation(AndroidTest.extJunitKtx)
-    kaptAndroidTest("com.airbnb.android:showkase-processor:1.0.0-beta12")
-    androidTestImplementation("com.airbnb.android:showkase-screenshot-testing:1.0.0-beta08")
+    kaptAndroidTest(Showkase.annotations)
+    androidTestImplementation(Showkase.screenshotTesting)
 }
 
 android {

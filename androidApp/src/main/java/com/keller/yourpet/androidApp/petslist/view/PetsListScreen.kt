@@ -1,14 +1,16 @@
 package com.keller.yourpet.androidApp.petslist.view
 
 import PetsListError
+import androidx.compose.foundation.background
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewModel
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewState
@@ -26,7 +28,6 @@ fun Content(state: PetsListViewState, onPetClicked: (Pet) -> Unit, onRetry: () -
     }
 }
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun PetsListScreen(update: Boolean, updated: () -> Unit, onPetClicked: (Pet) -> Unit) {
     val viewModel: PetsListViewModel = hiltViewModel()
@@ -41,12 +42,13 @@ fun PetsListScreen(update: Boolean, updated: () -> Unit, onPetClicked: (Pet) -> 
 }
 
 @Composable
-private fun PetsList(pets: List<Pet>, onPetClicked: (Pet) -> Unit) = LazyColumn {
-    items(
-        count = pets.size,
-        itemContent = { PetCard(pets[it], onPetClicked) },
-    )
-}
+private fun PetsList(pets: List<Pet>, onPetClicked: (Pet) -> Unit) =
+    LazyColumn(modifier = Modifier.background(color = MaterialTheme.colorScheme.surface)) {
+        items(
+            count = pets.size,
+            itemContent = { PetCard(pets[it], onPetClicked) },
+        )
+    }
 
 @Preview(showBackground = true, name = "Pets list", group = UIGroups.Screens)
 @Composable
@@ -54,6 +56,11 @@ fun PetsListPreview() {
     YourPetUITheme {
         PetsList(
             listOf(
+                Pet(
+                    "charlie",
+                    "https://picsum.photos/id/237/200/150",
+                    Gender.Female
+                ),
                 Pet(
                     "charlie",
                     "https://picsum.photos/id/237/200/150",
