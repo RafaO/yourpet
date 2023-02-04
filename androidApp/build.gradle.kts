@@ -3,8 +3,8 @@ apply(from = "../tools/detekt.gradle")
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
     id("shot")
 }
 
@@ -105,5 +105,9 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = "1.2.0"
+    }
+
+    kapt {
+        correctErrorTypes = true
     }
 }
