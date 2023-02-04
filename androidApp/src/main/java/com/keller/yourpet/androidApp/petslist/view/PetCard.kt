@@ -20,7 +20,7 @@ import coil.size.OriginalSize
 import com.keller.yourpet.androidApp.R
 import com.keller.yourpet.androidApp.ui.UIGroups
 import com.keller.yourpet.androidApp.ui.YourPetUITheme
-import com.keller.yourpet.shared.model.Gender
+import com.keller.yourpet.shared.mock.mockPet
 import com.keller.yourpet.shared.model.Pet
 
 @OptIn(ExperimentalCoilApi::class)
@@ -54,8 +54,6 @@ fun PetCard(pet: Pet, onPetClicked: (Pet) -> Unit) = Column(
 @Composable
 fun PetCardPreview() {
     YourPetUITheme {
-        PetCard(
-            pet = Pet("Charlie", "https://picsum.photos/id/237/200/150", Gender.Female),
-            onPetClicked = {})
+        PetCard(pet = mockPet(), onPetClicked = {})
     }
 }

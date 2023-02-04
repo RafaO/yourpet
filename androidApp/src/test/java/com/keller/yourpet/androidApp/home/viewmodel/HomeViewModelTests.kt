@@ -62,7 +62,7 @@ class NavigationTests(private val selectedOption: MenuOption) : CoroutinesTest()
         @Parameterized.Parameters
         fun data() = listOf(
             arrayOf(MenuOption.Settings()),
-            arrayOf(MenuOption.Pets(mockk(), false) {}),
+            arrayOf(MenuOption.Pets(mockk(), mockk(), false) {}),
         )
     }
 

@@ -1,5 +1,6 @@
 query GetAllPets($filter: Filter!) {
     pets(filter: $filter) {
+        id,
         name,
         imageUrl,
         gender

@@ -517,6 +517,18 @@
             "args": []
           },
           {
+            "name": "id",
+            "isDeprecated": false,
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long"
+              }
+            },
+            "args": []
+          },
+          {
             "name": "imageUrl",
             "isDeprecated": false,
             "type": {
@@ -707,11 +719,8 @@
                 "name": "filter",
                 "isDeprecated": false,
                 "type": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "Filter"
-                  }
+                  "kind": "INPUT_OBJECT",
+                  "name": "Filter"
                 }
               }
             ]

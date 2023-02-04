@@ -1,6 +1,7 @@
 package com.keller.yourpet.shared.api
 
 import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo3.exception.ApolloNetworkException
 import com.keller.yourpet.GetAllPetsQuery
 import com.keller.yourpet.shared.model.Filter
 import com.keller.yourpet.shared.model.Gender
@@ -16,13 +17,18 @@ class PetsApiClient : IPetsSource, KoinComponent {
     private val apolloClient: ApolloClient by inject()
 
     override suspend fun getPets(filter: Filter) = withContext(Dispatchers.Main) {
-        apolloClient.query(GetAllPetsQuery(filter.toQueryParam())).dataOrThrow.pets.map {
+        apolloClient.query(GetAllPetsQuery(filter.toQueryParam())).execute().data?.pets?.map {
             Pet(
+                it.id.toString().toLong(), // TODO apollo not handling long properly
                 it.name,
                 it.imageUrl,
                 Gender.valueOf(it.gender.rawValue)
             )
-        }
+        } ?: throw ApolloNetworkException("error retrieving pets from api")
+    }
+
+    override suspend fun getPet(petId: Long): Pet? {
+        throw NotImplementedError("method not implemented in api")
     }
 
     override fun saveOverride(pets: List<Pet>) {

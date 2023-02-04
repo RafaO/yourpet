@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
@@ -22,12 +21,15 @@ import com.keller.yourpet.androidApp.main.viewmodel.MainViewModel
 import com.keller.yourpet.androidApp.main.viewmodel.isDark
 import com.keller.yourpet.androidApp.petdetails.PetDetailsScreen
 import com.keller.yourpet.androidApp.ui.YourPetUITheme
+import com.keller.yourpet.shared.repository.PetsRepository
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var petsRepository: PetsRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +50,13 @@ class MainActivity : AppCompatActivity() {
         YourPetUITheme(darkTheme = state.themeColor.isDark(isSystemInDarkTheme())) {
             NavHost(navController = navController, startDestination = ROUTE_HOME) {
                 composable(ROUTE_HOME) {
-                    HomeScreen(navController)
+                    HomeScreen(navController, petsRepository)
                 }
                 composable(ROUTE_PET_DETAILS) {
-                    navController.previousBackStackEntry?.arguments?.getString(ARG_PET)?.let {
-                        PetDetailsScreen(pet = Json.decodeFromString(it))
-                    } ?: run { Text("Something went wrong") }
+                    PetDetailsScreen(
+                        petsRepository,
+                        it.arguments?.getString(ARG_PET)?.toLongOrNull() ?: null
+                    )
                 }
             }
         }

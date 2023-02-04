@@ -3,8 +3,8 @@ package com.keller.yourpet.androidApp.petslist.view
 import PetsListError
 import androidx.compose.foundation.background
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -16,7 +16,7 @@ import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewModel
 import com.keller.yourpet.androidApp.petslist.viewmodel.PetsListViewState
 import com.keller.yourpet.androidApp.ui.UIGroups
 import com.keller.yourpet.androidApp.ui.YourPetUITheme
-import com.keller.yourpet.shared.model.Gender
+import com.keller.yourpet.shared.mock.mockPetsList
 import com.keller.yourpet.shared.model.Pet
 
 @Composable
@@ -54,19 +54,6 @@ private fun PetsList(pets: List<Pet>, onPetClicked: (Pet) -> Unit) =
 @Composable
 fun PetsListPreview() {
     YourPetUITheme {
-        PetsList(
-            listOf(
-                Pet(
-                    "charlie",
-                    "https://picsum.photos/id/237/200/150",
-                    Gender.Female
-                ),
-                Pet(
-                    "charlie",
-                    "https://picsum.photos/id/237/200/150",
-                    Gender.Female
-                )
-            )
-        ) {}
+        PetsList(mockPetsList()) {}
     }
 }

@@ -7,6 +7,6 @@ class PetMapper {
     companion object {
         // id kept despite unused so the method can be passed as reference
         fun from(id: Long, name: String, imageUrl: String, gender: String) =
-            Pet(name, imageUrl, Gender.valueOf(gender))
+            Pet(id, name, imageUrl, Gender.valueOf(gender))
     }
 }
