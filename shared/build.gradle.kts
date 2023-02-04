@@ -12,7 +12,9 @@ plugins {
 }
 
 apollo {
-    packageName.set("com.keller.yourpet")
+    service("service") {
+        packageName.set("com.keller.yourpet")
+    }
 }
 
 android {
