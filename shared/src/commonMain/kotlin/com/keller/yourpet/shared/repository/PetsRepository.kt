@@ -8,7 +8,7 @@ class PetsRepository(private val cacheSource: IPetsSource, private val networkSo
     IPetsRepository {
     private var memory: Pet? = null
 
-    override fun getPetInMemory(petId: Long): Pet? {
+    override fun getPetInMemory(petId: String): Pet? {
         memory?.id.let {
             if (it == petId)
                 return memory

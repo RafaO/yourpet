@@ -523,7 +523,7 @@
               "kind": "NON_NULL",
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Long"
+                "name": "String"
               }
             },
             "args": []

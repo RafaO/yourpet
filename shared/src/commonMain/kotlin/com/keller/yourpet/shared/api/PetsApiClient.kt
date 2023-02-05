@@ -19,7 +19,7 @@ class PetsApiClient : IPetsSource, KoinComponent {
     override suspend fun getPets(filter: Filter) = withContext(Dispatchers.Main) {
         apolloClient.query(GetAllPetsQuery(filter.toQueryParam())).execute().data?.pets?.map {
             Pet(
-                it.id.toString().toLong(), // TODO apollo not handling long properly
+                it.id,
                 it.name,
                 it.imageUrl,
                 Gender.valueOf(it.gender.rawValue)

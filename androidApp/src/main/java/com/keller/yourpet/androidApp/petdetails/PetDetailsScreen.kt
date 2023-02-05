@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import com.keller.yourpet.shared.repository.PetsRepository
 
 @Composable
-fun PetDetailsScreen(petsRepository: PetsRepository, petId: Long?) {
+fun PetDetailsScreen(petsRepository: PetsRepository, petId: String?) {
     petId?.let {
         petsRepository.getPetInMemory(petId)?.let {
             Text(it.name, style = MaterialTheme.typography.titleMedium)

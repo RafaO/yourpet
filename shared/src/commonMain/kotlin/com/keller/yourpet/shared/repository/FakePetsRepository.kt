@@ -5,7 +5,7 @@ import com.keller.yourpet.shared.model.Pet
 import kotlinx.coroutines.flow.Flow
 
 class FakePetsRepository: IPetsRepository {
-    override fun getPetInMemory(petId: Long): Pet? {
+    override fun getPetInMemory(petId: String): Pet? {
         TODO("Not yet implemented")
     }
 

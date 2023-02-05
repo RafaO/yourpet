@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 composable(ROUTE_PET_DETAILS) {
                     PetDetailsScreen(
                         petsRepository,
-                        it.arguments?.getString(ARG_PET)?.toLongOrNull() ?: null
+                        it.arguments?.getString(ARG_PET)
                     )
                 }
             }
