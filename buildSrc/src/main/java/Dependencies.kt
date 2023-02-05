@@ -7,7 +7,7 @@ object Versions {
     const val detekt = "1.17.0-RC2"
     const val mockk = "1.13.2"
     const val kGraphQL = "0.17.9"
-    const val apollo = "3.7.4"
+    const val apollo = "3.0.0-alpha03"
     const val showkase = "1.0.0-beta17"
     const val compose = "1.2.0-rc03"
     const val androidTestJunit = "1.4.0"

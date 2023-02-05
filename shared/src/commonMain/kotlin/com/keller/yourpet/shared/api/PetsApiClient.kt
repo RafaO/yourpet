@@ -17,7 +17,7 @@ class PetsApiClient : IPetsSource, KoinComponent {
     private val apolloClient: ApolloClient by inject()
 
     override suspend fun getPets(filter: Filter) = withContext(Dispatchers.Main) {
-        apolloClient.query(GetAllPetsQuery(filter.toQueryParam())).execute().data?.pets?.map {
+        apolloClient.query(GetAllPetsQuery(filter.toQueryParam())).dataOrThrow.pets.map {
             Pet(
                 it.id,
                 it.name,

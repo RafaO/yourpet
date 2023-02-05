@@ -14,7 +14,7 @@ extension Array where Element: AnyObject{
     init(_ kotlinArray: KotlinArray<Element>){
         self.init()
         let iterator = kotlinArray.iterator()
-        while iterator.hasNext_() {
+        while iterator.hasNext() {
             self.append(iterator.next_() as! Element)
         }
     }
