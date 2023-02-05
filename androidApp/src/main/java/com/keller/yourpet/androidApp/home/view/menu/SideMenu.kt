@@ -31,6 +31,7 @@ import com.keller.yourpet.androidApp.ui.YourPetUITheme
 import com.keller.yourpet.androidApp.ui.getBrowserIntent
 import com.keller.yourpet.shared.model.Filter
 import com.keller.yourpet.shared.model.Gender
+import com.keller.yourpet.shared.repository.FakePetsRepository
 
 @Composable
 fun MenuItem(option: MenuOption, onOptionSelected: (MenuOption) -> Unit) {
@@ -104,8 +105,11 @@ fun DefaultPreview() {
     YourPetUITheme {
         SideMenu(
             Filter(),
-            listOf(MenuOption.Pets(rememberNavController(), false) {}, MenuOption.Settings()),
-            MenuOption.Pets(rememberNavController(), false) {},
+            listOf(
+                MenuOption.Pets(FakePetsRepository(), rememberNavController(), false) {},
+                MenuOption.Settings()
+            ),
+            MenuOption.Pets(FakePetsRepository(), rememberNavController(), false) {},
             { _, _ -> },
             {})
     }

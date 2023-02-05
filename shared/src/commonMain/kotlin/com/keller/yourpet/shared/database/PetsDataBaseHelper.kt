@@ -13,6 +13,10 @@ class PetsDataBaseHelper(private val database: MyDatabase) : IPetsSource {
             PetMapper::from
         ).executeAsList()
 
+    override suspend fun getPet(petId: Long): Pet? {
+        throw NotImplementedError("method not implemented in bd")
+    }
+
     override fun saveOverride(pets: List<Pet>) {
         database.petBDQueries.deletePets()
         pets.forEach {

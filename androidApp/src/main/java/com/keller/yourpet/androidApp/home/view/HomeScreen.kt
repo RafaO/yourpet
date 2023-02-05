@@ -26,17 +26,23 @@ import com.keller.yourpet.androidApp.R
 import com.keller.yourpet.androidApp.home.view.menu.MenuOption
 import com.keller.yourpet.androidApp.home.view.menu.SideMenu
 import com.keller.yourpet.androidApp.home.viewmodel.HomeViewModel
+import com.keller.yourpet.shared.repository.PetsRepository
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(navController: NavHostController, petsRepository: PetsRepository) {
     val viewModel: HomeViewModel = hiltViewModel()
     val drawerState = rememberDrawerState(DrawerValue.Closed, viewModel::onDrawerStateChanged)
     val scope = rememberCoroutineScope()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val options = listOf(
-        MenuOption.Pets(navController, uiState.filterUpdated, viewModel::petsListUpdated),
+        MenuOption.Pets(
+            petsRepository,
+            navController,
+            uiState.filterUpdated,
+            viewModel::petsListUpdated
+        ),
         MenuOption.Settings()
     )
     val innerNavController = rememberNavController()

@@ -20,6 +20,7 @@ buildscript {
 
 plugins {
     id("io.gitlab.arturbosch.detekt") version Versions.detekt
+    id("com.google.dagger.hilt.android") version Versions.hilt apply false
 }
 
 allprojects {

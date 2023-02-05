@@ -1,17 +1,18 @@
 import com.apurebase.kgraphql.GraphQL
 import database.DBHelper
 import database.DbConstants
-import io.ktor.application.Application
-import io.ktor.application.install
-import io.ktor.server.netty.EngineMain
+import io.ktor.application.*
+import io.ktor.server.netty.*
 import kotlinx.coroutines.runBlocking
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
 
 fun main(args: Array<String>) = EngineMain.main(args)
 
-fun Application.module(testing: Boolean = false) {
-    val createContent = false
+/**
+ * param testing indicates if it should retrieve mocked data instead of accessing BD
+ */
+fun Application.module(testing: Boolean = false, createContent: Boolean = false) {
     val client = KMongo.createClient().coroutine
     val database = client.getDatabase(DbConstants.DB_NAME_PETS)
     val dbHelper = DBHelper(collection = database.getCollection())
@@ -26,7 +27,7 @@ fun Application.module(testing: Boolean = false) {
     install(GraphQL) {
         playground = true
         schema {
-            schemaValue(RequestHandler(dbHelper))
+            schemaValue(RequestHandler(dbHelper), testing)
         }
     }
     println("server started")
