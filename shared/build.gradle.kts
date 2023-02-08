@@ -23,6 +23,7 @@ android {
         minSdk = AndroidSdk.min
         targetSdk = AndroidSdk.target
     }
+    namespace = "com.keller.yourpet.shared"
 
     // workaround needed: https://youtrack.jetbrains.com/issue/KT-43944
     configurations {

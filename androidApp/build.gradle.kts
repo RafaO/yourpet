@@ -106,6 +106,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.2.0"
     }
+    namespace = "com.keller.yourpet.androidApp"
 
     kapt {
         correctErrorTypes = true
