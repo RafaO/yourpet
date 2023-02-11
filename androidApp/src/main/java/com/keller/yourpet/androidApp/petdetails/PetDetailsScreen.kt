@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import coil.size.OriginalSize
 import com.keller.yourpet.androidApp.R
@@ -37,7 +37,7 @@ fun PetDetailsScreen(petsRepository: PetsRepository, petId: String) {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun PetDetailsContent(pet: Pet) {
     val state = rememberCollapsingToolbarScaffoldState()
@@ -57,7 +57,9 @@ fun PetDetailsContent(pet: Pet) {
                 contentScale = ContentScale.FillWidth,
             )
             Text(
-                text = pet.name, modifier = Modifier.road(
+                text = pet.name,
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.road(
                     whenCollapsed = Alignment.CenterStart,
                     whenExpanded = Alignment.BottomEnd
                 )
