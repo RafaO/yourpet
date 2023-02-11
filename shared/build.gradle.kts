@@ -126,5 +126,6 @@ kotlin {
 sqldelight {
     database("MyDatabase") {
         packageName = "com.keller.yourpet.shared.data"
+        schemaOutputDirectory = file("src/commonMain/sqldelight/databases")
     }
 }
