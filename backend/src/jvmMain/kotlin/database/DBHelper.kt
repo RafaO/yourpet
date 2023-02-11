@@ -20,8 +20,10 @@ class DBHelper(private val collection: CoroutineCollection<Pet>) {
 
     private inline fun <T> dbExecute(f: () -> T) = try {
         val r = f()
+        println("success, ${r.toString()}")
         Result.success(r)
     } catch (e: Exception) {
+        println("error: $e")
         Result.failure(e)
     }
 }

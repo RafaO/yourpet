@@ -21,6 +21,8 @@ fun Application.module(testing: Boolean = false, createContent: Boolean = false)
             val result = dbHelper.addContent()
             if (result.isFailure) {
                 println("content couldn't be created")
+            } else {
+                println("content added")
             }
         }
     }
