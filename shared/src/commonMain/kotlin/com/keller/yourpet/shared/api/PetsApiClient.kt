@@ -1,7 +1,6 @@
 package com.keller.yourpet.shared.api
 
 import com.apollographql.apollo3.ApolloClient
-import com.apollographql.apollo3.exception.ApolloNetworkException
 import com.keller.yourpet.GetAllPetsQuery
 import com.keller.yourpet.shared.model.Filter
 import com.keller.yourpet.shared.model.Gender
@@ -25,7 +24,7 @@ class PetsApiClient : IPetsSource, KoinComponent {
                 Gender.valueOf(it.gender.rawValue),
                 "no description from api"
             )
-        } ?: throw ApolloNetworkException("error retrieving pets from api")
+        }
     }
 
     override suspend fun getPet(petId: Long): Pet? {
