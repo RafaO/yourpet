@@ -32,6 +32,9 @@ dependencies {
     implementation(Compose.material)
     implementation(Compose.materialWindowSizeClass)
 
+    // views
+    implementation("me.onebone:toolbar-compose:2.3.5")
+
     // navigation
     val navVersion = "2.3.3"
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
