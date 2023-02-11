@@ -99,6 +99,7 @@ fun PetDetailsContent(pet: Pet) {
             modifier = Modifier.verticalScroll(rememberScrollState())
         ) {
             Text(pet.name, style = MaterialTheme.typography.titleMedium)
+            Text(pet.description, style = MaterialTheme.typography.bodyLarge)
         }
     }
 }
