@@ -22,7 +22,8 @@ class PetsApiClient : IPetsSource, KoinComponent {
                 it.id,
                 it.name,
                 it.imageUrl,
-                Gender.valueOf(it.gender.rawValue)
+                Gender.valueOf(it.gender.rawValue),
+                "no description from api"
             )
         } ?: throw ApolloNetworkException("error retrieving pets from api")
     }

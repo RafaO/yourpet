@@ -9,9 +9,16 @@ import kotlin.random.Random
 class PetsDataBaseHelper(private val database: MyDatabase) : IPetsSource {
     override suspend fun getPets(filter: Filter) =
         database.petBDQueries.selectFilteredPets(
-            filter.genders.map { it.toString() },
-            PetMapper::from
-        ).executeAsList()
+            filter.genders.map { it.toString() }
+        ) { id, name, imageUrl, gender ->
+            PetMapper.from(
+                id,
+                name,
+                imageUrl,
+                gender,
+                "no description from db"
+            )
+        }.executeAsList()
 
     override suspend fun getPet(petId: Long): Pet? {
         throw NotImplementedError("method not implemented in bd")
