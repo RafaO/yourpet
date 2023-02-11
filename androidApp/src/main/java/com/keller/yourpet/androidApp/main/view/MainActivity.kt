@@ -53,10 +53,9 @@ class MainActivity : AppCompatActivity() {
                     HomeScreen(navController, petsRepository)
                 }
                 composable(ROUTE_PET_DETAILS) {
-                    PetDetailsScreen(
-                        petsRepository,
-                        it.arguments?.getString(ARG_PET)
-                    )
+                    it.arguments?.getString(ARG_PET)?.let { petId ->
+                        PetDetailsScreen(petsRepository, petId)
+                    }
                 }
             }
         }
