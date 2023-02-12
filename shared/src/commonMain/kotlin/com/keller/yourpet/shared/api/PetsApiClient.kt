@@ -22,7 +22,7 @@ class PetsApiClient : IPetsSource, KoinComponent {
                 it.name,
                 it.imageUrl,
                 Gender.valueOf(it.gender.rawValue),
-                "no description from api"
+                it.description
             )
         }
     }

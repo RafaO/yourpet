@@ -3,6 +3,7 @@ query GetAllPets($filter: Filter!) {
         id,
         name,
         imageUrl,
-        gender
+        gender,
+        description
     }
 }
