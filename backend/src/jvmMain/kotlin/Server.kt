@@ -21,6 +21,8 @@ fun Application.module(testing: Boolean = false, createContent: Boolean = false)
             val result = dbHelper.addContent()
             if (result.isFailure) {
                 println("content couldn't be created")
+            } else {
+                println("content added")
             }
         }
     }
@@ -30,5 +32,5 @@ fun Application.module(testing: Boolean = false, createContent: Boolean = false)
             schemaValue(RequestHandler(dbHelper), testing)
         }
     }
-    println("server started")
+    println("server started at http://localhost:8080/graphql")
 }

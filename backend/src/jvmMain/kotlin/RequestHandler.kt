@@ -8,6 +8,7 @@ class RequestHandler(private val dbHelper: DBHelper) {
             dbHelper.getPets(filter).getOrThrow()
         }
     } catch (e: Exception) {
+        println("error: ${e.message}")
         emptyList()
     }
 }

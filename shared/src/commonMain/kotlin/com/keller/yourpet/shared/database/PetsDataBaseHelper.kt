@@ -25,6 +25,7 @@ class PetsDataBaseHelper(private val database: MyDatabase) : IPetsSource {
                 it.name,
                 it.imageUrl,
                 it.gender.toString(),
+                it.description
             )
         }
     }

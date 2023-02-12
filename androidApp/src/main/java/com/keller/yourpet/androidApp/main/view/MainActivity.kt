@@ -13,9 +13,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.keller.yourpet.androidApp.Navigation.Companion.ARG_PET
-import com.keller.yourpet.androidApp.Navigation.Companion.ROUTE_HOME
-import com.keller.yourpet.androidApp.Navigation.Companion.ROUTE_PET_DETAILS
+import com.keller.yourpet.androidApp.NavigationConstants.Companion.ARG_PET
+import com.keller.yourpet.androidApp.NavigationConstants.Companion.ROUTE_HOME
+import com.keller.yourpet.androidApp.NavigationConstants.Companion.ROUTE_PET_DETAILS
 import com.keller.yourpet.androidApp.home.view.HomeScreen
 import com.keller.yourpet.androidApp.main.viewmodel.MainViewModel
 import com.keller.yourpet.androidApp.main.viewmodel.isDark
@@ -53,10 +53,9 @@ class MainActivity : AppCompatActivity() {
                     HomeScreen(navController, petsRepository)
                 }
                 composable(ROUTE_PET_DETAILS) {
-                    PetDetailsScreen(
-                        petsRepository,
-                        it.arguments?.getString(ARG_PET)
-                    )
+                    it.arguments?.getString(ARG_PET)?.let { petId ->
+                        PetDetailsScreen(petsRepository, petId)
+                    }
                 }
             }
         }

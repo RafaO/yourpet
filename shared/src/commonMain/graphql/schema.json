@@ -505,6 +505,18 @@
         "description": "",
         "fields": [
           {
+            "name": "description",
+            "isDeprecated": false,
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String"
+              }
+            },
+            "args": []
+          },
+          {
             "name": "gender",
             "isDeprecated": false,
             "type": {

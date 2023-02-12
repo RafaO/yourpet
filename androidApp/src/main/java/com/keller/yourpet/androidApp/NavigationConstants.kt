@@ -1,6 +1,6 @@
 package com.keller.yourpet.androidApp
 
-class Navigation {
+class NavigationConstants {
     companion object {
         // home
         const val ROUTE_HOME = "home"

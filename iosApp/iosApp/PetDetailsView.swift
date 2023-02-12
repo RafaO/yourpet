@@ -13,6 +13,9 @@ struct PetDetailsView: View {
     var pet: Pet
     
     var body: some View {
-        Text(pet.name)
+        VStack {
+            Text(pet.name)
+            Text(pet.description_)
+        }
     }
 }
