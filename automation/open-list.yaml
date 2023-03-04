@@ -1,4 +1,4 @@
-appId: com.keller.yourpet.androidApp
+appId: com.keller.yourpet
 ---
 - launchApp
 - assertVisible:
