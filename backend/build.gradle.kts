@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinCommonOptions
-import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
-import org.jetbrains.kotlin.gradle.plugin.KotlinCompilationToRunnableFiles
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -13,7 +10,9 @@ tasks.withType<KotlinCompile> {
 }
 
 kotlin {
-    jvm()
+    jvm {
+        withJava()
+    }
 
     sourceSets {
         val jvmMain by getting {
@@ -40,14 +39,4 @@ kotlin {
 
 application {
     mainClass.set("ServerKt")
-}
-
-task<JavaExec>("runServer") {
-    main = "ServerKt"
-    val jvm by kotlin.targets.getting
-    val main: KotlinCompilation<KotlinCommonOptions> by jvm.compilations
-
-    val runtimeDependencies =
-        (main as KotlinCompilationToRunnableFiles<KotlinCommonOptions>).runtimeDependencyFiles
-    classpath = files(main.output.allOutputs, runtimeDependencies)
 }
