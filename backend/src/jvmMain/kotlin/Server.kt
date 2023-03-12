@@ -12,7 +12,8 @@ fun main(args: Array<String>) = EngineMain.main(args)
 /**
  * param testing indicates if it should retrieve mocked data instead of accessing BD
  */
-fun Application.module(testing: Boolean = false, createContent: Boolean = false) {
+fun Application.module(createContent: Boolean = false) {
+    val testing = environment.config.propertyOrNull("testing")?.getString().toBoolean()
     val client = KMongo.createClient().coroutine
     val database = client.getDatabase(DbConstants.DB_NAME_PETS)
     val dbHelper = DBHelper(collection = database.getCollection())

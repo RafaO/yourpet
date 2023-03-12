@@ -37,6 +37,14 @@ kotlin {
     }
 }
 
+tasks {
+    run.configure {
+        args = (project.findProperty("testing") as? String)
+            ?.let { listOf("-P:testing=${it}") }
+            ?: emptyList()
+    }
+}
+
 application {
     mainClass.set("ServerKt")
 }
