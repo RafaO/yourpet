@@ -47,6 +47,7 @@ jobs:
           api-level: 29
           profile: pixel_4
           script: |
+            ./gradlew backend:run -Ptesting=true
             ./gradlew androidApp:installDebug
             maestro test automation/open-list.yaml
 
