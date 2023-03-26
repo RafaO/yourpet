@@ -32,7 +32,7 @@ jobs:
           xcodebuild test \
           -project iOSApp/iOSApp.xcodeproj \
           -scheme iosApp -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 8,OS=15.2' | xcpretty -s
+          -destination 'platform=iOS Simulator,name=iPhone 8,OS=16.2' | xcpretty -s
 
       - name: "run detekt"
         run: ./gradlew detektAll
@@ -58,7 +58,7 @@ jobs:
       - name: "launch iOS simulator"
         uses: futureware-tech/simulator-action@v2
         with:
-          model: 'iPhone 14'
+          model: 'iPhone 8'
 
       - name: "ios e2e tests"
         run: |
