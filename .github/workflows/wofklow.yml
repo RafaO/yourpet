@@ -61,6 +61,7 @@ jobs:
         uses: futureware-tech/simulator-action@v2
         with:
           model: 'iPhone 8'
+          shutdown_after_job: false
 
       - name: "ios e2e tests"
         run: |
