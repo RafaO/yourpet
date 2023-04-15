@@ -19,7 +19,7 @@ class PetsViewModelStateTests: XCTestCase {
 
     func testState() throws {
 
-        let petMock = Pet(name: "", imageUrl: "", gender: Gender_.female)
+        let petMock = Pet(id: "", name: "", imageUrl: "", gender: Gender_.female, description: "")
         let errorMessage = "pets not found"
 
         let testValues = [
