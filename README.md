@@ -24,7 +24,7 @@ Welcome to `YourPet`, a side project I started with three main goals:
 ## Instructions
 
 - Make sure you are running mongodb in localhost.
-- To run the backend, execute `./gradlew backend:runServer` in the main directory.
+- To run the backend, execute `./gradlew backend:run` in the main directory.
 - Then visit `http://localhost:8080/graphql` to reach the playground and documentation.
 
 In order to get the schema file, once the backend is up and running. Execute the following command:

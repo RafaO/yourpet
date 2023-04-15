@@ -8,8 +8,9 @@ plugins {
     id("shot")
 }
 
+val appId = "com.keller.yourpet"
 shot {
-    applicationId = "com.keller.yourpet.androidApp"
+    applicationId = appId
 }
 
 dependencies {
@@ -74,7 +75,7 @@ android {
         resources.excludes.add("META-INF/*")
     }
     defaultConfig {
-        applicationId = "com.keller.yourpet.androidApp"
+        applicationId = appId
         minSdk = AndroidSdk.min
         targetSdk = AndroidSdk.target
         versionCode = 1
@@ -109,7 +110,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.2.0"
     }
-    namespace = "com.keller.yourpet.androidApp"
+    namespace = "$appId.androidApp"
 
     kapt {
         correctErrorTypes = true

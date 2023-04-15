@@ -10,6 +10,10 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: install-idb
+        run: |
+          brew tap facebook/fb
+          brew install idb-companion
       - name: setup-java
         uses: actions/setup-java@v2
         with:
@@ -28,7 +32,7 @@ jobs:
           xcodebuild test \
           -project iOSApp/iOSApp.xcodeproj \
           -scheme iosApp -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 8,OS=15.2' | xcpretty -s
+          -destination 'platform=iOS Simulator,name=iPhone 8,OS=16.2'
 
       - name: "run detekt"
         run: ./gradlew detektAll
@@ -40,8 +44,32 @@ jobs:
         run: |
           curl -Ls "https://get.maestro.mobile.dev" | bash
           echo "$HOME/.maestro/bin" >> $GITHUB_PATH
+          export PATH="$PATH":"$HOME/.maestro/bin"
+          echo "Maestro version: $(maestro --version)"
 
-      - name: "e2e tests"
+      - name: "Build iOS app"
+        run: |
+          xcodebuild -project iOSApp/iOSApp.xcodeproj \
+          -scheme iosApp \
+          -destination 'platform=iOS Simulator,name=iPhone 8,OS=16.2' \
+          -derivedDataPath build
+
+      - name: "Start backend"
+        run: ./gradlew backend:run -Ptesting=true &
+
+      - name: "launch iOS simulator"
+        uses: futureware-tech/simulator-action@v2
+        with:
+          model: 'iPhone 8'
+          shutdown_after_job: false
+
+      - name: "ios e2e tests"
+        run: |
+            xcrun simctl install booted build/Build/Products/Debug-iphonesimulator/iosApp.app
+            maestro test automation/open-list.yaml
+            xcrun simctl shutdown all
+
+      - name: "Android e2e tests"
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
