@@ -32,7 +32,7 @@ jobs:
           xcodebuild test \
           -project iOSApp/iOSApp.xcodeproj \
           -scheme iosApp -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 8,OS=16.2' | xcpretty -s
+          -destination 'platform=iOS Simulator,name=iPhone 8,OS=16.2'
 
       - name: "run detekt"
         run: ./gradlew detektAll
