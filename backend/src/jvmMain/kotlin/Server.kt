@@ -1,6 +1,5 @@
 import com.apurebase.kgraphql.GraphQL
-import database.DBHelper
-import database.DbConstants
+import database.DBInitializer
 import io.ktor.application.*
 import io.ktor.server.netty.*
 import kotlinx.coroutines.runBlocking
@@ -14,17 +13,14 @@ fun main(args: Array<String>) = EngineMain.main(args)
  */
 fun Application.module(createContent: Boolean = false) {
     val testing = environment.config.propertyOrNull("testing")?.getString().toBoolean()
-    val client = KMongo.createClient().coroutine
-    val database = client.getDatabase(DbConstants.DB_NAME_PETS)
-    val dbHelper = DBHelper(collection = database.getCollection())
+    val dbInitializer = DBInitializer(KMongo.createClient().coroutine)
+    runBlocking {
+        dbInitializer.checkConnection()
+    }
+    val dbHelper = dbInitializer.getHelper()
     if (createContent) {
         runBlocking {
-            val result = dbHelper.addContent()
-            if (result.isFailure) {
-                println("content couldn't be created")
-            } else {
-                println("content added")
-            }
+            dbHelper.addContent()
         }
     }
     install(GraphQL) {
