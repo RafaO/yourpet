@@ -23,8 +23,14 @@ Welcome to `YourPet`, a side project I started with three main goals:
 
 ## Instructions
 
-- Make sure you are running mongodb in localhost.
-- To run the backend, execute `./gradlew backend:run` in the main directory.
+- To run the backend, execute `./gradlew backend:run` in the main directory. There are two ways of
+running the backend:
+  - Using local database. Make sure you are running mongodb in localhost. You can use the provided 
+  container application in the backend directory.
+For that you just need to run `./docker-compose up` in the `backend` directory. Bear in mind that in
+  order to create the database with mock data, you can use the flag `createContent` in `Server.kt` file.
+  - Testing mode. If you want the backend to retrieve mocked in memory data you can run it with
+  `./gradlew backend:run -Ptesting=true`
 - Then visit `http://localhost:8080/graphql` to reach the playground and documentation.
 
 In order to get the schema file, once the backend is up and running. Execute the following command:
