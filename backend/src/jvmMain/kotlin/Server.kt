@@ -14,9 +14,10 @@ fun main(args: Array<String>) = EngineMain.main(args)
 fun Application.module(createContent: Boolean = false) {
     val testing = environment.config.propertyOrNull("testing")?.getString().toBoolean()
     val dbInitializer = DBInitializer(KMongo.createClient().coroutine)
-    runBlocking {
-        dbInitializer.checkConnection()
-    }
+    if (!testing)
+        runBlocking {
+            dbInitializer.checkConnection()
+        }
     val dbHelper = dbInitializer.getHelper()
     if (createContent) {
         runBlocking {
