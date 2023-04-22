@@ -45,6 +45,7 @@ struct SettingsView: View {
                     .pickerStyle(MenuPickerStyle())
                     .onChange(of: selectedTheme) { new in mainViewModel.colorSchemeSelected(selected: new) }
                 }
+                Spacer()
             }
     }
 }

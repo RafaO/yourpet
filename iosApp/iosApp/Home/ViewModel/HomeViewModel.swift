@@ -1,5 +1,6 @@
 import Combine
 import shared
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
     @Published private(set) var selectedOption = MenuOption.Pets
@@ -20,5 +21,8 @@ class HomeViewModel: ObservableObject {
     
     func selectedOption(newOption: MenuOption) {
         selectedOption = newOption
+        withAnimation {
+            showMenu = false
+        }
     }
 }

@@ -35,6 +35,7 @@
 		7555FF8B242A565B00829871 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7555FF89242A565B00829871 /* LaunchScreen.storyboard */; };
 		7555FF96242A565B00829871 /* iosAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF95242A565B00829871 /* iosAppTests.swift */; };
 		7555FFA1242A565B00829871 /* iosAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FFA0242A565B00829871 /* iosAppUITests.swift */; };
+		849B729129F43E9B00BD20A5 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B729029F43E9B00BD20A5 /* HomeViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		7555FF9C242A565B00829871 /* iosAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FFA0242A565B00829871 /* iosAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppUITests.swift; sourceTree = "<group>"; };
 		7555FFA2242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		849B729029F43E9B00BD20A5 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 		7555FF94242A565B00829871 /* iosAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				849B728F29F43E8200BD20A5 /* Home */,
 				1DC7966328CE715700E1A374 /* PetsList */,
 				1DC7965F28CC910C00E1A374 /* MainView */,
 				7555FF95242A565B00829871 /* iosAppTests.swift */,
@@ -272,6 +275,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		849B728F29F43E8200BD20A5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				849B729029F43E9B00BD20A5 /* HomeViewModelTests.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D7EE68A28FDF9B600BA7ABA /* GetPetsUseCaseMock.swift in Sources */,
+				849B729129F43E9B00BD20A5 /* HomeViewModelTests.swift in Sources */,
 				1DC7966128CC912000E1A374 /* MainViewModelTests.swift in Sources */,
 				7555FF96242A565B00829871 /* iosAppTests.swift in Sources */,
 				1DC7966528CE717200E1A374 /* PetsViewModelTests.swift in Sources */,
