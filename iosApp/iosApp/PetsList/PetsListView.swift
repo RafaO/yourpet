@@ -13,11 +13,13 @@ struct PetsListView: View {
     var content: [Pet]
     
     var body : some View{
-        List(content, id: \.name) { pet in
-            NavigationLink(destination: PetDetailsView(pet: pet)) {
-                PetRow(pet: pet)
+        VStack() {
+            Text("Pets")
+            List(content, id: \.name) { pet in
+                NavigationLink(destination: PetDetailsView(pet: pet)) {
+                    PetRow(pet: pet)
+                }
             }
         }
-        .customNavigationTitle(with: "Pets")
     }
 }

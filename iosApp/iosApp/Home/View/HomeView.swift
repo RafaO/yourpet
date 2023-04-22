@@ -53,7 +53,7 @@ struct HomeView: View {
         return NavigationView {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
-                    content()
+                    content().customNavigationTitle(with: "YourPet")
                     .offset(x: viewModel.showMenu ? geometry.size.width/2 : 0)
                     .disabled(viewModel.showMenu)
                     if viewModel.showMenu {
