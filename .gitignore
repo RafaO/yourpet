@@ -17,3 +17,4 @@ local.properties
 /androidApp/build/
 /shared/build
 UserInterfaceState.xcuserstate
+xcuserdata/
