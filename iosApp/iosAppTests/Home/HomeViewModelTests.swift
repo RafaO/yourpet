@@ -25,4 +25,19 @@ class HomeViewModelTests: XCTestCase {
             XCTAssertFalse(viewModel.showMenu)
         }
     }
+    
+    func testWhenMenuOptionSelectedThenTheOptionIsEmittted() {
+        // given
+        let viewModel = HomeViewModel()
+        
+        for option in MenuOption.allCases {
+            viewModel.showMenu = true
+            
+            // when
+            viewModel.selectedOption(newOption: option)
+            
+            // then
+            XCTAssertEqual(option, viewModel.selectedOption)
+        }
+    }
 }
