@@ -15,10 +15,14 @@ class HomeViewModelTests: XCTestCase {
         // given
         let viewModel = HomeViewModel()
         
-        // when
-        viewModel.selectedOption(newOption: MenuOption.Pets)
-        
-        // then
-        XCTAssertFalse(viewModel.showMenu)
+        for option in MenuOption.allCases {
+            viewModel.showMenu = true
+            
+            // when
+            viewModel.selectedOption(newOption: option)
+            
+            // then
+            XCTAssertFalse(viewModel.showMenu)
+        }
     }
 }

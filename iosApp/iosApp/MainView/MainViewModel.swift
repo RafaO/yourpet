@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-enum MenuOption {
+enum MenuOption: CaseIterable {
     case Pets
     case Settings
 }
