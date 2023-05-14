@@ -1,4 +1,4 @@
-FROM cimg/android:2021.08.1
+FROM cimg/android:2023.05.1
 
 COPY . /app
 WORKDIR /app
