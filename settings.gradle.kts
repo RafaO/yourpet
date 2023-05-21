@@ -4,6 +4,10 @@ pluginManagement {
         gradlePluginPortal()
         mavenCentral()
     }
+
+    plugins {
+        id("multiplatform") version "1.8.21"
+    }
     
 }
 rootProject.name = "YourPet"
