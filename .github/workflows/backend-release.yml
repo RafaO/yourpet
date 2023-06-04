@@ -19,7 +19,7 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      - name: "checkout"
+      - name: checkout
         uses: actions/checkout@v2
 
       - name: build-backend
