@@ -1,7 +1,8 @@
 FROM adoptopenjdk:11-jdk-hotspot
 
 USER root
-RUN adduser --system --uid 10000 backend-user
+
+RUN useradd -r backend-user
 
 EXPOSE 8080
 
