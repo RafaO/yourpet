@@ -18,5 +18,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '11'
+
+      - name: "checkout"
+        uses: actions/checkout@v2
+
       - name: build-backend
         run: ./gradlew backend:jvmJar
