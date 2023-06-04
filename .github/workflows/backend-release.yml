@@ -10,3 +10,6 @@ jobs:
     steps:
       - name: start
         run: echo "hello world"
+
+      - name: build-backend
+        run: ./gradlew backend:jvmJar
