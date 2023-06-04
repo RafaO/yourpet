@@ -24,3 +24,7 @@ jobs:
 
       - name: build-backend
         run: ./gradlew backend:jvmJar
+
+      - name: build-docker-backend
+        run: docker build -t yourpet:latest .
+
