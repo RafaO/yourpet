@@ -33,6 +33,9 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
+      - name: 'Set up Cloud SDK'
+        uses: google-github-actions/setup-gcloud@v1
+
       - name: push-image-to-artifact-repository
         run: docker push europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest
 
