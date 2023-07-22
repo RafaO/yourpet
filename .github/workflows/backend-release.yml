@@ -28,6 +28,11 @@ jobs:
       - name: build-docker-backend
         run: docker build -t europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest .
 
+      - name: login-gcloud
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
       - name: push-image-to-artifact-repository
         run: docker push europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest
 
