@@ -29,7 +29,7 @@ jobs:
         run: docker build -t europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest .
 
       - name: login-gcloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
