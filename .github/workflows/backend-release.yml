@@ -36,6 +36,9 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: google-github-actions/setup-gcloud@v1
 
+      - name: 'Configure docker to use gcloud'
+        run: gcloud auth configure-docker europe-southwest1-docker.pkg.dev
+
       - name: push-image-to-artifact-repository
         run: docker push europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest
 
