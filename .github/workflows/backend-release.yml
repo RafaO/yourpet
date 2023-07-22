@@ -26,5 +26,8 @@ jobs:
         run: ./gradlew backend:jvmJar
 
       - name: build-docker-backend
-        run: docker build -t yourpet:latest .
+        run: docker build -t europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest .
+
+      - name: push-image-to-artifact-repository
+        run: docker push europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest
 
