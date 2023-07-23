@@ -10,25 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: start
-        run: echo "hello world"
-
-      - name: setup-java
+      - name: 'setup java'
         uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
           java-version: '11'
 
-      - name: checkout
+      - name: 'checkout'
         uses: actions/checkout@v2
 
-      - name: build-backend
+      - name: 'build backend'
         run: ./gradlew backend:jvmJar
 
-      - name: build-docker-backend
+      - name: 'build docker backend'
         run: docker build -t europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest .
 
-      - name: login-gcloud
+      - name: 'login gcloud'
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
@@ -39,6 +36,6 @@ jobs:
       - name: 'Configure docker to use gcloud'
         run: gcloud auth configure-docker europe-southwest1-docker.pkg.dev
 
-      - name: push-image-to-artifact-repository
+      - name: 'push image to artifact repository'
         run: docker push europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest
 
