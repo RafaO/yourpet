@@ -1,9 +1,6 @@
 name: YourPet backend release
 
-on:
-  workflow_dispatch:
-  push:
-    branches: [backend-release-pipeline]
+on: workflow_dispatch
 
 jobs:
   build:
