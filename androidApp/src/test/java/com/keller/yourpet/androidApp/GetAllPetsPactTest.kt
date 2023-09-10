@@ -3,8 +3,10 @@ package com.keller.yourpet.androidApp
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import au.com.dius.pact.consumer.MockServer
 import au.com.dius.pact.consumer.PactTestExecutionContext
-import au.com.dius.pact.consumer.dsl.PactDslJsonBody
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider
+import au.com.dius.pact.consumer.dsl.newArray
+import au.com.dius.pact.consumer.dsl.newJsonObject
+import au.com.dius.pact.consumer.dsl.newObject
 import au.com.dius.pact.consumer.junit.ConsumerPactTest
 import au.com.dius.pact.core.model.RequestResponsePact
 import com.apollographql.apollo3.ApolloClient
@@ -39,17 +41,21 @@ class GetAllPetsPactTest : ConsumerPactTest() {
             .method("POST")
             .headers(mapOf("Content-Type" to "application/json"))
             .body(
-                PactDslJsonBody()
-                    .stringValue("operationName", "GetAllPets")
-                    .stringValue(
+                newJsonObject {
+                    stringValue("operationName", "GetAllPets")
+                    stringValue(
                         "query",
                         "query GetAllPets(\$filter: Filter!) { pets(filter: \$filter) { id name imageUrl gender description } }"
                     )
-                    .`object`("variables")
-                    .`object`("filter")
-                    .array("genders")
-                    .stringValue("Male")
-                    .stringValue("Female")
+                    newObject("variables") {
+                        newObject("filter") {
+                            newArray("genders") {
+                                stringValue("Male")
+                                stringValue("Female")
+                            }
+                        }
+                    }
+                }
             )
             .willRespondWith()
             .status(200)
