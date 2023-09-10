@@ -11,9 +11,7 @@ import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class PetsApiClient : IPetsSource, KoinComponent {
-
-    private val apolloClient: ApolloClient by inject()
+class PetsApiClient(private val apolloClient: ApolloClient) : IPetsSource {
 
     override suspend fun getPets(filter: Filter) = withContext(Dispatchers.Main) {
         apolloClient.query(GetAllPetsQuery(filter.toQueryParam())).dataOrThrow.pets.map {

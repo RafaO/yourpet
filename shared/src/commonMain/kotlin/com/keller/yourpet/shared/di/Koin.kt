@@ -16,6 +16,6 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
 fun initKoin() = initKoin {}
 
 fun commonModule(enableNetworkLogs: Boolean) = module {
-    single { PetsApiClient() }
+    single { PetsApiClient(get()) }
     single { ApolloClient(serverUrl = "$localhost:8080/graphql") }
 }
