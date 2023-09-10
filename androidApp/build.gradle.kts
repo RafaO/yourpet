@@ -53,6 +53,9 @@ dependencies {
     implementation(Showkase.base)
     kapt(Showkase.annotations)
 
+    testImplementation(Test.pact)
+    testImplementation(GraphQL.apollo) // pact doesn't support KMM, we need to include it in the Android app for now
+
     testImplementation(Test.junit)
     testImplementation(Test.mockk)
     testImplementation(Test.androidx)

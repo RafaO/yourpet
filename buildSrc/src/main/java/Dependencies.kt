@@ -71,6 +71,7 @@ object Test {
     const val mockk = "io.mockk:mockk:${Versions.mockk}"
     const val androidx = "androidx.arch.core:core-testing:2.1.0"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.0"
+    const val pact = "au.com.dius.pact.consumer:junit:4.2.9"
 }
 
 object AndroidTest {
