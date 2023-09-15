@@ -78,6 +78,22 @@ jobs:
             ./gradlew androidApp:installDebug
             maestro test automation/open-list.yaml
 
+      - name: "Upload pacts to pactflow"
+        run: |
+          brew install docker
+          colima start
+          docker run --rm \
+            -w ${PWD} \
+            -v ${PWD}:${PWD} \
+            -e PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }} \
+            -e PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }} \
+            -e TAG=${{ github.head_ref }} \
+            pactfoundation/pact-cli:latest \
+            publish \
+            androidApp/build/pacts \
+            --consumer-app-version fake-git-sha-for-demo-$(date +%s) \
+            -t=${TAG}
+
 #  screenshot-tests:
 #    runs-on: macos-latest
 #    steps:
