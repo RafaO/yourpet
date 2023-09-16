@@ -45,7 +45,8 @@ class GetAllPetsPactTest : ConsumerPactTest() {
                     stringValue("operationName", "GetAllPets")
                     stringValue(
                         "query",
-                        "query GetAllPets(\$filter: Filter!) { pets(filter: \$filter) { id name imageUrl gender description } }"
+                        "query GetAllPets(\$filter: Filter!) { pets(filter: \$filter) { " +
+                                "id name imageUrl gender description } }"
                     )
                     newObject("variables") {
                         newObject("filter") {
