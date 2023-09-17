@@ -8,8 +8,6 @@ import com.keller.yourpet.shared.model.Pet
 import com.keller.yourpet.shared.repository.IPetsSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class PetsApiClient(private val apolloClient: ApolloClient) : IPetsSource {
 
