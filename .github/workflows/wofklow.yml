@@ -79,16 +79,25 @@ jobs:
             ./gradlew androidApp:installDebug
             maestro test automation/open-list.yaml
 
+      - name: Extract branch name
+        shell: bash
+        run: |
+          branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          echo "Branch name is $branch"
+          echo "branch=$branch" >> $GITHUB_OUTPUT
+        id: extract_branch
+
       - name: "Upload pacts to pactflow"
         run: |
           brew install docker
           colima start
+          TAG="${{ steps.extract_branch.outputs.branch }}"
           docker run --rm \
             -w ${PWD} \
             -v ${PWD}:${PWD} \
             -e PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }} \
             -e PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }} \
-            -e TAG=${{ github.head_ref }} \
+            -e TAG=${{ steps.extract_branch.outputs.branch }} \
             pactfoundation/pact-cli:latest \
             publish \
             androidApp/build/pacts \
