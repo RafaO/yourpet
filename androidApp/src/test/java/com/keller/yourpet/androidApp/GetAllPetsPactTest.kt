@@ -29,9 +29,9 @@ class GetAllPetsPactTest : ConsumerPactTest() {
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
-    override fun providerName() = "YourPet API"
+    override fun providerName() = "YourPetAPI"
 
-    override fun consumerName() = "YourPet Mobile client"
+    override fun consumerName() = "YourPetMobileClient"
 
     override fun createPact(builder: PactDslWithProvider): RequestResponsePact {
 
