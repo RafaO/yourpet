@@ -113,7 +113,12 @@ jobs:
         env:
           PACT_BROKER_BASE_URL: ${{ env.PACT_BROKER_BASE_URL }}
           PACT_BROKER_TOKEN: ${{ env.PACT_BROKER_TOKEN }}
-        run: ./gradlew pactVerify
+        uses: BerniWittmann/background-server-action@v1
+        with:
+          command: ./gradlew pactVerify
+          start: ./gradlew backend:run -Ptesting=true
+          wait-on: 'http://localhost:8080/graphql'
+          wait-on-timeout: 300
 
 #  screenshot-tests:
 #    runs-on: macos-latest
