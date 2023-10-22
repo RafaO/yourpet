@@ -3,10 +3,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("multiplatform")
     application
+    id("au.com.dius.pact") version "4.3.10"
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
+}
 }
 
 kotlin {
@@ -21,6 +23,8 @@ kotlin {
 
                 implementation(GraphQL.kGraphQL)
 
+                implementation(Ktor.serverContentNegotiation)
+                implementation(Ktor.serializationGson)
                 implementation(Ktor.serverCore)
                 implementation(Ktor.serverNetty)
                 implementation(Ktor.kGraphQLKtor)
@@ -29,6 +33,7 @@ kotlin {
         }
         val jvmTest by getting {
             dependencies {
+                implementation(Test.pact)
                 implementation(Test.junit)
                 implementation(Test.mockk)
                 implementation(Test.coroutines)
