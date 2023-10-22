@@ -9,6 +9,21 @@ plugins {
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
 }
+
+pact {
+    serviceProviders {
+        register("YourPet API") {
+            protocol = "http"
+            path = "graphql"
+            host = "localhost"
+            port = 8080
+        }
+    }
+
+    broker {
+        pactBrokerUrl = System.getenv("PACT_BROKER_BASE_URL")
+        pactBrokerToken = System.getenv("PACT_BROKER_TOKEN")
+    }
 }
 
 kotlin {
