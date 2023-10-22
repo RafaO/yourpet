@@ -61,28 +61,26 @@ class GetAllPetsPactTest : ConsumerPactTest() {
             .willRespondWith()
             .status(200)
             .body(
-                """
-                {
-                  "data": {
-                    "pets": [
-                  {
-                    "id": "1",
-                    "name": "Fatality",
-                    "gender": "Female",
-                    "imageUrl": "https://picsum.photos/id/237/200/150",
-                    "description": "Fatality is a great dog"
-                  },
-                  {
-                    "id": "2",
-                    "name": "Charlie",
-                    "gender": "Male",
-                    "imageUrl": "https://picsum.photos/id/1025/200/150",
-                    "description": "Charlie is a bit naughty"
-                  }
-                    ]
-                  }
+                newJsonObject {
+                    newObject("data") {
+                        newArray("pets") {
+                            newObject {
+                                stringValue("id", "1")
+                                stringValue("name", "Fatality")
+                                stringValue("gender", "Female")
+                                stringValue("imageUrl", "https://picsum.photos/id/237/200/150")
+                                stringValue("description", "Fatality is a great dog")
+                            }
+                            newObject {
+                                stringValue("id", "2")
+                                stringValue("name", "Charlie")
+                                stringValue("gender", "Male")
+                                stringValue("imageUrl", "https://picsum.photos/id/1025/200/150")
+                                stringValue("description", "Charlie is a bit naughty")
+                            }
+                        }
+                    }
                 }
-                """
             ).toPact()
     }
 
