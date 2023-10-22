@@ -1,6 +1,7 @@
 package database
 
 import com.keller.yourpet.shared.model.Pet
+import org.litote.kmongo.toId
 
 class MongoPetMapper {
     companion object {
@@ -12,5 +13,8 @@ class MongoPetMapper {
                 mongoPet.gender,
                 mongoPet.description
             )
+
+        fun toMongoPet(pet: Pet) =
+            MongoPet(pet.id.toId(), pet.name, pet.imageUrl, pet.gender, pet.description)
     }
 }
