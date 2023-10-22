@@ -10,11 +10,12 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: install-idb
+      - name: "install idb"
         run: |
           brew tap facebook/fb
           brew install idb-companion
-      - name: setup-java
+
+      - name: "setup java"
         uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
@@ -77,6 +78,42 @@ jobs:
           script: |
             ./gradlew androidApp:installDebug
             maestro test automation/open-list.yaml
+
+      - name: Extract branch name
+        shell: bash
+        run: |
+          branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          echo "Branch name is $branch"
+          echo "branch=$branch" >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      - name: "Upload pacts to pactflow"
+        run: |
+          brew install docker
+          colima start
+          TAG="${{ steps.extract_branch.outputs.branch }}"
+          docker run --rm \
+            -w ${PWD} \
+            -v ${PWD}:${PWD} \
+            -e PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }} \
+            -e PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }} \
+            -e TAG=${{ steps.extract_branch.outputs.branch }} \
+            pactfoundation/pact-cli:latest \
+            publish \
+            androidApp/build/pacts \
+            --consumer-app-version fake-git-sha-for-demo-$(date +%s) \
+            -t=${TAG}
+
+      - name: "Expose secrets as env variables"
+        run: |
+          echo "PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }}" >> $GITHUB_ENV
+          echo "PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }}" >> $GITHUB_ENV
+
+      - name: "Provider verify pacts"
+        env:
+          PACT_BROKER_BASE_URL: ${{ env.PACT_BROKER_BASE_URL }}
+          PACT_BROKER_TOKEN: ${{ env.PACT_BROKER_TOKEN }}
+        run: ./gradlew pactVerify -Ppact.verifier.publishResults=true
 
 #  screenshot-tests:
 #    runs-on: macos-latest

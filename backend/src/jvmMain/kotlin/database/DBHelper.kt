@@ -3,7 +3,6 @@ package database
 import com.keller.yourpet.shared.mock.mockPetsList
 import com.keller.yourpet.shared.model.Filter
 import org.litote.kmongo.coroutine.CoroutineCollection
-import org.litote.kmongo.toId
 
 object DbConstants {
     const val DB_NAME_PETS = "pets"
@@ -12,9 +11,7 @@ object DbConstants {
 class DBHelper(private val collection: CoroutineCollection<MongoPet>) {
 
     suspend fun addContent() = dbExecute {
-        collection.insertMany(mockPetsList().map {
-            MongoPet(it.id.toId(), it.name, it.imageUrl, it.gender, it.description)
-        })
+        collection.insertMany(mockPetsList().map(MongoPetMapper::toMongoPet))
     }
 
     suspend fun getPets(filter: Filter?) = if (filter != null)

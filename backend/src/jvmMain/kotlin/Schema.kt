@@ -10,7 +10,7 @@ fun SchemaBuilder.schemaValue(requestHandler: RequestHandler, mockedPets: Boolea
         description = "Retrieve all pets"
         resolver { filter: Filter? ->
             if (mockedPets)
-                mockPetsList()
+                mockPetsList().filter { filter?.genders?.contains(it.gender) ?: true }
             else
                 requestHandler.getPets(filter).map(MongoPetMapper::toPet)
         }

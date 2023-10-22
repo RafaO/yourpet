@@ -1,15 +1,15 @@
 object Versions {
-    const val kotlin = "1.7.0"
+    const val kotlin = "1.9.0"
     const val junit = "4.13"
     const val sqlDelight = "1.5.2"
-    const val hilt = "2.44"
-    const val ktor = "1.6.0"
+    const val hilt = "2.48.1"
+    const val ktor = "2.3.5"
     const val detekt = "1.17.0-RC2"
     const val mockk = "1.13.2"
-    const val kGraphQL = "0.17.9"
+    const val kGraphQL = "0.19.0"
     const val apollo = "3.0.0-alpha03"
     const val showkase = "1.0.0-beta17"
-    const val compose = "1.2.0-rc03"
+    const val compose = "1.5.2"
     const val androidTestJunit = "1.4.0"
     const val androidTestExtJunit = "1.1.3"
     const val coroutinesVersion = "1.6.1-native-mt"
@@ -24,7 +24,7 @@ object Compose {
 
 object AndroidSdk {
     const val min = 24
-    const val compile = 33
+    const val compile = 34
     const val target = compile
 }
 
@@ -55,6 +55,9 @@ object Ktor {
     const val serverCore = "io.ktor:ktor-server-core:${Versions.ktor}"
     const val serverNetty = "io.ktor:ktor-server-netty:${Versions.ktor}"
 
+    const val serverContentNegotiation = "io.ktor:ktor-server-content-negotiation:${Versions.ktor}"
+    const val serializationGson = "io.ktor:ktor-serialization-gson:${Versions.ktor}"
+
     const val clientIos = "io.ktor:ktor-client-ios:${Versions.ktor}"
 }
 
@@ -71,6 +74,7 @@ object Test {
     const val mockk = "io.mockk:mockk:${Versions.mockk}"
     const val androidx = "androidx.arch.core:core-testing:2.1.0"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.0"
+    const val pact = "au.com.dius.pact.consumer:junit:4.2.9"
 }
 
 object AndroidTest {

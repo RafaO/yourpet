@@ -43,6 +43,7 @@ kotlin {
             kotlinOptions.jvmTarget = "1.8"
         }
     }
+
     ios {
         binaries {
             framework {
@@ -102,7 +103,7 @@ kotlin {
                 implementation("com.squareup.sqldelight:android-driver:${Versions.sqlDelight}")
             }
         }
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation("junit:junit:4.13")

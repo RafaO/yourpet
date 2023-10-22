@@ -15,7 +15,7 @@ struct HomeView: View {
         
         let useCase = GetPetsUseCase(repository: PetsRepository(
             cacheSource: databaseHelper,
-            networkSource: PetsApiClient()
+            networkSource: KoinKt.getPetsApiClient()
         ))
         
         self.petsScreen = PetsScreen(
