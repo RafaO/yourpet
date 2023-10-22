@@ -113,7 +113,7 @@ jobs:
         env:
           PACT_BROKER_BASE_URL: ${{ env.PACT_BROKER_BASE_URL }}
           PACT_BROKER_TOKEN: ${{ env.PACT_BROKER_TOKEN }}
-        run: ./gradlew pactVerify
+        run: ./gradlew pactVerify -Ppact.verifier.publishResults=true
 
 #  screenshot-tests:
 #    runs-on: macos-latest
