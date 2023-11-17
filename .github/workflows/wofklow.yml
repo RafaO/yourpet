@@ -87,7 +87,7 @@ jobs:
           echo "branch=$branch" >> $GITHUB_OUTPUT
         id: extract_branch
 
-      - name: "Upload pacts to pactflow"
+      - name: "Consumer - Upload pacts to pactflow"
         run: |
           brew install docker
           colima start
@@ -109,7 +109,7 @@ jobs:
           echo "PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }}" >> $GITHUB_ENV
           echo "PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }}" >> $GITHUB_ENV
 
-      - name: "Provider verify pacts"
+      - name: "Provider - Verify pacts"
         env:
           PACT_BROKER_BASE_URL: ${{ env.PACT_BROKER_BASE_URL }}
           PACT_BROKER_TOKEN: ${{ env.PACT_BROKER_TOKEN }}
