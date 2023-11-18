@@ -113,7 +113,7 @@ jobs:
             -t=${TAG}
 
       - name: "Record consumer deployment in pact broker"
-        if: github.ref == 'refs/heads/master' # for now we assume merging to master is deploy apps
+        #if: github.ref == 'refs/heads/master' # for now we assume merging to master is deploy apps
         run: |
           COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}
           docker run --rm \
