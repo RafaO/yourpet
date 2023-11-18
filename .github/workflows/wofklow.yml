@@ -87,8 +87,16 @@ jobs:
           echo "branch=$branch" >> $GITHUB_OUTPUT
         id: extract_branch
 
+      - name: "Get commit count"
+        id: commit_count
+        run: |
+          COMMIT_COUNT=$(git rev-list --count HEAD)
+          echo "Commit count: $COMMIT_COUNT"
+          echo "::set-output name=commit_count::$COMMIT_COUNT"
+
       - name: "Consumer - Upload pacts to pactflow"
         run: |
+          COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}
           brew install docker
           colima start
           TAG="${{ steps.extract_branch.outputs.branch }}"
@@ -101,7 +109,7 @@ jobs:
             pactfoundation/pact-cli:latest \
             publish \
             androidApp/build/pacts \
-            --consumer-app-version fake-git-sha-for-demo-$(date +%s) \
+            --consumer-app-version COMMIT_COUNT \
             -t=${TAG}
 
       - name: "Expose secrets as env variables"
