@@ -112,6 +112,21 @@ jobs:
             --consumer-app-version COMMIT_COUNT \
             -t=${TAG}
 
+      - name: "Record consumer deployment in pact broker"
+        if: github.ref == 'refs/heads/master' # for now we assume merging to master is deploy apps
+        run: |
+          COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}
+          docker run --rm \
+            -w ${PWD} \
+            -v ${PWD}:${PWD} \
+            -e PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }} \
+            -e PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }} \
+            pactfoundation/pact-cli:latest \
+            pact-broker record-deployment \
+            --environment production \
+            --pacticipant "YourPet Mobile client" \
+            --version COMMIT_COUNT
+
       - name: "Expose secrets as env variables"
         run: |
           echo "PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }}" >> $GITHUB_ENV
