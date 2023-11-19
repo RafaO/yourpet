@@ -37,6 +37,9 @@ jobs:
           echo "PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }}" >> $GITHUB_ENV
           echo "COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}" >> $GITHUB_ENV
 
+      - name: "Start backend"
+        run: ./gradlew backend:run -Ptesting=true &
+
       - name: "Provider - Verify pacts"
         env:
           PACT_BROKER_BASE_URL: ${{ env.PACT_BROKER_BASE_URL }}
