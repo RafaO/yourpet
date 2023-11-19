@@ -111,7 +111,7 @@ jobs:
             pactfoundation/pact-cli:latest \
             publish \
             androidApp/build/pacts \
-            --consumer-app-version COMMIT_COUNT \
+            --consumer-app-version "$COMMIT_COUNT" \
             -t=${TAG}
 
       - name: "Record consumer deployment in pact broker"
