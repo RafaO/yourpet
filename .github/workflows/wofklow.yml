@@ -127,7 +127,7 @@ jobs:
             pact-broker record-deployment \
             --environment production \
             --pacticipant "YourPet Mobile client" \
-            --version COMMIT_COUNT
+            --version "$COMMIT_COUNT"
 
       - name: "Expose secrets as env variables"
         run: |
