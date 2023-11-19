@@ -35,6 +35,7 @@ jobs:
         run: |
           echo "PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }}" >> $GITHUB_ENV
           echo "PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }}" >> $GITHUB_ENV
+          echo "COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}" >> $GITHUB_ENV
 
       - name: "Provider - Verify pacts"
         env:
