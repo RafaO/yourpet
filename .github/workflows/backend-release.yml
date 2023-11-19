@@ -35,7 +35,6 @@ jobs:
         run: |
           echo "PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }}" >> $GITHUB_ENV
           echo "PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }}" >> $GITHUB_ENV
-          echo "COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}" >> $GITHUB_ENV
 
       - name: "Start backend"
         run: ./gradlew backend:run -Ptesting=true &
@@ -44,22 +43,25 @@ jobs:
         env:
           PACT_BROKER_BASE_URL: ${{ env.PACT_BROKER_BASE_URL }}
           PACT_BROKER_TOKEN: ${{ env.PACT_BROKER_TOKEN }}
-        run: ./gradlew pactVerify -Ppact.verifier.publishResults=true
-
-      - name: "Provider - check can I deploy"
         run: |
           COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}
-          brew install docker
-          colima start
-          TAG="${{ steps.extract_branch.outputs.branch }}"
-          docker run --rm \
-            -w ${PWD} \
-            -v ${PWD}:${PWD} \
-            -e PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }} \
-            -e PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }} \
+          ./gradlew pactVerify -Ppact.verifier.publishResults=true
+
+      - name: "Provider - check can I deploy"
+        uses: addnab/docker-run-action@v3
+        with:
+          image: aschmelyun/cleaver:latest
+          options: |
+            -w ${PWD}
+            -v ${PWD}:${PWD}
+            -e PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }}
+            -e PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }}
+          run: |
+            COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}
+            TAG="${{ steps.extract_branch.outputs.branch }}"
             pactfoundation/pact-cli:latest \
             broker can-i-deploy \
-            --pacticipant "YourPet API" --version ${GIT_COMMIT} --to-environment production
+            --pacticipant "YourPet API" --version ${COMMIT_COUNT} --to-environment production
 
       - name: 'login gcloud'
         uses: google-github-actions/auth@v1
