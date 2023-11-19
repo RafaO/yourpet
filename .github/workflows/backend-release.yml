@@ -50,7 +50,7 @@ jobs:
       - name: "Provider - check can I deploy"
         uses: addnab/docker-run-action@v3
         with:
-          image: aschmelyun/cleaver:latest
+          image: pactfoundation/pact-cli:latest
           options: |
             -w ${{ github.workspace }}
             -v ${{ github.workspace }}:${{ github.workspace }}
@@ -59,8 +59,7 @@ jobs:
           run: |
             COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}
             TAG="${{ steps.extract_branch.outputs.branch }}"
-            pactfoundation/pact-cli:latest \
-            broker can-i-deploy \
+            pact-broker can-i-deploy \
             --pacticipant "YourPet API" --version ${COMMIT_COUNT} --to-environment production
 
       - name: 'login gcloud'
