@@ -24,6 +24,39 @@ jobs:
       - name: 'build docker backend'
         run: docker build -t europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest .
 
+      - name: "Get commit count"
+        id: commit_count
+        run: |
+          COMMIT_COUNT=$(git rev-list --count HEAD)
+          echo "Commit count: $COMMIT_COUNT"
+          echo "::set-output name=commit_count::$COMMIT_COUNT"
+
+      - name: "Expose secrets as env variables"
+        run: |
+          echo "PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }}" >> $GITHUB_ENV
+          echo "PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }}" >> $GITHUB_ENV
+
+      - name: "Provider - Verify pacts"
+        env:
+          PACT_BROKER_BASE_URL: ${{ env.PACT_BROKER_BASE_URL }}
+          PACT_BROKER_TOKEN: ${{ env.PACT_BROKER_TOKEN }}
+        run: ./gradlew pactVerify -Ppact.verifier.publishResults=true
+
+      - name: "Provider - check can I deploy"
+        run: |
+          COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}
+          brew install docker
+          colima start
+          TAG="${{ steps.extract_branch.outputs.branch }}"
+          docker run --rm \
+            -w ${PWD} \
+            -v ${PWD}:${PWD} \
+            -e PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }} \
+            -e PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }} \
+            pactfoundation/pact-cli:latest \
+            broker can-i-deploy \
+            --pacticipant "YourPet API" --version ${GIT_COMMIT} --to-environment production
+
       - name: 'login gcloud'
         uses: google-github-actions/auth@v1
         with:
@@ -37,4 +70,3 @@ jobs:
 
       - name: 'push image to artifact repository'
         run: docker push europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest
-
