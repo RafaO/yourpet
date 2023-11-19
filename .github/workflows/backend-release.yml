@@ -52,8 +52,8 @@ jobs:
         with:
           image: aschmelyun/cleaver:latest
           options: |
-            -w ${PWD}
-            -v ${PWD}:${PWD}
+            -w ${{ github.workspace }}
+            -v ${{ github.workspace }}:${{ github.workspace }}
             -e PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }}
             -e PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }}
           run: |
