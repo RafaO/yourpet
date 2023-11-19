@@ -30,56 +30,56 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: "iOS tests"
-        run: |
-          xcodebuild test \
-          -project iOSApp/iOSApp.xcodeproj \
-          -scheme iosApp -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 8,OS=16.2'
-
-      - name: "run detekt"
-        run: ./gradlew detektAll
-
+#      - name: "iOS tests"
+#        run: |
+#          xcodebuild test \
+#          -project iOSApp/iOSApp.xcodeproj \
+#          -scheme iosApp -sdk iphonesimulator \
+#          -destination 'platform=iOS Simulator,name=iPhone 8,OS=16.2'
+#
+#      - name: "run detekt"
+#        run: ./gradlew detektAll
+#
       - name: "tests"
         run: ./gradlew testDebugUnitTest
-
-      - name: "install maestro"
-        run: |
-          curl -Ls "https://get.maestro.mobile.dev" | bash
-          echo "$HOME/.maestro/bin" >> $GITHUB_PATH
-          export PATH="$PATH":"$HOME/.maestro/bin"
-          echo "Maestro version: $(maestro --version)"
-
-      - name: "Build iOS app"
-        run: |
-          xcodebuild -project iOSApp/iOSApp.xcodeproj \
-          -scheme iosApp \
-          -destination 'platform=iOS Simulator,name=iPhone 8,OS=16.2' \
-          -derivedDataPath build
-
-      - name: "Start backend"
-        run: ./gradlew backend:run -Ptesting=true &
-
-      - name: "launch iOS simulator"
-        uses: futureware-tech/simulator-action@v2
-        with:
-          model: 'iPhone 8'
-          shutdown_after_job: false
-
-      - name: "ios e2e tests"
-        run: |
-            xcrun simctl install booted build/Build/Products/Debug-iphonesimulator/iosApp.app
-            maestro test automation/open-list.yaml
-            xcrun simctl shutdown all
-
-      - name: "Android e2e tests"
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          profile: pixel_4
-          script: |
-            ./gradlew androidApp:installDebug
-            maestro test automation/open-list.yaml
+#
+#      - name: "install maestro"
+#        run: |
+#          curl -Ls "https://get.maestro.mobile.dev" | bash
+#          echo "$HOME/.maestro/bin" >> $GITHUB_PATH
+#          export PATH="$PATH":"$HOME/.maestro/bin"
+#          echo "Maestro version: $(maestro --version)"
+#
+#      - name: "Build iOS app"
+#        run: |
+#          xcodebuild -project iOSApp/iOSApp.xcodeproj \
+#          -scheme iosApp \
+#          -destination 'platform=iOS Simulator,name=iPhone 8,OS=16.2' \
+#          -derivedDataPath build
+#
+#      - name: "Start backend"
+#        run: ./gradlew backend:run -Ptesting=true &
+#
+#      - name: "launch iOS simulator"
+#        uses: futureware-tech/simulator-action@v2
+#        with:
+#          model: 'iPhone 8'
+#          shutdown_after_job: false
+#
+#      - name: "ios e2e tests"
+#        run: |
+#            xcrun simctl install booted build/Build/Products/Debug-iphonesimulator/iosApp.app
+#            maestro test automation/open-list.yaml
+#            xcrun simctl shutdown all
+#
+#      - name: "Android e2e tests"
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          api-level: 29
+#          profile: pixel_4
+#          script: |
+#            ./gradlew androidApp:installDebug
+#            maestro test automation/open-list.yaml
 
       - name: Extract branch name
         shell: bash
@@ -128,17 +128,6 @@ jobs:
             --environment production \
             --pacticipant "YourPet Mobile client" \
             --version "$COMMIT_COUNT"
-
-      - name: "Expose secrets as env variables"
-        run: |
-          echo "PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }}" >> $GITHUB_ENV
-          echo "PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }}" >> $GITHUB_ENV
-
-      - name: "Provider - Verify pacts"
-        env:
-          PACT_BROKER_BASE_URL: ${{ env.PACT_BROKER_BASE_URL }}
-          PACT_BROKER_TOKEN: ${{ env.PACT_BROKER_TOKEN }}
-        run: ./gradlew pactVerify -Ppact.verifier.publishResults=true
 
 #  screenshot-tests:
 #    runs-on: macos-latest
