@@ -76,3 +76,19 @@ jobs:
 
       - name: 'push image to artifact repository'
         run: docker push europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest
+
+      - name: "Record provider deployment in pact broker"
+        uses: addnab/docker-run-action@v3
+        with:
+          image: pactfoundation/pact-cli:latest
+          options: |
+            -w ${{ github.workspace }}
+            -v ${{ github.workspace }}:${{ github.workspace }}
+            -e PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }}
+            -e PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }}
+          run: |
+            COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}
+            pact-broker record-deployment \
+              --environment production \
+              --pacticipant "YourPet API" \
+              --version "$COMMIT_COUNT"
