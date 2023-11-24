@@ -114,6 +114,23 @@ jobs:
             --consumer-app-version "$COMMIT_COUNT" \
             -t=${TAG}
 
+      - name: "Consumer - check can I deploy"
+        #if: github.ref == 'refs/heads/master' # for now we assume merging to master is deploy apps
+        run: |
+          COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}
+          docker run --rm \
+            -w ${PWD} \
+            -v ${PWD}:${PWD} \
+            -e PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }} \
+            -e PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }} \
+            pactfoundation/pact-cli:latest \
+            pact-broker can-i-deploy \
+            --pacticipant "YourPet Mobile client" \
+            --version ${COMMIT_COUNT} \
+            --to-environment production
+
+      # Here should come the actual deployment of the apps (send to stores)
+
       - name: "Record consumer deployment in pact broker"
         #if: github.ref == 'refs/heads/master' # for now we assume merging to master is deploy apps
         run: |
