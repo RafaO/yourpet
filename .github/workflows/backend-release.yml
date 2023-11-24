@@ -40,12 +40,13 @@ jobs:
         run: ./gradlew backend:run -Ptesting=true &
 
       - name: "Provider - Verify pacts"
-        env:
-          PACT_BROKER_BASE_URL: ${{ env.PACT_BROKER_BASE_URL }}
-          PACT_BROKER_TOKEN: ${{ env.PACT_BROKER_TOKEN }}
         run: |
           COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}
           ./gradlew pactVerify -Ppact.verifier.publishResults=true
+        env:
+          PACT_BROKER_BASE_URL: ${{ env.PACT_BROKER_BASE_URL }}
+          PACT_BROKER_TOKEN: ${{ env.PACT_BROKER_TOKEN }}
+          COMMIT_COUNT: ${COMMIT_COUNT}
 
       - name: "Provider - check can I deploy"
         uses: addnab/docker-run-action@v3
