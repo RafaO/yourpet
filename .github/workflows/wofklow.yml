@@ -39,7 +39,7 @@ jobs:
 
       - name: "run detekt"
         run: ./gradlew detektAll
-#
+
       - name: "tests"
         run: ./gradlew testDebugUnitTest
 
