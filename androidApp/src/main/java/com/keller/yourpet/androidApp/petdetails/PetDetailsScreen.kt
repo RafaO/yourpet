@@ -96,7 +96,9 @@ fun PetDetailsContent(pet: Pet) {
         scrollStrategy = ScrollStrategy.ExitUntilCollapsed,
     ) {
         Column(
-            modifier = Modifier.verticalScroll(rememberScrollState())
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .padding(dimensionResource(R.dimen.text_padding))
         ) {
             Text(pet.name, style = MaterialTheme.typography.titleMedium)
             Text(pet.description, style = MaterialTheme.typography.bodyLarge)
