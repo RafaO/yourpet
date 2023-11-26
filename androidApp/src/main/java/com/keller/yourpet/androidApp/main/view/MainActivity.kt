@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -52,7 +54,15 @@ class MainActivity : AppCompatActivity() {
                 composable(ROUTE_HOME) {
                     HomeScreen(navController, petsRepository)
                 }
-                composable(ROUTE_PET_DETAILS) {
+                composable(
+                    ROUTE_PET_DETAILS,
+                    enterTransition = {
+                        slideIntoContainer(
+                            towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
+                            animationSpec = tween(700)
+                        )
+                    },
+                ) {
                     it.arguments?.getString(ARG_PET)?.let { petId ->
                         PetDetailsScreen(petsRepository, petId)
                     }
