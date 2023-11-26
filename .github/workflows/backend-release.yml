@@ -15,12 +15,53 @@ jobs:
 
       - name: 'checkout'
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: 'build backend'
         run: ./gradlew backend:jvmJar
 
       - name: 'build docker backend'
         run: docker build -t europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest .
+
+      - name: "Get commit count"
+        id: commit_count
+        run: |
+          COMMIT_COUNT=$(git rev-list --count HEAD)
+          echo "Commit count: $COMMIT_COUNT"
+          echo "::set-output name=commit_count::$COMMIT_COUNT"
+
+      - name: "Expose secrets as env variables"
+        run: |
+          echo "PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }}" >> $GITHUB_ENV
+          echo "PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }}" >> $GITHUB_ENV
+
+      - name: "Start backend"
+        run: ./gradlew backend:run -Ptesting=true &
+
+      - name: "Provider - Verify pacts"
+        run: |
+          COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}
+          ./gradlew pactVerify -Ppact.verifier.publishResults=true
+        env:
+          PACT_BROKER_BASE_URL: ${{ env.PACT_BROKER_BASE_URL }}
+          PACT_BROKER_TOKEN: ${{ env.PACT_BROKER_TOKEN }}
+          COMMIT_COUNT: ${COMMIT_COUNT}
+
+      - name: "Provider - check can I deploy"
+        uses: addnab/docker-run-action@v3
+        with:
+          image: pactfoundation/pact-cli:latest
+          options: |
+            -w ${{ github.workspace }}
+            -v ${{ github.workspace }}:${{ github.workspace }}
+            -e PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }}
+            -e PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }}
+          run: |
+            COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}
+            TAG="${{ steps.extract_branch.outputs.branch }}"
+            pact-broker can-i-deploy \
+            --pacticipant "YourPet API" --version ${COMMIT_COUNT} --to-environment production
 
       - name: 'login gcloud'
         uses: google-github-actions/auth@v1
@@ -36,3 +77,18 @@ jobs:
       - name: 'push image to artifact repository'
         run: docker push europe-southwest1-docker.pkg.dev/yourpet-backend/backend-images/yourpet:latest
 
+      - name: "Record provider deployment in pact broker"
+        uses: addnab/docker-run-action@v3
+        with:
+          image: pactfoundation/pact-cli:latest
+          options: |
+            -w ${{ github.workspace }}
+            -v ${{ github.workspace }}:${{ github.workspace }}
+            -e PACT_BROKER_BASE_URL=${{ secrets.PACT_BROKER_BASE_URL }}
+            -e PACT_BROKER_TOKEN=${{ secrets.PACT_BROKER_TOKEN }}
+          run: |
+            COMMIT_COUNT=${{ steps.commit_count.outputs.commit_count }}
+            pact-broker record-deployment \
+              --environment production \
+              --pacticipant "YourPet API" \
+              --version "$COMMIT_COUNT"

@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.util.function.Supplier
 
 plugins {
     kotlin("multiplatform")
@@ -17,6 +18,7 @@ pact {
             path = "graphql"
             host = "localhost"
             port = 8080
+            providerVersion = Supplier { System.getenv("COMMIT_COUNT") }
         }
     }
 
