@@ -51,18 +51,7 @@ fun PetDetailsContent(pet: Pet) {
 
     CollapsingToolbarScaffold(
         toolbar = {
-            Image(
-                painter = rememberImagePainter(data = pet.imageUrl, builder = {
-                    placeholder(R.drawable.filter_list_white_24dp) // TODO
-                    size(OriginalSize)
-                }),
-                contentDescription = "image for $pet.name",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(barHeight)
-                    .parallax(ratio = 0.2f),
-                contentScale = ContentScale.FillWidth,
-            )
+            ImagePager(pet, barHeight)
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -100,8 +89,8 @@ fun PetDetailsContent(pet: Pet) {
                 .verticalScroll(rememberScrollState())
                 .padding(dimensionResource(R.dimen.text_padding))
         ) {
-            Text(pet.name, style = MaterialTheme.typography.titleMedium)
             Text(pet.description, style = MaterialTheme.typography.bodyLarge)
+            Text(pet.gender.toString())
         }
     }
 }

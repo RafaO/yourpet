@@ -9,7 +9,7 @@ object Versions {
     const val kGraphQL = "0.19.0"
     const val apollo = "3.0.0-alpha03"
     const val showkase = "1.0.0-beta17"
-    const val compose = "1.5.2"
+    const val compose = "1.5.4"
     const val androidTestJunit = "1.4.0"
     const val androidTestExtJunit = "1.1.3"
     const val coroutinesVersion = "1.6.1-native-mt"
