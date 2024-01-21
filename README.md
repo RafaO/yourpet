@@ -20,6 +20,9 @@ Welcome to `YourPet`, a side project I started with three main goals:
   screenshot testing on Android
 - [Maestro](https://maestro.mobile.dev/)
 - [Github actions](https://github.com/features/actions)
+- [Pact testing](https://pactflow.io/)
+- [Google cloud](https://cloud.google.com/)
+- [Docker](https://www.docker.com/)
 
 ## Instructions
 
